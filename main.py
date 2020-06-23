@@ -3,7 +3,7 @@ import webBrowser # webBrowser.py file
 import datetime # For printing the time at the terminal shell
 import sys # For exiting the program (sys.exit)
 
-version = "1.0.0"
+version = "0.1.0"
 commandHistory = []
 
 canv = canvas(width, height, bgChar=" ")
