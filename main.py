@@ -1,7 +1,9 @@
-from canvas import * # Internal canvas.py file for ascii windows and stuff
-import webBrowser # webBrowser.py file
-import datetime # For printing the time at the terminal shell
-import sys # For exiting the program (sys.exit)
+from canvas import *  # Internal canvas.py file for ascii windows and stuff
+import webBrowser     # webBrowser.py file
+import datetime       # For printing the time at the terminal shell
+import sys            # For exiting the program (sys.exit)
+import psutil         # For the task manager
+import time
 
 version = "0.1"
 commandHistory = []
@@ -34,6 +36,16 @@ def terminalShell():
         except:
             pass
 
+def taskMonitor():
+    os.system("clear")
+    print("CPU Percent(s):", *psutil.cpu_percent(percpu=True), sep="\t")
+    option = ""
+
+    while option != "q":
+        os.system("clear")
+        print("CPU Percent(s):", *psutil.cpu_percent(percpu=True), sep="\t")
+        option = input("Press 'q' <ENTER> to quit this program, or just <ENTER> to refresh: ")
+
 def appLauncher():
     canv.addWindow(0, 0, width-1, height-3, "A P P   L A U N C H E R  -  VERSION " + version, False)
     canv.addStr(2, 2, appGlyph + " 1. Terminal Shell")
@@ -65,6 +77,9 @@ def appLauncher():
 
     elif option == "5":
         webBrowser.main()
+
+    elif option == "8":
+        taskMonitor()
     
     elif option == "10":
         sys.exit() # Just ends the whole program

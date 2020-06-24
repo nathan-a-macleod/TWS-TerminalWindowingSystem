@@ -8,6 +8,11 @@ def main():
     url = input("Enter a URL to view or 'q' to quit: ")
 
     if url != "q" and url != "Q":
-        pageHTML = requests.get(url)
-        print(pageHTML.text)
+        try:
+            pageHTML = requests.get(url)
+            print(pageHTML.text)
+
+        except:
+            print("Error reading request... Did you forget to put 'http://' at the start?")
+        
         time.sleep(1)
