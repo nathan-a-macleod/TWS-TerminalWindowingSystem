@@ -13,9 +13,10 @@ Just run `python3 main.py` to run the program.
 # Contributing
 I am looking for contributers to help with this project, especially with things like the applications (or anything else you would like to help with), because there are quite a few of them to do.
 
-## Here is a list of planned apps, and whether they have been completed:
-* Terminal Shell (Mostly Completed [things like autocomplete, etc aren't implemented yet])
+## Here is a list of planned apps, and how close they are to being completed:
+* Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
 * VIM Text Editor (Completed)
+* Software Planning Tool (Not started - [probably use the curses module])
 * Games Library (Not Started)
 * Settings (Not Started)
 
