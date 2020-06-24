@@ -6,7 +6,7 @@ When you run the program, it launches you straight into the app launcher, where 
 # Contributing
 I am looking for contributers to help with this project, especially with things like the applications (or anything else you would like to help with), because there are quite a few of them to do.
 
-## Here is a list of apps, and whether they have been completed:
+## Here is a list of planned apps, and whether they have been completed:
 * Terminal Shell (Mostly Completed)
 * Text Editor (Not Started)
 * File Browser (Not Started)
