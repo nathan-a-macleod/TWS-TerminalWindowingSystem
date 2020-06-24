@@ -14,5 +14,7 @@ def main():
 
         except:
             print("Error reading request... Did you forget to put 'http://' at the start?")
+            time.sleep(0.8)
+            main()
         
         time.sleep(1)
