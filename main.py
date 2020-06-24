@@ -48,7 +48,7 @@ def appLauncher():
     canv.addPixel(width-1, height-3, "\033[0m", "r")
     canv.refresh()
     
-    option = input(inputGlyph + "Please enter an option (1-9): ")
+    option = input(inputGlyph + "Please enter an option (1-5): ")
 
     # If it's an invalid option, run the function again
     if option not in ["1", "2", "3", "4", "5"]:
