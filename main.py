@@ -1,6 +1,7 @@
 from canvas import *  # Internal canvas.py file for ascii windows and stuff
 import datetime       # For printing the time in the terminal shell
 import sys            # For exiting the program (sys.exit)
+import curses         # For the software planner
 
 version = "0.1"
 commandHistory = []
@@ -34,17 +35,21 @@ def terminalShell():
             pass
 
 def softwarePlanner():
-    pass
+    def main(stdscr):
+        stdscr.addstr(0, 0, "Hello, World!")
+        stdscr.refresh()
+        stdscr.getch()
+
+    curses.wrapper(main)
 
 def appLauncher():
     canv.addWindow(0, 0, width-1, height-3, "A P P   L A U N C H E R  -  VERSION " + version, False)
-    canv.addStr(2, 2, appGlyph + " 1. VIM")
-    canv.addStr(2, 3, appGlyph + " 2. Terminal Shell")
-    canv.addStr(2, 4, appGlyph + " 3. Software Planner")
-    canv.addStr(2, 5, appGlyph + " 4. Games Library")
-    canv.addStr(2, 6, appGlyph + " 5. Settings")
+    canv.addStr(2, 2, appGlyph + " 1. Terminal Shell")
+    canv.addStr(2, 3, appGlyph + " 2. Software Planner")
+    canv.addStr(2, 4, appGlyph + " 3. Games Library")
+    canv.addStr(2, 5, appGlyph + " 4. Settings")
     # Development Library Environment. # (Not sure how to do it yet, but maybe a python library (canvas.py or something to link up to automatically) where you can create graphical programs the the program.)
-    canv.addStr(2, 8, "6. EXIT")
+    canv.addStr(2, 7, "5. EXIT")
 
     # Colors for heading and window content
     canv.addPixel(0, 0, "\033[44m", "l")
@@ -55,19 +60,16 @@ def appLauncher():
     option = input(inputGlyph + "Please enter an option (1-5): ")
 
     # If it's an invalid option, run the function again
-    if option not in ["1", "2", "3", "4", "5", "6"]:
+    if option not in ["1", "2", "3", "4", "5"]:
         appLauncher()
 
     elif option == "1":
-        os.system("vim")
-
-    elif option == "2":
         terminalShell()
 
-    elif option == "3":
+    elif option == "2":
         softwarePlanner()
 
-    elif option == "6":
+    elif option == "5":
         sys.exit() # Just ends the whole program
 
     appLauncher() # Once it has run a program, it goes back to the main home screen (app launcher screen)
