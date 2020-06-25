@@ -3,7 +3,7 @@ import datetime       # For printing the time in the terminal shell
 import sys            # For exiting the program (sys.exit)
 import curses         # For the software planner
 
-version = "0.1"
+version = "0.1.1"
 commandHistory = []
 
 canv = canvas(width, height, bgChar=" ")
