@@ -1,7 +1,8 @@
-from canvas import *  # Internal canvas.py file for ascii windows and stuff
-import datetime       # For printing the time in the terminal shell
-import sys            # For exiting the program (sys.exit)
-import curses         # For the software planner
+from canvas import *        # Internal canvas.py file for ascii windows and stuff
+import datetime             # For printing the time in the terminal shell
+import sys                  # For exiting the program (sys.exit)
+import curses               # For the software planner
+from curses import textpad  # Also for the software planner
 
 version = "0.1.1"
 commandHistory = []
@@ -36,7 +37,10 @@ def terminalShell():
 
 def softwarePlanner():
     def main(stdscr):
-        stdscr.addstr(0, 0, "Hello, World!")
+        stdscr.addstr(0, 0, "Welcome to the software planner.\u2550")
+        box = textpad.Textbox(stdscr, True)
+        contents = box.edit()
+        stdscr.addstr(repr(contents))
         stdscr.refresh()
         stdscr.getch()
 
