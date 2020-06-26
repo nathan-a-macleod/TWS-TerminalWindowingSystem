@@ -15,7 +15,8 @@ I am looking for contributers to help with this project, especially with things 
 
 # Future plans
 
-At some point soon, this wikipedia page may become helpful: https://en.wikipedia.org/wiki/Box-drawing_character
+* At some point soon, this wikipedia page may become helpful: https://en.wikipedia.org/wiki/Box-drawing_character
+* Also, VERY soon, I think I will start to do the main page with curses, and maybe other programs too.
 
 ## Here is a list of planned apps, and how close they are to being completed:
 * Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
