@@ -80,12 +80,12 @@ class canvas:
     def addWindow(self, x, y, width, height, titleStr, border):
         if border == True:
             titleStr = "| " + titleStr + " |"
-            topLeftCorner = "+"
-            topRightCorner = "+"
-            bottomLeftCorner = "+"
-            bottomRightCorner = "+"
-            verticalEdge = "|"
-            horizontalEdge = "_"
+            topLeftCorner = "\u2554"
+            topRightCorner = "\u2557"
+            bottomLeftCorner = "\u255a"
+            bottomRightCorner = "\u255d"
+            verticalEdge = "\u2551"
+            horizontalEdge = "\u2550"
 
         else:
             topLeftCorner = " "
