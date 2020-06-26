@@ -1,7 +1,21 @@
 import os
+import sys, tty, termios    # For the getch function
 
 width = os.get_terminal_size().columns
 height = os.get_terminal_size().lines
+
+def getch(message):
+    print(message)
+
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno()) # Raw read
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+
+    return ch
 
 class colors:
     reset = "\u001b[0m"
