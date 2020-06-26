@@ -55,6 +55,7 @@ def appLauncher():
     canv.addPixel(0, 0, colors.bgBlue + colors.fgWhite, "l")
     canv.addPixel(0, 1, colors.bgWhite + colors.fgBlack, "l")
     canv.addPixel(width-1, height-3, colors.reset, "r")
+
     canv.refresh()
     
     option = input(inputGlyph + "Please enter an option (1-5): ")

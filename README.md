@@ -13,6 +13,10 @@ Just run `python3 main.py` to run the program. When the program starts, you will
 # Contributing
 I am looking for contributers to help with this project, especially with things like the applications (or anything else you would like to help with), because there are quite a few of them to do.
 
+# Future plans
+
+At some point soon, this wikipedia page may become helpful: https://en.wikipedia.org/wiki/Box-drawing_character
+
 ## Here is a list of planned apps, and how close they are to being completed:
 * Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
 * Default System Text Editor (Not started - [probably use the curses module])

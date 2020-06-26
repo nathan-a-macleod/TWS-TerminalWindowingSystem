@@ -113,6 +113,11 @@ class canvas:
 
         # Title:
         self.addStr(width//2-(len(titleStr)//2), y, titleStr)
+
+    # Need to give it a way for the user to type yes or no.
+    def addConfirm(self, prompt):
+        self.addPixel(self.width-len(prompt)-2, self.height-3, colors.bgRed + colors.fgWhite, "l") # Colors (don't need to reset it because it is at the bottom of the canvas)
+        self.addStr(self.width-len(prompt)-1, self.height-3, prompt)
  
     def reset(self):
         self.screenChars = []
