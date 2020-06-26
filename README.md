@@ -8,7 +8,7 @@ Prerequisites:
 * Python 3
 * VIM
 
-Just run `python3 main.py` to run the program.
+Just run `python3 main.py` to run the program. When the program starts, you will see an app launcher screen with some options for apps you can use.
 
 # Contributing
 I am looking for contributers to help with this project, especially with things like the applications (or anything else you would like to help with), because there are quite a few of them to do.
