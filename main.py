@@ -6,7 +6,7 @@ import curses         # For the software planner
 version = "0.1.1"
 commandHistory = []
 
-canv = canvas(width, height-1, bgChar=" ")
+canv = canvas(width, height, bgChar=" ")
 
 appGlyph = "[=+=]"
 #inputGlyph = "'***'"
@@ -43,7 +43,7 @@ def softwarePlanner():
     curses.wrapper(main)
 
 def appLauncher():
-    canv.addWindow(0, 0, width-1, height-4, "A P P   L A U N C H E R  -  VERSION " + version, False)
+    canv.addWindow(0, 0, width-1, height-3, "A P P   L A U N C H E R  -  VERSION " + version, False)
     canv.addStr(2, 2, appGlyph + " 1. Terminal Shell")
     canv.addStr(2, 3, appGlyph + " 2. Software Planner")
     canv.addStr(2, 4, appGlyph + " 3. Games Library")
@@ -54,11 +54,11 @@ def appLauncher():
     # Colors for heading and window content
     canv.addPixel(0, 0, colors.bgBlue + colors.fgWhite, "l")
     canv.addPixel(0, 1, colors.bgWhite + colors.fgBlack, "l")
-    canv.addPixel(width-1, height-4, colors.reset, "r")
+    canv.addPixel(width-1, height-3, colors.reset, "r")
     canv.refresh()
     
-    #option = input(inputGlyph + "Please enter an option (1-5): ")
-    option = getch(inputGlyph + "Please enter an option (1-5): ")
+    option = input(inputGlyph + "Please enter an option (1-5): ")
+    #option = getch(inputGlyph + "Please enter an option (1-5): ")
 
     # If it's an invalid option, run the function again
     if option not in ["1", "2", "3", "4", "5"]:
@@ -75,7 +75,7 @@ def appLauncher():
 
     appLauncher() # Once it has run a program, it goes back to the main home screen (app launcher screen)
 
-# Something containing the version number, and maybe some ascii art.
+# Something containing the version number, and maybe some ascii art (logo or something).
 def bootupScreen():
     pass
 
