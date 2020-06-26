@@ -3,6 +3,27 @@ import os
 width = os.get_terminal_size().columns
 height = os.get_terminal_size().lines
 
+class colors:
+    reset = "\u001b[0m"
+
+    fgBlack = "\u001b[30m"
+    fgRed = "\u001b[31m"
+    fgGreen = "\u001b[32m"
+    fgYellow = "\u001b[33m"
+    fgBlue = "\u001b[34m"
+    fgMagenta = "\u001b[35m"
+    fgCyan = "\u001b[36m"
+    fgWhite = "\u001b[37m"
+
+    bgBlack = "\u001b[40m"
+    bgRed = "\u001b[41m"
+    bgGreen = "\u001b[42m"
+    bgYellow = "\u001b[43m"
+    bgBlue = "\u001b[44m"
+    bgMagenta = "\u001b[45m"
+    bgCyan = "\u001b[46m"
+    bgWhite = "\u001b[47m"
+
 class canvas:
     def __init__(self, width, height, bgChar):
         self.width = width

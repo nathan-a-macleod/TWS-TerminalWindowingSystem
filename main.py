@@ -52,9 +52,9 @@ def appLauncher():
     canv.addStr(2, 7, "5. EXIT")
 
     # Colors for heading and window content
-    canv.addPixel(0, 0, "\033[44m", "l")
-    canv.addPixel(0, 1, "\033[47m\033[30m", "l")
-    canv.addPixel(width-1, height-3, "\033[0m", "r")
+    canv.addPixel(0, 0, colors.bgWhite + colors.fgBlue, "l")
+    canv.addPixel(0, 1, colors.bgBlue + colors.fgWhite, "l")
+    canv.addPixel(width-1, height-3, colors.reset, "r")
     canv.refresh()
     
     option = input(inputGlyph + "Please enter an option (1-5): ")
@@ -74,12 +74,8 @@ def appLauncher():
 
     appLauncher() # Once it has run a program, it goes back to the main home screen (app launcher screen)
 
+# Something containing the version number, and maybe some ascii art.
 def bootupScreen():
-    '''for y in range(height):
-        for x in range(width):
-            print("\u001b[44m ", end="")
-
-    print("\u001b[0m")'''
     pass
 
 bootupScreen()
