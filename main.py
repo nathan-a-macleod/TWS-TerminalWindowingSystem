@@ -52,8 +52,8 @@ def appLauncher():
     canv.addStr(2, 7, "5. EXIT")
 
     # Colors for heading and window content
-    canv.addPixel(0, 0, colors.bgWhite + colors.fgBlue, "l")
-    canv.addPixel(0, 1, colors.bgBlue + colors.fgWhite, "l")
+    canv.addPixel(0, 0, colors.bgBlue + colors.fgWhite, "l")
+    canv.addPixel(0, 1, colors.bgWhite + colors.fgBlack, "l")
     canv.addPixel(width-1, height-3, colors.reset, "r")
     canv.refresh()
     
