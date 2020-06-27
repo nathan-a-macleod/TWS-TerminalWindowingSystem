@@ -4,6 +4,8 @@ import datetime             # For printing the time in the terminal shell
 import sys                  # For exiting the program (sys.exit)
 import os                   # For the terminal (os.system() function is very widely used)
 
+startDir = os.getcwd()
+
 version = "0.1.2"
 commandHistory = []
 
@@ -49,6 +51,8 @@ def terminalShell():
         except:
             pass
 
+    os.chdir(startDir)
+
 def softwarePlanner(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
@@ -73,6 +77,9 @@ def softwarePlanner(stdscr):
     file.close()
 
     stdscr.refresh()
+
+def gamesLibrary(stdscr):
+    pass
 
 def appLauncher(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
@@ -114,6 +121,9 @@ def appLauncher(stdscr):
 
     elif option == "2":
        curses.wrapper(softwarePlanner)
+
+    elif option == "3":
+       curses.wrapper(gamesLibrary)
 
     elif option == "5":
         sys.exit()
