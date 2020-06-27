@@ -6,7 +6,6 @@ When you run the program, it launches you straight into the app launcher, where 
 # Usage:
 Prerequisites:
 * Python 3
-* VIM
 
 Just run `python3 main.py` to run the program. When the program starts, you will see an app launcher screen with some options for apps you can use.
 

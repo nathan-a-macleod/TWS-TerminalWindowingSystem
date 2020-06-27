@@ -1,17 +1,31 @@
-from canvas import *        # Internal canvas.py file for ascii windows and stuff
+import curses               # For the core of the main user interface
+from curses import textpad  # Mainly for the software planner
 import datetime             # For printing the time in the terminal shell
 import sys                  # For exiting the program (sys.exit)
-import curses               # For the software planner
-from curses import textpad  # Also for the software planner
+import os                   # For the terminal (os.system() function is very widely used)
 
-version = "0.1.1"
+version = "0.1.2"
 commandHistory = []
-
-canv = canvas(width, height, bgChar=" ")
 
 appGlyph = "[=+=]"
 #inputGlyph = "'***'"
 inputGlyph = ""
+
+# Function for curses to get input, then enter, similar to getch() (but lets the user press enter) - need to make backspace and arrow keys work
+def getInput(stdscr, y, x, prompt, colorPair):
+    stdscr.addstr(y, x, prompt, colorPair)
+
+    string = ""
+
+    while True:
+        char = stdscr.getkey()
+
+        if ord(char) == 10:
+            break
+
+        string += char
+
+    return string
 
 def terminalShell():
     command = ""
@@ -35,54 +49,64 @@ def terminalShell():
         except:
             pass
 
-def softwarePlanner():
-    def main(stdscr):
-        stdscr.addstr(0, 0, "Welcome to the software planner.\u2550")
-        box = textpad.Textbox(stdscr, True)
-        contents = box.edit()
-        stdscr.addstr(repr(contents))
-        stdscr.refresh()
-        stdscr.getch()
+def softwarePlanner(stdscr):
+    stdscr.clear()
+    stdscr.addstr(0, 0, "Welcome to the software planner.\u2550")
+    stdscr.refresh()
+    stdscr.getch()
 
-    curses.wrapper(main)
+def appLauncher(stdscr):
+    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLUE)
+    curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
 
-def appLauncher():
-    canv.addWindow(0, 0, width-1, height-3, "A P P   L A U N C H E R  -  VERSION " + version, False)
-    canv.addStr(2, 2, appGlyph + " 1. Terminal Shell")
-    canv.addStr(2, 3, appGlyph + " 2. Software Planner")
-    canv.addStr(2, 4, appGlyph + " 3. Games Library")
-    canv.addStr(2, 5, appGlyph + " 4. Settings")
-    # Development Library Environment. # (Not sure how to do it yet, but maybe a python library (canvas.py or something to link up to automatically) where you can create graphical programs the the program.)
-    canv.addStr(2, 7, "5. EXIT")
+    appLauncherWin = curses.newwin(curses.LINES, curses.COLS, 0, 0)
+    appLauncherWin.bkgd(" ", curses.color_pair(3))
 
-    # Colors for heading and window content
-    canv.addPixel(0, 0, colors.bgBlue + colors.fgWhite, "l")
-    canv.addPixel(0, 1, colors.bgWhite + colors.fgBlack, "l")
-    canv.addPixel(width-1, height-3, colors.reset, "r")
+    # Header at the top of the screen
+    menuTitleStr = " A P P   L A U N C H E R  -  VERSION " + version + " "
 
-    canv.refresh()
-    
-    option = input(inputGlyph + "Please enter an option (1-5): ")
-    #option = getch(inputGlyph + "Please enter an option (1-5): ")
+    for i in range(0, curses.COLS//2-len(menuTitleStr)//2):
+        appLauncherWin.addstr(0, int(i), " ", curses.color_pair(2))
 
-    # If it's an invalid option, run the function again
-    if option not in ["1", "2", "3", "4", "5"]:
-        appLauncher()
+    appLauncherWin.addstr(0, curses.COLS//2-len(menuTitleStr)//2, menuTitleStr, curses.color_pair(1))
 
-    elif option == "1":
+    for i in range(curses.COLS//2+len(menuTitleStr)//2+1, curses.COLS):
+        appLauncherWin.addstr(0, int(i), " ", curses.color_pair(2))
+
+    # Options for other apps:
+    appLauncherWin.addstr(2, 2, appGlyph + " 1. Terminal Shell")
+    appLauncherWin.addstr(3, 2, appGlyph + " 2. Software Planner")
+    appLauncherWin.addstr(4, 2, appGlyph + " 3. Games Library")
+    appLauncherWin.addstr(5, 2, appGlyph + " 4. Settings")
+    appLauncherWin.addstr(7, 2, "5. EXIT")
+
+    appLauncherWin.refresh()
+
+    # Get input from the user
+    #option = appLauncherWin.getstr(curses.COLS-1, 2)
+    curses.echo()
+    option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-5): ", curses.color_pair(3))
+    curses.noecho()
+
+    if option == "1":
+        curses.endwin()
         terminalShell()
 
     elif option == "2":
-        softwarePlanner()
+       curses.wrapper(softwarePlanner)
 
     elif option == "5":
-        sys.exit() # Just ends the whole program
+        sys.exit()
 
-    appLauncher() # Once it has run a program, it goes back to the main home screen (app launcher screen)
+    curses.wrapper(appLauncher)
 
-# Something containing the version number, and maybe some ascii art (logo or something).
+    appLauncherWin.refresh()
+    stdscr.refresh()
+
+# Something containing the version number, and maybe some ascii art (logo or something) - then it says to press any key to continue.
 def bootupScreen():
     pass
 
 bootupScreen()
-appLauncher()
+curses.wrapper(appLauncher)
