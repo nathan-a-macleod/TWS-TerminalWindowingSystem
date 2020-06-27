@@ -58,7 +58,7 @@ def softwarePlanner(stdscr):
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
 
     stdscr.clear()
-    stdscr.addstr(0, 0, "Welcome to the software planner. Press Ctrl-G to exit.")
+    stdscr.addstr(0, 0, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
     stdscr.refresh()
 
     mainWin = curses.newwin(curses.LINES-2, curses.COLS, 2, 0)
@@ -137,7 +137,7 @@ def appLauncher(stdscr):
 # Something containing the version number, and maybe some ascii art (logo or something) - then it says to press any key to continue.
 def bootupScreen(stdscr):
     bootupMessage1 = "Version " + version
-    bootupMessage2 = "Press any key to continue"
+    bootupMessage2 = "Press any key to continue..."
     
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLUE)
 
