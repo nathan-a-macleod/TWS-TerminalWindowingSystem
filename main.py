@@ -1,5 +1,5 @@
 import curses               # For the core of the main user interface
-from curses import textpad  # Mainly for the software planner
+from curses.textpad import Textbox  # Mainly for the software planner
 import datetime             # For printing the time in the terminal shell
 import sys                  # For exiting the program (sys.exit)
 import os                   # For the terminal (os.system() function is very widely used)
@@ -50,10 +50,29 @@ def terminalShell():
             pass
 
 def softwarePlanner(stdscr):
+    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
+
     stdscr.clear()
-    stdscr.addstr(0, 0, "Welcome to the software planner.\u2550")
+    stdscr.addstr(0, 0, "Welcome to the software planner. Press Ctrl-G to exit.")
     stdscr.refresh()
-    stdscr.getch()
+
+    mainWin = curses.newwin(curses.LINES-2, curses.COLS, 2, 0)
+    mainWin.bkgd(" ", curses.color_pair(2))
+
+    with open("softwarePlannerText.txt", "r") as file:
+        for i, line in enumerate(file):
+            mainWin.addstr(i, 0, line)
+    file.close()
+
+    box = Textbox(mainWin)
+    box.edit()
+
+    file = open("softwarePlannerText.txt","w")
+    file.write(box.gather())
+    file.close()
+
+    stdscr.refresh()
 
 def appLauncher(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
