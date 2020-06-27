@@ -9,7 +9,7 @@ startDir = os.getcwd()
 version = "0.1.2"
 commandHistory = []
 
-appGlyph = "[=+=]"
+appGlyph = "[\u25a1]"
 #inputGlyph = "'***'"
 inputGlyph = ""
 
@@ -93,12 +93,12 @@ def appLauncher(stdscr):
     menuTitleStr = " A P P   L A U N C H E R  -  VERSION " + version + " "
 
     for i in range(0, curses.COLS//2-len(menuTitleStr)//2):
-        appLauncherWin.addstr(0, int(i), " ", curses.color_pair(2))
+        appLauncherWin.addstr(0, int(i), "\u2592", curses.color_pair(2))
 
     appLauncherWin.addstr(0, curses.COLS//2-len(menuTitleStr)//2, menuTitleStr, curses.color_pair(1))
 
     for i in range(curses.COLS//2+len(menuTitleStr)//2+1, curses.COLS):
-        appLauncherWin.addstr(0, int(i), " ", curses.color_pair(2))
+        appLauncherWin.addstr(0, int(i), "\u2591", curses.color_pair(2))
 
     # Options for other apps:
     appLauncherWin.addstr(2, 2, appGlyph + " 1. Terminal Shell")

@@ -1,7 +1,9 @@
 # terminalEnv
 A terminal shell environment with support for a couple of other programs written in Python - should work on any Unix-based Operating System. Sort of like a terminal-desktop environment for developers?!
 
-When you run the program, it launches you straight into the app launcher, where you can run many apps (most of them aren't completed yet), including a terminal shell, calendar, file browser, task monitor, etc.
+When you run the `main.py` file, it launches you straight into the app launcher, where you can run many apps (most of them aren't completed yet), including a terminal shell, calendar, file browser, task monitor, etc.
+
+When you open a program, it can only run one program at a time.
 
 # Usage:
 Prerequisites:
