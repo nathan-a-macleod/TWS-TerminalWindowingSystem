@@ -128,14 +128,23 @@ def appLauncher(stdscr):
     elif option == "5":
         sys.exit()
 
+    curses.endwin()
     curses.wrapper(appLauncher)
 
     appLauncherWin.refresh()
     stdscr.refresh()
 
 # Something containing the version number, and maybe some ascii art (logo or something) - then it says to press any key to continue.
-def bootupScreen():
-    pass
+def bootupScreen(stdscr):
+    bootupMessage = "Welcome to version " + version + " of this terminal shell/desktop environment/window manager. Press any key to continue."
+    
+    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLUE)
 
-bootupScreen()
+    stdscr.bkgd(" ", curses.color_pair(1))
+    stdscr.addstr(curses.LINES//2, curses.COLS//2-len(bootupMessage)//2, bootupMessage)
+
+    stdscr.getch()
+    curses.endwin()
+
+curses.wrapper(bootupScreen)
 curses.wrapper(appLauncher)
