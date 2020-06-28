@@ -21,7 +21,7 @@ I am looking for contributers to help with this project, especially with things 
 ## Here is a list of planned apps, and how close they are to being completed:
 * Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
 * Default System Text Editor (Not started - [probably use the curses module])
-* Software Planning Tool (Not started - [probably use the curses module])
+* Software Planning Tool (Half finished)
 * Games Library (Not Started - [Probably use curses for some things, and text based things for other things])
 * Settings (Not Started - [Change things like default system colors, etc])
 
