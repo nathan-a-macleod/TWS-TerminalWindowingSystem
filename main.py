@@ -9,7 +9,9 @@ startDir = os.getcwd()
 version = "0.1.2"
 commandHistory = []
 
+termGlyph = "[\u2550]"
 appGlyph = "[\u25a1]"
+settingsGlyph = "[\u2592]"
 #inputGlyph = "'***'"
 inputGlyph = ""
 
@@ -103,10 +105,10 @@ def appLauncher(stdscr):
         appLauncherWin.addstr(0, int(i), "\u2592", curses.color_pair(2))
 
     # Options for other apps:
-    appLauncherWin.addstr(2, 2, appGlyph + " 1. Terminal Shell")
+    appLauncherWin.addstr(2, 2, termGlyph + " 1. Terminal Shell")
     appLauncherWin.addstr(3, 2, appGlyph + " 2. Software Planner")
     appLauncherWin.addstr(4, 2, appGlyph + " 3. Games Library")
-    appLauncherWin.addstr(5, 2, appGlyph + " 4. Settings")
+    appLauncherWin.addstr(5, 2, settingsGlyph + " 4. Settings")
     appLauncherWin.addstr(7, 2, "5. EXIT")
 
     appLauncherWin.refresh()
