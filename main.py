@@ -9,7 +9,9 @@ startDir = os.getcwd()
 version = "0.1.2"
 commandHistory = []
 
+termGlyph = "[\u2550]"
 appGlyph = "[\u25a1]"
+settingsGlyph = "[\u2592]"
 #inputGlyph = "'***'"
 inputGlyph = ""
 
@@ -53,30 +55,32 @@ def terminalShell():
 
     os.chdir(startDir)
 
-def softwarePlanner(stdscr):
-    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
-
-    stdscr.clear()
-    stdscr.addstr(0, 0, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
+def softwarePlanner(stdscrMain):
+    stdscr = curses.newwin(curses.LINES-1, curses.COLS, 1, 0)
+    stdscr.bkgd(" ", curses.color_pair(1))
+    stdscr.border()
+    stdscr.addstr(1, 1, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
     stdscr.refresh()
 
-    mainWin = curses.newwin(curses.LINES-2, curses.COLS, 2, 0)
-    mainWin.bkgd(" ", curses.color_pair(2))
+    editWin = curses.newwin(curses.LINES-4, curses.COLS-2, 3, 1)
+    editWin.bkgd(" ", curses.color_pair(3))
 
     with open("softwarePlannerText.txt", "r") as file:
         for i, line in enumerate(file):
-            mainWin.addstr(i, 0, line)
+            editWin.addstr(i, 0, line)
     file.close()
 
-    box = Textbox(mainWin)
+    box = Textbox(editWin)
     box.edit()
+
+    editWin.refresh()
 
     file = open("softwarePlannerText.txt","w")
     file.write(box.gather())
     file.close()
 
     stdscr.refresh()
+    stdscrMain.refresh()
 
 def gamesLibrary(stdscr):
     pass
@@ -103,10 +107,10 @@ def appLauncher(stdscr):
         appLauncherWin.addstr(0, int(i), "\u2592", curses.color_pair(2))
 
     # Options for other apps:
-    appLauncherWin.addstr(2, 2, appGlyph + " 1. Terminal Shell")
+    appLauncherWin.addstr(2, 2, termGlyph + " 1. Exit To Shell")
     appLauncherWin.addstr(3, 2, appGlyph + " 2. Software Planner")
     appLauncherWin.addstr(4, 2, appGlyph + " 3. Games Library")
-    appLauncherWin.addstr(5, 2, appGlyph + " 4. Settings")
+    appLauncherWin.addstr(5, 2, settingsGlyph + " 4. Settings")
     appLauncherWin.addstr(7, 2, "5. EXIT")
 
     appLauncherWin.refresh()
@@ -122,7 +126,7 @@ def appLauncher(stdscr):
         terminalShell()
 
     elif option == "2":
-       curses.wrapper(softwarePlanner)
+       softwarePlanner(stdscr)
 
     elif option == "3":
        curses.wrapper(gamesLibrary)
