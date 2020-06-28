@@ -60,6 +60,7 @@ def softwarePlanner(stdscrRoot):
     stdscr = curses.newwin(curses.LINES-1, curses.COLS, 1, 0)
     stdscr.bkgd(" ", curses.color_pair(3))
     stdscr.border()
+    stdscr.addstr(0, 0, "S O F T W A R E   P L A N N E R")
     stdscr.addstr(1, 1, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
     for i in range(0, curses.COLS):
         if i == 0:
@@ -92,8 +93,28 @@ def softwarePlanner(stdscrRoot):
     stdscr.refresh()
     stdscrRoot.refresh()
 
-def gamesLibrary(stdscr):
-    pass
+def gamesLibrary(stdscrRoot):
+    stdscr = curses.newwin(curses.LINES-1, curses.COLS, 1, 0)
+    stdscr.bkgd(" ", curses.color_pair(3))
+    stdscr.border()
+    stdscr.addstr(0, 0, "G A M E S   L I B R A R Y")
+    stdscr.refresh()
+    
+    stdscr.addstr(2, 2, "1. Snake Game")
+    stdscr.addstr(3, 2, "2. Number Guessing Game")
+    stdscr.addstr(5, 2, "3. EXIT")
+
+    curses.echo()
+    option = getInput(stdscr, curses.LINES-3, 2, "Enter an option (1-5): ", curses.color_pair(3))
+    curses.noecho()
+
+    if option == "1":
+        pass
+
+    elif option == "2":
+        pass
+
+    stdscrRoot.refresh()
 
 def appLauncher(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
@@ -139,7 +160,7 @@ def appLauncher(stdscr):
        softwarePlanner(stdscr)
 
     elif option == "3":
-       curses.wrapper(gamesLibrary)
+       gamesLibrary(stdscr)
 
     elif option == "5":
         sys.exit()
