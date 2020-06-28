@@ -3,7 +3,7 @@ A terminal shell environment with support for a couple of other programs written
 
 When you run the `main.py` file, it launches you straight into the app launcher, where you can run many apps (most of them aren't completed yet), including a terminal shell, calendar, file browser, task monitor, etc.
 
-When you open a program, it can only run one program at a time.
+When you open a program, it can only run one program at a time - right now it a stacking window manager, however it is very limited as you can only open one window at a time, and you can't switch between windows, etc.
 
 # Usage:
 Prerequisites:
