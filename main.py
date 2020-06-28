@@ -55,9 +55,10 @@ def terminalShell():
 
     os.chdir(startDir)
 
-def softwarePlanner(stdscrMain):
+# stdscrRoot is the root app launcher window...
+def softwarePlanner(stdscrRoot):
     stdscr = curses.newwin(curses.LINES-1, curses.COLS, 1, 0)
-    stdscr.bkgd(" ", curses.color_pair(1))
+    stdscr.bkgd(" ", curses.color_pair(3))
     stdscr.border()
     stdscr.addstr(1, 1, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
     stdscr.refresh()
@@ -67,7 +68,7 @@ def softwarePlanner(stdscrMain):
 
     with open("softwarePlannerText.txt", "r") as file:
         for i, line in enumerate(file):
-            editWin.addstr(i, 0, line)
+            editWin.addstr(i+2, 0, line)
     file.close()
 
     box = Textbox(editWin)
@@ -80,7 +81,7 @@ def softwarePlanner(stdscrMain):
     file.close()
 
     stdscr.refresh()
-    stdscrMain.refresh()
+    stdscrRoot.refresh()
 
 def gamesLibrary(stdscr):
     pass
