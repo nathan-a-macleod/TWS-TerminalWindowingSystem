@@ -125,6 +125,7 @@ def appLauncher(stdscr):
     curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
 
     stdscr.clear()
+    curses.curs_set(1)
 
     appLauncherWin = curses.newwin(curses.LINES, curses.COLS, 0, 0)
     appLauncherWin.bkgd(" ", curses.color_pair(3))
@@ -176,11 +177,14 @@ def appLauncher(stdscr):
 
 # Something containing the version number, and maybe some ascii art (logo or something) - then it says to press any key to continue.
 def bootupScreen(stdscr):
+    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLUE)
+
+    curses.noecho()
+    curses.curs_set(0)
+
     bootupMessage1 = "Version " + version
     bootupMessage2 = "Press any key to continue..."
     
-    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLUE)
-
     stdscr.bkgd(" ", curses.color_pair(1))
     stdscr.addstr(curses.LINES//2-1, curses.COLS//2-len(bootupMessage1)//2, bootupMessage1)
     stdscr.addstr(curses.LINES//2, curses.COLS//2-len(bootupMessage2)//2, bootupMessage2)
