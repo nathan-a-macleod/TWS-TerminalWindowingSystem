@@ -26,6 +26,7 @@ I am looking for contributers to help with this project, especially with things 
 * Settings (Not Started - [For changing things like default system colors, etc])
 
 ## Here is a list of potential ideas for the future:
+* HELP PAGE
 * Calendar
 * Web Browser
 * Email Client

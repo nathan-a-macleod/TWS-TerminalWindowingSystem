@@ -67,6 +67,18 @@ def softwarePlanner(stdscrRoot):
     stdscr.refresh()
     stdscrRoot.refresh()
 
+def helpWindow(stdscr):
+    helpWin = createNewWindow(stdscr, "H E L P")
+
+    # To inset the text inside it so that it works with the border, create another window which is smaller than the main 'helpWin'
+    textWin = curses.newwin(curses.LINES-3, curses.COLS-2, 2, 1)
+    textWin.bkgd(" ", curses.color_pair(3))
+    textWin.addstr(1, 0, "This is a terminal shell environment with support for a couple of other programs written in Python and it should work on any Unix-based Operating System.\nYou can think of it sort of like a terminal-desktop environment for developers - but it is really just a terminal shell with a few other programs.\n\nIts Github page is at https://github.com/nathan-a-macleod/terminalEnv\n\nPress any key to close this window...")
+    textWin.refresh()
+
+    helpWin.refresh()
+    helpWin.getch()
+
 def appLauncher(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_YELLOW)
@@ -91,17 +103,19 @@ def appLauncher(stdscr):
 
     # Options for other apps:
     appLauncherWin.addstr(2, 2, "[>] 1. Exit To Shell")
-    appLauncherWin.addstr(3, 2, "[\u25a1] 2. Software Planner")
+    appLauncherWin.addstr(3, 2, "[=] 2. Software Planner")
     appLauncherWin.addstr(4, 2, "[\u25a1] 3. File Manager")
     appLauncherWin.addstr(5, 2, "[\u2592] 4. Settings")
-    appLauncherWin.addstr(7, 2, "5. EXIT")
+    appLauncherWin.addstr(6, 2, "--------------------")
+    appLauncherWin.addstr(7, 2, "[?] 5. HELP")
+    appLauncherWin.addstr(8, 2, "[x] 6. EXIT")
 
     appLauncherWin.refresh()
 
     # Get input from the user
     #option = appLauncherWin.getstr(curses.COLS-1, 2)
     curses.echo()
-    option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-5): ", curses.color_pair(3))
+    option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-6): ", curses.color_pair(3))
     curses.noecho()
 
     if option == "1":
@@ -109,16 +123,16 @@ def appLauncher(stdscr):
         terminalShell.terminalShell()
 
     elif option == "2":
-       softwarePlanner(stdscr)
+        softwarePlanner(stdscr)
 
     elif option == "5":
+        helpWindow(stdscr)
+
+    elif option == "6":
         sys.exit()
 
     curses.endwin()
     curses.wrapper(appLauncher)
-
-    appLauncherWin.refresh()
-    stdscr.refresh()
 
 # Something containing the version number, and maybe some ascii art (logo or something) - then it says to press any key to continue.
 def bootupScreen(stdscr):
