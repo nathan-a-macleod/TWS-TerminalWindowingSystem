@@ -1,7 +1,8 @@
-import curses                       # For the core of the main user interface
-from curses.textpad import Textbox  # Mainly for the software planner
-import sys                          # For exiting the program (sys.exit)
-import terminalShell                # terminalShell.py file
+import curses                        # For the core of the main user interface
+from curses.textpad import Textbox   # Mainly for the software planner
+import sys                           # For exiting the program (sys.exit)
+import terminalShell                 # terminalShell.py file
+import random                        # For the number guessing game
 
 version = "0.2.0"
 
@@ -72,25 +73,6 @@ def softwarePlanner(stdscrRoot):
     stdscr.refresh()
     stdscrRoot.refresh()
 
-def gamesLibrary(stdscrRoot):
-    stdscr = createNewWindow(stdscrRoot, "G A M E S   L I B R A R Y")
-    
-    stdscr.addstr(2, 2, "1. Snake Game")
-    stdscr.addstr(3, 2, "2. Number Guessing Game")
-    stdscr.addstr(4, 2, "3. EXIT")
-
-    curses.echo()
-    option = getInput(stdscr, curses.LINES-3, 2, "Enter an option (1-5): ", curses.color_pair(3))
-    curses.noecho()
-
-    if option == "1":
-        pass
-
-    elif option == "2":
-        pass
-
-    stdscrRoot.refresh()
-
 def appLauncher(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_RED)
@@ -103,7 +85,7 @@ def appLauncher(stdscr):
     appLauncherWin.bkgd(" ", curses.color_pair(3))
 
     # Header at the top of the screen
-    menuTitleStr = " A P P   L A U N C H E R  -  VERSION " + version + " "
+    menuTitleStr = " A P P   L A U N C H E R "
 
     for i in range(0, curses.COLS//2-len(menuTitleStr)//2):
         appLauncherWin.addstr(0, int(i), "\u2592", curses.color_pair(2))
@@ -116,16 +98,15 @@ def appLauncher(stdscr):
     # Options for other apps:
     appLauncherWin.addstr(2, 2, termGlyph + " 1. Exit To Shell")
     appLauncherWin.addstr(3, 2, appGlyph + " 2. Software Planner")
-    appLauncherWin.addstr(4, 2, appGlyph + " 3. Games Library")
-    appLauncherWin.addstr(5, 2, settingsGlyph + " 4. Settings")
-    appLauncherWin.addstr(7, 2, "5. EXIT")
+    appLauncherWin.addstr(4, 2, settingsGlyph + " 3. Settings")
+    appLauncherWin.addstr(6, 2, "4. EXIT")
 
     appLauncherWin.refresh()
 
     # Get input from the user
     #option = appLauncherWin.getstr(curses.COLS-1, 2)
     curses.echo()
-    option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-5): ", curses.color_pair(3))
+    option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-4): ", curses.color_pair(3))
     curses.noecho()
 
     if option == "1":
@@ -135,10 +116,7 @@ def appLauncher(stdscr):
     elif option == "2":
        softwarePlanner(stdscr)
 
-    elif option == "3":
-       gamesLibrary(stdscr)
-
-    elif option == "5":
+    elif option == "4":
         sys.exit()
 
     curses.endwin()
