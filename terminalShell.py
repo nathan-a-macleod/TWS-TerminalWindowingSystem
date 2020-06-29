@@ -12,7 +12,7 @@ def terminalShell():
 
     while command != "exit":
         now = datetime.datetime.now()
-        command = input("\033[37m\033[44m" + now.strftime("<%I:%M:%p>") + "\033[0m~\033[31;4m" + os.popen("whoami").read().split()[0] + "\033[0m~\033[36m" + os.popen("pwd").read().split("\n")[0] + "/\033[0m~$ ")
+        command = input("\033[37;44m" + now.strftime("<%I:%M:%p>") + "\033[0m~\033[31;4m" + os.popen("whoami").read().split()[0] + "\033[0m~\033[36m" + os.popen("pwd").read().split("\n")[0] + "/\033[0m~$ ")
 
         os.system(command)
 
