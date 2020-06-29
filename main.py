@@ -6,7 +6,7 @@ import os                   # For the terminal (os.system() function is very wid
 
 startDir = os.getcwd()
 
-version = "0.1.2"
+version = "0.2.0"
 commandHistory = []
 
 termGlyph = "[\u2550]"
