@@ -1,13 +1,9 @@
 import curses                       # For the core of the main user interface
 from curses.textpad import Textbox  # Mainly for the software planner
-import datetime                     # For printing the time in the terminal shell
 import sys                          # For exiting the program (sys.exit)
-import os                           # For the terminal (os.system() function is very widely used)
-
-startDir = os.getcwd()
+import terminalShell                # terminalShell.py file
 
 version = "0.2.0"
-commandHistory = []
 
 termGlyph = "[\u2550]"
 appGlyph = "[\u25a1]"
@@ -40,30 +36,6 @@ def createNewWindow(stdscrRoot, title):
     stdscr.refresh()
     
     return stdscr
-
-def terminalShell():
-    command = ""
-    
-    os.system("clear")
-    print(f"Welcome to the terminal environment.\nTo open the app launcher again, type: 'exit'")
-
-    while command != "exit":
-        now = datetime.datetime.now()
-        command = input("\033[34;1m" + now.strftime("%H:%M") + "\033[0m~\033[31;1m" + os.popen("whoami").read().split()[0] + "\033[0m~\033[36m" + os.popen("pwd").read().split("\n")[0] + "/\033[0m~$ ")
-
-        os.system(command)
-
-        # To allow the user to press up arrow to go to the last command:
-        commandHistory.append(command)
-
-        # To allow changing of directories:
-        try:
-            os.chdir(command.split()[1])
-
-        except:
-            pass
-
-    os.chdir(startDir)
 
 # stdscrRoot is the root app launcher window...
 def softwarePlanner(stdscrRoot):
@@ -158,7 +130,7 @@ def appLauncher(stdscr):
 
     if option == "1":
         curses.endwin()
-        terminalShell()
+        terminalShell.terminalShell()
 
     elif option == "2":
        softwarePlanner(stdscr)
