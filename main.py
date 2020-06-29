@@ -1,8 +1,8 @@
-import curses               # For the core of the main user interface
+import curses                       # For the core of the main user interface
 from curses.textpad import Textbox  # Mainly for the software planner
-import datetime             # For printing the time in the terminal shell
-import sys                  # For exiting the program (sys.exit)
-import os                   # For the terminal (os.system() function is very widely used)
+import datetime                     # For printing the time in the terminal shell
+import sys                          # For exiting the program (sys.exit)
+import os                           # For the terminal (os.system() function is very widely used)
 
 startDir = os.getcwd()
 
