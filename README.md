@@ -16,7 +16,7 @@ I am looking for contributers to help with this project, especially with things 
 
 # Future plans
 
-* At some point soon, this wikipedia page may become helpful: https://en.wikipedia.org/wiki/Box-drawing_character
+* This Wikipedia page is very helpful (Unicode Characters): https://en.wikipedia.org/wiki/Box-drawing_character
 
 ## Here is a list of planned apps, and how close they are to being completed:
 * Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
