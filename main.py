@@ -17,8 +17,8 @@ def getInput(stdscr, y, x, prompt, colorPair):
 
         if ord(char) == 10:
             break
-
-        string += char
+        else:
+            string += char
 
     return string
 
@@ -73,7 +73,7 @@ def helpWindow(stdscr):
     # To inset the text inside it so that it works with the border, create another window which is smaller than the main 'helpWin'
     textWin = curses.newwin(curses.LINES-3, curses.COLS-2, 2, 1)
     textWin.bkgd(" ", curses.color_pair(3))
-    textWin.addstr(1, 0, "This is a terminal shell environment with support for a couple of other programs written in Python and it should work on any Unix-based Operating System.\nYou can think of it sort of like a terminal-desktop environment for developers - but it is really just a terminal shell with a few other programs.\n\nIts Github page is at https://github.com/nathan-a-macleod/terminalEnv\n\nPress any key to close this window...")
+    textWin.addstr(1, 0, "This is a terminal shell environment with support for a couple of other programs written in Python and it should work on any Unix-based Operating System.\nYou can think of it sort of like a terminal-desktop environment for developers - but it is really just a terminal shell with a few other programs.\n\nThe Github page is at https://github.com/nathan-a-macleod/terminalEnv\n\nPress any key to close this window...")
     textWin.refresh()
 
     helpWin.refresh()
@@ -138,7 +138,7 @@ def appLauncher(stdscr):
 def bootupScreen(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLUE)
 
-    stdscr.border(chr("\u2502"))
+    stdscr.border()
 
     curses.noecho()
     curses.curs_set(0)

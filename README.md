@@ -31,5 +31,4 @@ I am looking for contributers to help with this project, especially with things 
 * Web Browser
 * Email Client
 * Task Monitor
-* File Browser
 * Development Library (Not sure how to do it yet, but maybe a python library (canvas.py or something to link up to automatically) where you can create graphical programs with the program.)
