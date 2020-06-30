@@ -23,6 +23,7 @@ def getInput(stdscr, y, x, prompt, colorPair):
 
         if ord(char) == 10:
             break
+        
         else:
             string += char
 
