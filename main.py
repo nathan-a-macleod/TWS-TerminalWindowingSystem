@@ -10,7 +10,7 @@ version = "0.2.0"
 def getCtrlG(stdscr):
     key = stdscr.getch()
     if key != 7:
-        getKey()
+        getCtrlG(stdscr)
 
 # Function for curses to get input, then enter, similar to getch() (but lets the user press enter) - need to make backspace and arrow keys work
 def getInput(stdscr, y, x, prompt, colorPair):
@@ -42,6 +42,8 @@ def createNewWindow(stdscrRoot, title):
 def softwarePlanner(stdscrRoot):
     stdscr = createNewWindow(stdscrRoot, "S O F T W A R E   P L A N N E R")
     stdscr.addstr(1, 1, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
+
+    # Horizontal line with unicode chars
     for i in range(0, curses.COLS):
         if i == 0:
             stdscr.addstr(2, 0, "\u251c")
@@ -76,10 +78,26 @@ def softwarePlanner(stdscrRoot):
 def helpWindow(stdscr):
     helpWin = createNewWindow(stdscr, "H E L P")
 
+    helpWin.addstr(1, 0, "This is the help page - press Ctrl-G to exit.")
+
+    # Horizontal line with unicode chars
+    for i in range(0, curses.COLS):
+        if i == 0:
+            helpWin.addstr(2, 0, "\u251c")
+
+        elif i == curses.COLS-1:
+            helpWin.addstr(2, i, "\u2524")
+
+        else:
+            helpWin.addstr(2, i, "\u2500")
+
+    helpWin.refresh()
+
     # To inset the text inside it so that it works with the border, create another window which is smaller than the main 'helpWin'
-    textWin = curses.newwin(curses.LINES-3, curses.COLS-2, 2, 1)
+    textWin = curses.newwin(curses.LINES-5, curses.COLS-2, 4, 1)
     textWin.bkgd(" ", curses.color_pair(3))
-    textWin.addstr(1, 0, "This is a terminal shell environment with support for a couple of other programs written in Python and it should work on any Unix-based Operating System.\nYou can think of it sort of like a terminal-desktop environment for developers - but it is really just a terminal shell with a few other programs.\n\nThe Github page is at https://github.com/nathan-a-macleod/terminalEnv\n\nPress Ctrl-G to exit.")
+    
+    textWin.addstr(0, 0, "This is a terminal shell environment with support for a couple of other programs written in Python and it should work on any Unix-based Operating System.\nYou can think of it sort of like a terminal-desktop environment for developers - but it is really just a terminal shell with a few other programs.\n\nThe Github page is at https://github.com/nathan-a-macleod/terminalEnv")
     textWin.refresh()
 
     helpWin.refresh()
