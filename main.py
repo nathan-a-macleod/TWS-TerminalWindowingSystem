@@ -2,6 +2,7 @@ import curses                        # For the core of the main user interface
 from curses.textpad import Textbox   # Mainly for the software planner
 import sys                           # For exiting the program (sys.exit)
 import terminalShell                 # terminalShell.py file
+import fileManager                   # fileManager.py file
 import random                        # For the number guessing game
 
 version = "0.2.0"
@@ -21,16 +22,20 @@ def getInput(stdscr, y, x, prompt, colorPair):
     while True:
         char = stdscr.getkey()
 
-        if ord(char) == 10:
-            break
-        
-        else:
-            string += char
+        try:
+            if ord(char) == 10:
+                break
+            
+            else:
+                string += char
+
+        except:
+            pass
 
     return string
 
 # Function to create a new window, with the correct size, etc
-def createNewWindow(stdscrRoot, title):
+def createNewWindow(title):
     stdscr = curses.newwin(curses.LINES-1, curses.COLS, 1, 0)
     stdscr.bkgd(" ", curses.color_pair(3))
     stdscr.border()
@@ -40,8 +45,8 @@ def createNewWindow(stdscrRoot, title):
     return stdscr
 
 # stdscrRoot is the root app launcher window...
-def softwarePlanner(stdscrRoot):
-    stdscr = createNewWindow(stdscrRoot, "S O F T W A R E   P L A N N E R")
+def softwarePlanner():
+    stdscr = createNewWindow("S O F T W A R E   P L A N N E R")
     stdscr.addstr(1, 1, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
 
     # Horizontal line with unicode chars
@@ -74,10 +79,9 @@ def softwarePlanner(stdscrRoot):
     file.close()
 
     stdscr.refresh()
-    stdscrRoot.refresh()
 
-def helpWindow(stdscr):
-    helpWin = createNewWindow(stdscr, "H E L P")
+def helpWindow():
+    helpWin = createNewWindow("H E L P")
 
     helpWin.addstr(1, 0, "This is the help page - press Ctrl-G to exit.")
 
@@ -145,13 +149,16 @@ def appLauncher(stdscr):
 
     if option == "1":
         curses.endwin()
-        terminalShell.terminalShell()
+        terminalShell.terminalShellWin()
 
     elif option == "2":
-        softwarePlanner(stdscr)
+        softwarePlanner()
+
+    elif option == "3":
+        fileManager.fileManagerWin(createNewWindow)
 
     elif option == "5":
-        helpWindow(stdscr)
+        helpWindow()
 
     elif option == "6":
         sys.exit()

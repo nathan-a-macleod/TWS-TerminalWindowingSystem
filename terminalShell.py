@@ -4,7 +4,7 @@ import datetime
 startDir = os.getcwd()
 commandHistory = []
 
-def terminalShell():
+def terminalShellWin():
     command = ""
     
     os.system("clear")
