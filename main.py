@@ -105,10 +105,10 @@ def appLauncher(stdscr):
     appLauncherWin.addstr(2, 2, "[>] 1. Exit To Shell")
     appLauncherWin.addstr(3, 2, "[=] 2. Software Planner")
     appLauncherWin.addstr(4, 2, "[\u25a1] 3. File Manager")
-    appLauncherWin.addstr(5, 2, "[\u2592] 4. Settings")
-    appLauncherWin.addstr(6, 2, "--------------------")
-    appLauncherWin.addstr(7, 2, "[?] 5. HELP")
-    appLauncherWin.addstr(8, 2, "[x] 6. EXIT")
+    appLauncherWin.addstr(5, 2, "-----------------------")
+    appLauncherWin.addstr(6, 2, "[\u2592] 4. Settings")
+    appLauncherWin.addstr(7, 2, "[?] 5. Help")
+    appLauncherWin.addstr(8, 2, "[x] 6. Exit")
 
     appLauncherWin.refresh()
 
@@ -130,6 +130,8 @@ def appLauncher(stdscr):
 
     elif option == "6":
         sys.exit()
+
+    appLauncherWin.refresh()
 
     curses.endwin()
     curses.wrapper(appLauncher)

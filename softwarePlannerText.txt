@@ -1,7 +1,0 @@
-Here are my software ideas: 
-* Idea 1 
-* Idea 2 
-* Idea 3 
------------------- 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do elusmod tempor. 
-Create a flowchart -> Code a basic implementation -> Improve the basic implementation. 
