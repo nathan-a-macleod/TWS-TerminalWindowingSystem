@@ -6,6 +6,12 @@ import random                        # For the number guessing game
 
 version = "0.2.0"
 
+# Function that only finishes if the user presses Ctrl-G (Used in things like the help window)
+def getCtrlG(stdscr):
+    key = stdscr.getch()
+    if key != 7:
+        getKey()
+
 # Function for curses to get input, then enter, similar to getch() (but lets the user press enter) - need to make backspace and arrow keys work
 def getInput(stdscr, y, x, prompt, colorPair):
     stdscr.addstr(y, x, prompt, colorPair)
@@ -73,11 +79,11 @@ def helpWindow(stdscr):
     # To inset the text inside it so that it works with the border, create another window which is smaller than the main 'helpWin'
     textWin = curses.newwin(curses.LINES-3, curses.COLS-2, 2, 1)
     textWin.bkgd(" ", curses.color_pair(3))
-    textWin.addstr(1, 0, "This is a terminal shell environment with support for a couple of other programs written in Python and it should work on any Unix-based Operating System.\nYou can think of it sort of like a terminal-desktop environment for developers - but it is really just a terminal shell with a few other programs.\n\nThe Github page is at https://github.com/nathan-a-macleod/terminalEnv\n\nPress any key to close this window...")
+    textWin.addstr(1, 0, "This is a terminal shell environment with support for a couple of other programs written in Python and it should work on any Unix-based Operating System.\nYou can think of it sort of like a terminal-desktop environment for developers - but it is really just a terminal shell with a few other programs.\n\nThe Github page is at https://github.com/nathan-a-macleod/terminalEnv\n\nPress Ctrl-G to exit.")
     textWin.refresh()
 
     helpWin.refresh()
-    helpWin.getch()
+    getCtrlG(helpWin)
 
 def appLauncher(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
