@@ -18,15 +18,15 @@ I am looking for contributers to help with this project, especially with things 
 
 * This Wikipedia page is very helpful (Unicode Characters): https://en.wikipedia.org/wiki/Box-drawing_character
 
-## Here is a list of planned apps, and how close they are to being completed:
+## Here is a list of apps, and how close they are to being completed:
 * Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
 * Default System Text Editor (Not started)
 * Software Planning Tool (Half finished)
 * File Manager (Not started)
+* Help Page (Mostly completed)
 * Settings (Not Started - [For changing things like default system colors, etc])
 
 ## Here is a list of potential ideas for the future:
-* HELP PAGE
 * Calendar
 * Web Browser
 * Email Client
