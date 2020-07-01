@@ -1,5 +1,18 @@
 import curses
 
+# Function to print a horizontal line with unicode characters:
+def hlineUnicode(window):
+    for i in range(0, curses.COLS):
+        if i == 0:
+            window.addstr(2, 0, "\u251c")
+
+        elif i == curses.COLS-1:
+            window.addstr(2, i, "\u2524")
+
+        else:
+            window.addstr(2, i, "\u2500")
+    window.refresh()
+
 # Function that only finishes if the user presses Ctrl-G (Used in things like the help window)
 def getCtrlG(stdscr):
     key = stdscr.getch()

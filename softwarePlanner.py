@@ -7,17 +7,7 @@ def softwarePlanner():
     stdscr = createNewWindow("S O F T W A R E   P L A N N E R")
     stdscr.addstr(1, 1, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
 
-    # Horizontal line with unicode chars
-    for i in range(0, curses.COLS):
-        if i == 0:
-            stdscr.addstr(2, 0, "\u251c")
-
-        elif i == curses.COLS-1:
-            stdscr.addstr(2, i, "\u2524")
-
-        else:
-            stdscr.addstr(2, i, "\u2500")
-    stdscr.refresh()
+    hlineUnicode(stdscr)
 
     editWin = curses.newwin(curses.LINES-5, curses.COLS-2, 4, 1)
     editWin.bkgd(" ", curses.color_pair(3))

@@ -14,16 +14,7 @@ def helpWindow():
 
     helpWin.addstr(1, 0, "This is the help page - press Ctrl-G to exit.")
 
-    # Horizontal line with unicode chars
-    for i in range(0, curses.COLS):
-        if i == 0:
-            helpWin.addstr(2, 0, "\u251c")
-
-        elif i == curses.COLS-1:
-            helpWin.addstr(2, i, "\u2524")
-
-        else:
-            helpWin.addstr(2, i, "\u2500")
+    hlineUnicode(helpWin)
 
     helpWin.refresh()
 
@@ -94,6 +85,8 @@ def appLauncher(stdscr):
 
     appLauncherWin.refresh()
 
+
+    # When the app is finished (the user presses Ctrl-G) it closes all windows and runs the app launcher again
     curses.endwin()
     curses.wrapper(appLauncher)
 
