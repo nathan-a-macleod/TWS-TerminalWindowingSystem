@@ -19,11 +19,12 @@ def terminalShellWin():
         # To allow the user to press up arrow to go to the last command (not completed yet):
         commandHistory.append(command)
 
-        # To allow changing of directories:
-        try:
-            os.chdir(command.split()[1])
+        if command.split()[0] == "cd":
+            # To allow changing of directories:
+            try:
+                os.chdir(command.split()[1])
 
-        except:
-            pass
+            except:
+                pass
 
     os.chdir(startDir)
