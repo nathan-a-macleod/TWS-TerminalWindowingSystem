@@ -20,10 +20,10 @@ I am looking for contributers to help with this project, especially with things 
 
 ## Here is a list of apps, and how close they are to being completed:
 * Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
-* Default System Text Editor (Not started)
-* Software Planning Tool (Half finished)
-* File Manager (Not started)
 * Help Page (Mostly completed)
+* Software Planning Tool (Half Completed)
+* Default System Text Editor (Not started)
+* File Manager (Not started)
 * Settings (Not Started - [For changing things like default system colors, etc])
 
 ## Here is a list of potential ideas for the future:
