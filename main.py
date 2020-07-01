@@ -7,7 +7,7 @@ import applications.terminalShell as terminalShell       # terminalShell.py file
 import applications.fileManager as fileManager           # fileManager.py file
 import applications.softwarePlanner as softwarePlanner   # softwarePlanner file
 
-version = "0.2.0"
+version = "0.3.0"
 
 # Window displaying some help - should really move this to another file inside the applications folder
 def helpWindow():
