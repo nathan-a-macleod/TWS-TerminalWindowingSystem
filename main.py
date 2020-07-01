@@ -1,18 +1,19 @@
-import curses                        # For the core of the main user interface
-from applicationFunctions import *   # applicationFunctions file - functions like getInput, getCtrlG, createNewWindow, etc
-import sys                           # For exiting the program (sys.exit)
+import curses                                            # For the core of the main user interface
+from applicationFunctions import *                       # applicationFunctions file - functions like getInput, getCtrlG, createNewWindow, etc
+import sys                                               # For exiting the program (sys.exit)
 
 # Programs
-import terminalShell                 # terminalShell.py file
-import fileManager                   # fileManager.py file
-import softwarePlanner               # softwarePlanner file
+import applications.terminalShell as terminalShell       # terminalShell.py file
+import applications.fileManager as fileManager           # fileManager.py file
+import applications.softwarePlanner as softwarePlanner   # softwarePlanner file
 
 version = "0.2.0"
 
+# Window displaying some help - should really move this to another file inside the applications folder
 def helpWindow():
     helpWin = createNewWindow("H E L P")
 
-    helpWin.addstr(1, 0, "This is the help page - press Ctrl-G to exit.")
+    helpWin.addstr(1, 1, "This is the help page - press Ctrl-G to exit.")
 
     hlineUnicode(helpWin)
 
@@ -64,8 +65,10 @@ def appLauncher(stdscr):
     # Get input from the user
     #option = appLauncherWin.getstr(curses.COLS-1, 2)
     curses.echo()
+    curses.curs_set(1)
     option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-6): ", curses.color_pair(3))
     curses.noecho()
+    curses.curs_set(0)
 
     if option == "1":
         curses.endwin()
@@ -86,7 +89,7 @@ def appLauncher(stdscr):
     appLauncherWin.refresh()
 
 
-    # When the app is finished (the user presses Ctrl-G) it closes all windows and runs the app launcher again
+    # When the app is finished (the user presses Ctrl-G in most cases) it closes all windows and runs the app launcher again
     curses.endwin()
     curses.wrapper(appLauncher)
 

@@ -4,6 +4,7 @@ from applicationFunctions import *
 
 # stdscrRoot is the root app launcher window...
 def softwarePlanner():
+    curses.curs_set(1)
     stdscr = createNewWindow("S O F T W A R E   P L A N N E R")
     stdscr.addstr(1, 1, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
 
