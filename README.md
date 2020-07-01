@@ -32,3 +32,16 @@ I am looking for contributers to help with this project, especially with things 
 * Email Client
 * Task Monitor
 * Development Library (Not sure how to do it yet, but maybe a python library (canvas.py or something to link up to automatically) where you can create graphical programs with the program.)
+
+# Images:
+![image1]
+(images/screenShot1.png)
+
+![image2]
+(images/screenShot2.png)
+
+![image3]
+(images/screenShot3.png)
+
+![image4]
+(images/screenShot4.png)
