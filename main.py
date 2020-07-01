@@ -1,84 +1,13 @@
 import curses                        # For the core of the main user interface
-from curses.textpad import Textbox   # Mainly for the software planner
+from applicationFunctions import *   # applicationFunctions file - functions like getInput, getCtrlG, createNewWindow, etc
 import sys                           # For exiting the program (sys.exit)
+
+# Programs
 import terminalShell                 # terminalShell.py file
 import fileManager                   # fileManager.py file
-import random                        # For the number guessing game
+import softwarePlanner               # softwarePlanner file
 
 version = "0.2.0"
-
-# Function that only finishes if the user presses Ctrl-G (Used in things like the help window)
-def getCtrlG(stdscr):
-    key = stdscr.getch()
-    if key != 7:
-        getCtrlG(stdscr)
-
-# Function for curses to get input, then enter, similar to getch() (but lets the user press enter) - need to make backspace and arrow keys work
-def getInput(stdscr, y, x, prompt, colorPair):
-    stdscr.addstr(y, x, prompt, colorPair)
-
-    string = ""
-
-    while True:
-        char = stdscr.getkey()
-
-        try:
-            if ord(char) == 10:
-                break
-            
-            else:
-                string += char
-
-        except:
-            pass
-
-    return string
-
-# Function to create a new window, with the correct size, etc
-def createNewWindow(title):
-    stdscr = curses.newwin(curses.LINES-1, curses.COLS, 1, 0)
-    stdscr.bkgd(" ", curses.color_pair(3))
-    stdscr.border()
-    stdscr.addstr(0, 0, title)
-    stdscr.refresh()
-    
-    return stdscr
-
-# stdscrRoot is the root app launcher window...
-def softwarePlanner():
-    stdscr = createNewWindow("S O F T W A R E   P L A N N E R")
-    stdscr.addstr(1, 1, "Welcome to the software planner - why not plan out some software in here? Press Ctrl-G to exit.")
-
-    # Horizontal line with unicode chars
-    for i in range(0, curses.COLS):
-        if i == 0:
-            stdscr.addstr(2, 0, "\u251c")
-
-        elif i == curses.COLS-1:
-            stdscr.addstr(2, i, "\u2524")
-
-        else:
-            stdscr.addstr(2, i, "\u2500")
-    stdscr.refresh()
-
-    editWin = curses.newwin(curses.LINES-5, curses.COLS-2, 4, 1)
-    editWin.bkgd(" ", curses.color_pair(3))
-
-    with open("softwarePlannerText.txt", "r") as file:
-        for i, line in enumerate(file):
-            editWin.addstr(i, 0, line)
-    file.close()
-
-    box = Textbox(editWin)
-    box.edit()
-
-    editWin.refresh()
-
-    file = open("softwarePlannerText.txt","w")
-    file.write(box.gather())
-    file.close()
-
-    stdscr.refresh()
 
 def helpWindow():
     helpWin = createNewWindow("H E L P")
@@ -152,10 +81,10 @@ def appLauncher(stdscr):
         terminalShell.terminalShellWin()
 
     elif option == "2":
-        softwarePlanner()
+        softwarePlanner.softwarePlanner()
 
     elif option == "3":
-        fileManager.fileManagerWin(createNewWindow)
+        fileManager.fileManagerWin()
 
     elif option == "5":
         helpWindow()
