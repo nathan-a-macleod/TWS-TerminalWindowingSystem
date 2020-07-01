@@ -35,13 +35,13 @@ I am looking for contributers to help with this project, especially with things 
 
 # Images:
 ![image1]
-(images/screenShot1.png)
+(/images/screenShot1.png)
 
 ![image2]
-(images/screenShot2.png)
+(/images/screenShot2.png)
 
 ![image3]
-(images/screenShot3.png)
+(/images/screenShot3.png)
 
 ![image4]
-(images/screenShot4.png)
+(/images/screenShot4.png)
