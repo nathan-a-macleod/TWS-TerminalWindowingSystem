@@ -52,25 +52,14 @@ def appLauncher(stdscr):
     for i in range(curses.COLS//2+len(menuTitleStr)//2+1, curses.COLS):
         appLauncherWin.addstr(0, int(i), "\u2592", curses.color_pair(2))
 
-    '''
-    # Options for other apps:
-    appLauncherWin.addstr(2, 2, "[>] 1. Exit To Shell")
-    appLauncherWin.addstr(3, 2, "[=] 2. Software Planner")
-    appLauncherWin.addstr(4, 2, "[\u25a1] 3. File Manager")
-    appLauncherWin.addstr(5, 2, "-----------------------")
-    appLauncherWin.addstr(6, 2, "[\u2592] 4. Settings")
-    appLauncherWin.addstr(7, 2, "[?] 5. Help")
-    appLauncherWin.addstr(8, 2, "[x] 6. Exit")
-    '''
-
     appLauncherWin.hline(1, 0, " ", curses.COLS, curses.color_pair(4))
-    appLauncherWin.addstr(1, 0, "[>] 1. Shell    [-] 2. Apps    [x] 3. Exit", curses.color_pair(4))
+    appLauncherWin.addstr(1, 0, "[>] 1. Shell    [-] 2. Apps    [?] 3. Help    [x] 4. Exit", curses.color_pair(4))
     appLauncherWin.refresh()
 
     # Get input from the user
     #option = appLauncherWin.getstr(curses.COLS-1, 2)
     setCursor(1)
-    option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-3): ", curses.color_pair(3))
+    option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-4): ", curses.color_pair(3))
     setCursor(0)
 
     if option == "1":
@@ -86,9 +75,8 @@ def appLauncher(stdscr):
         extraAppWindow1.addstr(2, 2, "[\u25a1] 2. File Manager")
         extraAppWindow1.addstr(3, 2, "-----------------------")
         extraAppWindow1.addstr(4, 2, "[\u2592] 3. Settings")
-        extraAppWindow1.addstr(5, 2, "[?] 4. Help")
         setCursor(1)
-        appOption = getInput(extraAppWindow1, 7, 2, "Enter an option (1-4): ", curses.color_pair(3))
+        appOption = getInput(extraAppWindow1, 7, 2, "Enter an option (1-3): ", curses.color_pair(3))
         setCursor(0)
 
         if appOption == "1":
@@ -97,29 +85,11 @@ def appLauncher(stdscr):
         elif appOption == "2":
             fileManager.fileManagerWin()
 
-        elif appOption == "4":
-            helpWindow()
-
     elif option == "3":
-        sys.exit()
-
-    '''
-    if option == "1":
-        curses.endwin()
-        terminalShell.terminalShellWin()
-
-    elif option == "2":
-        softwarePlanner.softwarePlanner()
-
-    elif option == "3":
-        fileManager.fileManagerWin()
-
-    elif option == "5":
         helpWindow()
 
-    elif option == "6":
+    elif option == "4":
         sys.exit()
-    '''
 
     appLauncherWin.refresh()
 
