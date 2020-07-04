@@ -1,5 +1,14 @@
 import curses
 
+def setCursor(mode):
+    if mode == True:
+        curses.echo()
+        curses.curs_set(1)
+
+    else:
+        curses.noecho()
+        curses.curs_set(0)
+
 # Function to print a horizontal line with unicode characters:
 def hlineUnicode(window):
     for i in range(0, curses.COLS):

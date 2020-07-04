@@ -33,6 +33,7 @@ def appLauncher(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_YELLOW)
     curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
+    curses.init_pair(4, curses.COLOR_WHITE, curses.COLOR_BLUE)
 
     stdscr.clear()
     curses.curs_set(1)
@@ -51,6 +52,7 @@ def appLauncher(stdscr):
     for i in range(curses.COLS//2+len(menuTitleStr)//2+1, curses.COLS):
         appLauncherWin.addstr(0, int(i), "\u2592", curses.color_pair(2))
 
+    '''
     # Options for other apps:
     appLauncherWin.addstr(2, 2, "[>] 1. Exit To Shell")
     appLauncherWin.addstr(3, 2, "[=] 2. Software Planner")
@@ -59,17 +61,49 @@ def appLauncher(stdscr):
     appLauncherWin.addstr(6, 2, "[\u2592] 4. Settings")
     appLauncherWin.addstr(7, 2, "[?] 5. Help")
     appLauncherWin.addstr(8, 2, "[x] 6. Exit")
+    '''
 
+    appLauncherWin.hline(1, 0, " ", curses.COLS, curses.color_pair(4))
+    appLauncherWin.addstr(1, 0, "[>] 1. Shell    [-] 2. Apps    [x] 3. Exit", curses.color_pair(4))
     appLauncherWin.refresh()
 
     # Get input from the user
     #option = appLauncherWin.getstr(curses.COLS-1, 2)
-    curses.echo()
-    curses.curs_set(1)
-    option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-6): ", curses.color_pair(3))
-    curses.noecho()
-    curses.curs_set(0)
+    setCursor(1)
+    option = getInput(appLauncherWin, curses.LINES-2, 2, "Enter an option (1-3): ", curses.color_pair(3))
+    setCursor(0)
 
+    if option == "1":
+        curses.endwin()
+        terminalShell.terminalShellWin()
+
+    # Open up a menu of some more applications
+    elif option == "2":
+        extraAppWindow1 = curses.newwin(9, 40, 2, 16)
+        extraAppWindow1.bkgd(" ", curses.color_pair(3))
+        extraAppWindow1.border()
+        extraAppWindow1.addstr(1, 2, "[=] 1. Software Planner")
+        extraAppWindow1.addstr(2, 2, "[\u25a1] 2. File Manager")
+        extraAppWindow1.addstr(3, 2, "-----------------------")
+        extraAppWindow1.addstr(4, 2, "[\u2592] 3. Settings")
+        extraAppWindow1.addstr(5, 2, "[?] 4. Help")
+        setCursor(1)
+        appOption = getInput(extraAppWindow1, 7, 2, "Enter an option (1-4): ", curses.color_pair(3))
+        setCursor(0)
+
+        if appOption == "1":
+            softwarePlanner.softwarePlanner()
+
+        elif appOption == "2":
+            fileManager.fileManagerWin()
+
+        elif appOption == "4":
+            helpWindow()
+
+    elif option == "3":
+        sys.exit()
+
+    '''
     if option == "1":
         curses.endwin()
         terminalShell.terminalShellWin()
@@ -85,6 +119,7 @@ def appLauncher(stdscr):
 
     elif option == "6":
         sys.exit()
+    '''
 
     appLauncherWin.refresh()
 
