@@ -18,13 +18,13 @@ I am looking for contributers to help with this project, especially with things 
 * This Wikipedia page is very helpful (Unicode Characters): https://en.wikipedia.org/wiki/Box-drawing_character
 
 ## Here is a list of apps, and how close they are to being completed:
+* Clock (Completed)
+* CPU Monitor (Completed)
 * Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
 * Help Page (Mostly completed)
 * Default System Text Editor (Not started)
 * File Manager (Not started)
 * Settings (Not Started - [For changing things like default system colors, etc])
-* Clock (Completed)
-* CPU Monitor (Completed)
 
 ## Here is a list of potential ideas for the future:
 * Calendar
