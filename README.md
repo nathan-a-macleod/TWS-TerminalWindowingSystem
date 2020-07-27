@@ -38,5 +38,3 @@ I am looking for contributers to help with this project, especially with things 
 ![image2](/images/screenShot2.png)
 
 ![image3](/images/screenShot3.png)
-
-![image4](/images/screenShot4.png)
