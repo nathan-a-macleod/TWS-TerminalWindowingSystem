@@ -38,3 +38,36 @@ I am looking for contributers to help with this project, especially with things 
 ![image2](/images/screenShot2.png)
 
 ![image3](/images/screenShot3.png)
+
+# How to create an app
+Recently, the process of creating and installing another app has become much easier. Here is how.
+1. Add a new file in `src/Programs` with whatever name you want.
+2. For the first line, type `from TWS.windowClass import *`
+3. Next you will want to create a window. Type `newWindow = Window(y, x, height, width, windowTitle, functionName)`. The parameters are as follows:
+* `y` and `x` define the position of the window.
+* `height` and `width` is the size of the window.
+* `windowTitle` is the title of the window that appears at the bar at the top of the window.
+* `functionName` is the name of the function that you need to create in step `4`:
+4. Create a function with the same name as `functionName` with the following parameters: `window`, `key`, `selectedButtonID`.
+5. In this function, you can import the rest of the libraries you need for your program. For example `import psutil`, etc.
+6. Inside the function, you can do the logic of the program. There are a few functions you can use:
+* `window.addString(4, 2, "Hello, World!")` will add a string inside the window at (y:4, x:2) with the text `Hello, World!`
+
+You can also detect key presses. For example:
+`if key == ord("f"):`
+`    window.addString(5, 2, "You pressed the 'f' key")`
+Will add text saying `You pressed the 'f' key` at (y:5, x:2) if the 'f' key is pressed.
+
+You can also do something if a button is pressed. For example:
+`if selectedButtonID == "myFirstButton":`
+`    window.addString(6, 2, "Thanks for pressing the button!")`
+Will add the string `Thanks for pressing the button!` at (y:6, x:2).
+But wait! Buttons won't work unless you do the following:
+
+Outside the function, after the line creating the window, add the following line:
+`newWindow.addButton(buttonID, y, x, text)`
+OR
+`newWindow.addMenuButton(buttonID, y, x, text)`
+The parameters are:
+* `buttonID` the ID of the button. For example `myFirstButton`.
+* `y`, `x`, `text` are the y and x positions of the buttons, as well as the text.
