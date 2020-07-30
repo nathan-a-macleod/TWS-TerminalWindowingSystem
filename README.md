@@ -52,6 +52,7 @@ Recently, the process of creating and installing another app has become much eas
 5. In this function, you can import the rest of the libraries you need for your program. For example `import psutil`, etc.
 6. Inside the function, you can do the logic of the program. There are a few functions you can use:
 * `window.addString(4, 2, "Hello, World!")` will add a string inside the window at (y:4, x:2) with the text `Hello, World!`
+* `window.closeWindow()` will close the window. (Usually used with a button [for example, `newWindow.addMenuButton("closeButton", 0, "Close Window")`] explained later.)
 
 You can also detect key presses. For example:
 `if key == ord("f"):`
