@@ -1,10 +1,13 @@
 # Import the curses library...
 import curses
 import os
+import random
 # ...and some other files
 import terminalShell
 from TWS.windowClass import *
 from TWS.screenCycle import *
+
+icons = ["*", "^", "@", "#", "~", "\u2591", "\u039E"]
 
 # The main function
 def main(stdscr):
@@ -49,7 +52,9 @@ def main(stdscr):
 
         # If the file has "." as the first letter it's a hidden file. If it's a folder, it can't be run directly
         if program[0] != "." and os.path.isfile(os.getcwd() + "/Programs/" + program):
-            appLauncher.addButton(str(program), idx+3, 2, str(program)[:-3])
+            icon = random.choice(icons)
+            appLauncher.addButton(str(program), idx+3, 2, "[" + icon + "] " + str(program)[:-3])
+            icons.remove(icon)
 
         else:
             idx -= 1
