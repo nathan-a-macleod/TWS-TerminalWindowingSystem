@@ -3,7 +3,6 @@ import curses
 import os
 import random
 # ...and some other files
-import terminalShell
 from TWS.windowClass import *
 from TWS.screenCycle import *
 
@@ -25,11 +24,7 @@ def main(stdscr):
     
     # The core of the program
     def appLauncherFunction(window, key, selectedButtonID):
-        if selectedButtonID == "exitToShell":
-            curses.endwin()
-            terminalShell.main()
-        
-        elif selectedButtonID == "endSession":
+        if selectedButtonID == "endSession":
             exit()
 
         else:
@@ -43,7 +38,6 @@ def main(stdscr):
     scr = Screen(stdscr)
     appLauncher = Window(curses.LINES//9, curses.COLS//9, int(curses.LINES/1.2)-10, int(curses.COLS/1.3), "TWS-App_Launcher", appLauncherFunction)
     appLauncher.addString(1, 2, "Use arrow keys to highlight an option and <ENTER> to 'click' an option.")
-    appLauncher.addButton("exitToShell", 3, 2, "[>] Exit To Shell")
 
     # Create a button for each file in the 'Programs' directory
     idx = 0
@@ -53,7 +47,7 @@ def main(stdscr):
         # If the file has "." as the first letter it's a hidden file. If it's a folder, it can't be run directly
         if program[0] != "." and os.path.isfile(os.getcwd() + "/Programs/" + program):
             icon = random.choice(icons)
-            appLauncher.addButton(str(program), idx+3, 2, "[" + icon + "] " + str(program)[:-3])
+            appLauncher.addButton(str(program), idx+2, 2, "[" + icon + "] " + str(program)[:-3])
             icons.remove(icon)
 
         else:
