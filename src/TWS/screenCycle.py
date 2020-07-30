@@ -79,11 +79,11 @@ class Screen:
             char = self.stdscrRoot.getch()
 
             # Changing the selected button:
-            if char == curses.KEY_DOWN or char == curses.KEY_RIGHT:
+            if char == curses.KEY_DOWN:
                 if window.selectedWidget < len(window.widgets)-1:
                     window.selectedWidget += 1
 
-            elif char == curses.KEY_UP or char == curses.KEY_LEFT:
+            elif char == curses.KEY_UP:
                 if window.selectedWidget > 0:
                     window.selectedWidget -= 1
 
@@ -91,7 +91,7 @@ class Screen:
                 window.functionName(window, char, window.widgets[window.selectedWidget][0])
 
             # Changing the focused window:
-            elif char == curses.KEY_SRIGHT:
+            elif char == curses.KEY_RIGHT:
                 try:
                     lastWindow = openWindows[0]
                     openWindows.remove(lastWindow)
@@ -100,7 +100,7 @@ class Screen:
                 except:
                     pass
 
-            elif char == curses.KEY_SLEFT:
+            elif char == curses.KEY_LEFT:
                 try:
                     lastWindow = openWindows[len(openWindows)-1]
                     openWindows.remove(lastWindow)
