@@ -15,6 +15,7 @@ class Window:
         self.functionName = functionName
         self.widgets = [] # An array of all the widgets
         self.selectedWidget = 0
+        self.strings = [] # An array of all the non interactive widgets (right now just strings)
 
         openWindows.append(self) # Adds the window to the array containing all the open windows
 
@@ -40,18 +41,7 @@ class Window:
 
     # Add individual letters from 'string' to the character array
     def addString(self, y, x, string):
-        xNew = x
-        for char in string:
-            try:
-                self.chars[y][xNew] = char
-
-            # For wrapping to the next line inside the window
-            except:
-                y += 1
-                xNew = 0
-
-            self.chars[y][xNew] = char
-            xNew += 1
+        self.strings.append([y, x, string, True])
 
     def addButton(self, buttonID, y, x, text):
         # The last parameter (regularButton) tells the program that it's specifically a BUTTON widget (not 'menuButton' for example)

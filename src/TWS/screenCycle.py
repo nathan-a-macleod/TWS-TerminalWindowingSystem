@@ -32,6 +32,11 @@ class Screen:
 
                 else:
                     self.stdscrRoot.addstr(widget[1], widget[2], str(widget[3]), curses.color_pair(2))
+
+        # Draw all the strings (They aren't interactive so they are different to window.widgets):
+        for string in window.strings:
+            if string[3] == True:
+                self.stdscrRoot.addstr(string[0]+window.y, string[1]+window.x, str(string[2]), curses.color_pair(2))
         
         # Draw the shadow (if there is space on the screen, hence the try, except statement):
         try:
