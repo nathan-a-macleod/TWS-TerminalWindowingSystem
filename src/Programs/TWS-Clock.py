@@ -1,11 +1,15 @@
 from TWS.windowClass import *
 
-def clockWinFunction(window, key, selectedButtonID):
-    import datetime
-    window.addString(1, 2, str(datetime.datetime.now().strftime("%I:%M:%S")))
+global datetime
+import datetime
 
-    if selectedButtonID == "closeButton":
-        window.closeWindow()
+def clockWinFunction(window, key, clickedButton):
+    window.getWidgetByID("timeStr")["text"] = str(datetime.datetime.now().strftime("%I:%M:%S"))
+
+    if clickedButton != 0:
+        if clickedButton["text"] == "closeButton":
+            window.closeWindow()
 
 clockWin = Window(1, 0, 3, 12, "TWS-Clock", clockWinFunction)
 clockWin.addMenuButton("closeButton", 0, "Close Window")
+clockWin.addLabel("timeStr", 1, 2, str(datetime.datetime.now().strftime("%I:%M:%S")))

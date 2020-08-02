@@ -23,21 +23,22 @@ def main(stdscr):
     stdscr.timeout(500)
     
     # The core of the program
-    def appLauncherFunction(window, key, selectedButtonID):
-        if selectedButtonID == "endSession":
-            exit()
+    def appLauncherFunction(window, key, clickedButton):
+        if clickedButton != 0:
+            if clickedButton["widgetID"] == "endSession":
+                exit()
 
-        else:
-            try:
-                if selectedButtonID != 0:
-                    exec(open("Programs/" + selectedButtonID).read())
+            else:
+                try:
+                    exec(open("Programs/" + clickedButton["widgetID"]).read())
 
-            except:
-                pass
-
+                except:
+                    pass
+                    # window.addAlert("There was an error running the program.")
+                
     scr = Screen(stdscr)
     appLauncher = Window(curses.LINES//9, curses.COLS//9, int(curses.LINES/1.2)-10, int(curses.COLS/1.3), "TWS-App_Launcher", appLauncherFunction)
-    appLauncher.addString(1, 2, "Use arrow keys to highlight an option and <ENTER> to 'click' an option.")
+    appLauncher.addLabel("str", 1, 2, "Use arrow keys to highlight an option and <ENTER> to 'click' an option.")
 
     # Create a button for each file in the 'Programs' directory
     idx = 0
@@ -54,6 +55,7 @@ def main(stdscr):
             idx -= 1
 
     appLauncher.addButton("endSession", int(curses.LINES/1.2)-12, 2, "[x] End Session")
+
     scr.mainloop()
 
     # Update the screen and wait for 1 second (curses.napms())

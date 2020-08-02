@@ -15,42 +15,33 @@ class Window:
         self.functionName = functionName
         self.widgets = [] # An array of all the widgets
         self.selectedWidget = 0
-        self.strings = [] # An array of all the non interactive widgets (right now just strings)
 
         openWindows.append(self) # Adds the window to the array containing all the open windows
 
-        # Setup the character array for the window
-        self.chars = []
-        for yBg in range(self.height):
-            currentLine = []
-            for xBg in range(self.width):
-                currentLine.append(" ")
-
-            self.chars.append(currentLine)
-
-        # The window border and corners:
-        for xBorder in range(self.width):
-            self.addString(self.height-1, xBorder, "\u2550")
-
-        for yBorder in range(self.height-2):
-            self.addString(yBorder+1, 0, "\u2551")
-            self.addString(yBorder+1, self.width-1, "\u2551")
-
-        self.addString(self.height-1, 0, "\u255a")
-        self.addString(self.height-1, self.width-1, "\u255d")
-
     # Add individual letters from 'string' to the character array
-    def addString(self, y, x, string):
-        self.strings.append([y, x, string, True])
+    def addLabel(self, widgetID, y, x, text):
+        self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "type":"label"})
 
-    def addButton(self, buttonID, y, x, text):
-        # The last parameter (regularButton) tells the program that it's specifically a BUTTON widget (not 'menuButton' for example)
-        self.widgets.append([buttonID, y, x, text, "regularButton"])
+        # Make sure you don't start by "selecting" a label:
+        try:
+            while self.widgets[self.selectedWidget]["type"] == "label":
+                self.selectedWidget += 1
+
+        # If it doesn't work it probably means there aren't any button widgets yet
+        except:
+            pass
+
+    def addButton(self, widgetID, y, x, text):
+        self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "type":"regularButton"})
 
     # a Menu button is just a regular button, but it's drawn at the very top of the screen
-    def addMenuButton(self, buttonID, x, text):
-        # The last parameter (regularButton) tells the program that it's specifically a BUTTON widget (not 'menuButton' for example)
-        self.widgets.append([buttonID, 0, x, text, "menuButton"])
+    def addMenuButton(self, widgetID, x, text):
+        self.widgets.append({"widgetID":widgetID, "y":0, "x":x, "text":text, "type":"menuButton"})
+
+    def getWidgetByID(self, ID):
+        for widget in self.widgets:
+            if widget["widgetID"] == ID:
+                return widget
 
     def closeWindow(self):
         # Remove the window from the array of windows

@@ -11,33 +11,42 @@ class Screen:
     def drawWindow(self, window):
         self.stdscrRoot.hline(0, 0, " ", curses.COLS, curses.color_pair(2)) # Draw a horizontal line at the top of the screen
 
-        # Draw the character array
-        for yIdx, currentLine in enumerate(window.chars):
-            for xIdx, currentChar in enumerate(currentLine):
-                self.stdscrRoot.addstr(window.y+yIdx, window.x+xIdx, currentChar, curses.color_pair(2))
+        # SeDrawtup the character array for the window
+        for yBg in range(window.height):
+            for xBg in range(window.width):
+                self.stdscrRoot.addstr(window.y+yBg, window.x+xBg, " ",  curses.color_pair(2))
 
-        # Draw all the widgets (if it's the selected window):
-        #if self == openWindows[len(openWindows)-1]:
+        # The window border and corners:
+        for xBorder in range(window.width):
+            self.stdscrRoot.addstr(window.y+window.height-1, window.x+xBorder, "\u2550",  curses.color_pair(2))
+
+        for yBorder in range(window.height-2):
+            self.stdscrRoot.addstr(window.y+yBorder+1, window.x, "\u2551",  curses.color_pair(2))
+            self.stdscrRoot.addstr(window.y+yBorder+1, window.x+window.width-1, "\u2551",  curses.color_pair(2))
+
+        self.stdscrRoot.addstr(window.y+window.height-1, window.x, "\u255a",  curses.color_pair(2))
+        self.stdscrRoot.addstr(window.y+window.height-1, window.x+window.width-1, "\u255d",  curses.color_pair(2))
+
+        # Draw all the widgets:
         for idx, widget in enumerate(window.widgets):
-            if widget[4] == "regularButton":
+            if widget["type"] == "regularButton":
                 if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
-                    self.stdscrRoot.addstr(window.y+widget[1], window.x+widget[2], str(widget[3]), curses.color_pair(1))
+                    self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
 
                 else:
-                    self.stdscrRoot.addstr(window.y+widget[1], window.x+widget[2], str(widget[3]), curses.color_pair(2))
+                    self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(2))
 
-            elif widget[4] == "menuButton" and window == openWindows[len(openWindows)-1]:
+            # Only draw the menu bar on the selected window
+            elif widget["type"] == "menuButton" and window == openWindows[len(openWindows)-1]:
                 if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
-                    self.stdscrRoot.addstr(widget[1], widget[2], str(widget[3]), curses.color_pair(1))
+                    self.stdscrRoot.addstr(widget["y"], widget["x"], str(widget["text"]), curses.color_pair(1))
 
                 else:
-                    self.stdscrRoot.addstr(widget[1], widget[2], str(widget[3]), curses.color_pair(2))
+                    self.stdscrRoot.addstr(widget["y"], widget["x"], str(widget["text"]), curses.color_pair(2))
 
-        # Draw all the strings (They aren't interactive so they are different to window.widgets):
-        for string in window.strings:
-            if string[3] == True:
-                self.stdscrRoot.addstr(string[0]+window.y, string[1]+window.x, str(string[2]), curses.color_pair(2))
-        
+            elif widget["type"] == "label":
+                self.stdscrRoot.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(2))
+
         # Draw the shadow (if there is space on the screen, hence the try, except statement):
         try:
             for yShadow in range(window.y+2, window.y+window.height):
@@ -85,15 +94,29 @@ class Screen:
 
             # Changing the selected button:
             if char == curses.KEY_DOWN:
-                if window.selectedWidget < len(window.widgets)-1:
-                    window.selectedWidget += 1
+                while True:
+                    if window.selectedWidget < len(window.widgets)-1:
+                        window.selectedWidget += 1
+
+                    else:
+                        window.selectedWidget = 0
+
+                    if window.widgets[window.selectedWidget]["type"] != "label":
+                        break
 
             elif char == curses.KEY_UP:
-                if window.selectedWidget > 0:
-                    window.selectedWidget -= 1
+                while True:
+                    if window.selectedWidget > 0:
+                        window.selectedWidget -= 1
+
+                    else:
+                        window.selectedWidget = len(window.widgets)-1
+
+                    if window.widgets[window.selectedWidget]["type"] != "label":
+                        break
 
             elif char == curses.KEY_ENTER or char == 10 or char == 13:
-                window.functionName(window, char, window.widgets[window.selectedWidget][0])
+                window.functionName(window, char, window.widgets[window.selectedWidget])
 
             # Changing the focused window:
             elif char == curses.KEY_RIGHT:

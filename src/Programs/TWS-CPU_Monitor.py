@@ -1,11 +1,15 @@
 from TWS.windowClass import *
 
-def CPUMonFunction(window, key, selectedButtonID):
-    import psutil
-    window.addString(1, 2, str(psutil.cpu_percent()) + " % ")
+global psutil
+import psutil
 
-    if selectedButtonID == "closeButton":
-        window.closeWindow()
+def clockWinFunction(window, key, clickedButton):
+    window.getWidgetByID("CPUStr")["text"] = str(psutil.cpu_percent()) + " % "
 
-CPUMonWin = Window(1, 0, 3, len("TWS-CPU_Monitor"), "TWS-CPU_Monitor", CPUMonFunction)
-CPUMonWin.addMenuButton("closeButton", 0, "Close Window")
+    if clickedButton != 0:
+        if clickedButton["text"] == "closeButton":
+            window.closeWindow()
+
+clockWin = Window(1, 0, 3, 18, "TWS-CPU_Monitor", clockWinFunction)
+clockWin.addMenuButton("closeButton", 0, "Close Window")
+clockWin.addLabel("CPUStr", 1, 2, str(psutil.cpu_percent()) + " % ")
