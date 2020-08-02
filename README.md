@@ -49,25 +49,5 @@ I am looking for contributers to help with this project, especially with things 
 # How to create an app
 Recently, the process of creating and installing another app has become much easier. Here is how.
 1. Add a new file in `src/Programs` with whatever name you want.
-2. Then, begin coding the app! Here is an example:
-```python
-from TWS.windowClass import * # Import the library like this
-
-# Import other libraries like this:
-global datetime
-import datetime
-
-# The main function
-def clockWinFunction(window, key, clickedButton):
-    window.getWidgetByID("timeStr")["text"] = str(datetime.datetime.now().strftime("%I:%M:%S")) # CHanges the text of a widget with an id of "timeStr" with str(datetime.datetime.now().strftime("%I:%M:%S"))
-  
-    if clickedButton != 0: # If you have clicked a button
-        if clickedButton["widgetID"] == "closeButton": # If the ID of the clicked button is "closeButton"
-            window.closeWindow() # Close the window
- 
-clockWin = Window(1, 0, 3, 12, "TWS-Clock", clockWinFunction) # Create a window
-clockWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-clockWin.addLabel("timeStr", 1, 2, str(datetime.datetime.now().strftime("%I:%M:%S"))) # Add a label with an id of "timeStr"
-```
-
+2. Then, begin coding the app! An example is in `src/Programs/TWS-Example.py`:
 If you would like more explaination than this, feel free to create an issue in the github page.
