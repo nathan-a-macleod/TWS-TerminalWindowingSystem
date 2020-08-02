@@ -7,7 +7,7 @@ def clockWinFunction(window, key, clickedButton):
     window.getWidgetByID("timeStr")["text"] = str(datetime.datetime.now().strftime("%I:%M:%S"))
 
     if clickedButton != 0:
-        if clickedButton["text"] == "closeButton":
+        if clickedButton["widgetID"] == "closeButton":
             window.closeWindow()
 
 clockWin = Window(1, 0, 3, 12, "TWS-Clock", clockWinFunction)

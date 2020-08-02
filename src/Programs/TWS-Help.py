@@ -2,13 +2,13 @@ from TWS.windowClass import *
 
 def helpWinFunction(window, key, clickedButton):
     if clickedButton != 0:
-        if clickedButton["text"] == "closeButton":
+        if clickedButton["widgetID"] == "closeButton":
             window.closeWindow()
 
 helpWin = Window(curses.LINES//9, curses.COLS//9, int(curses.LINES/1.2)-10, int(curses.COLS/1.3), "TWS-Help", helpWinFunction)
 helpWin.addMenuButton("closeButton", 0, "Close Window")
-helpWin.addMenuButton("", 20, "Menu Item 2")
-helpWin.addMenuButton("", 36, "Menu Item 3")
+helpWin.addMenuButton("", 16, "Menu Item 2")
+helpWin.addMenuButton("", 31, "Menu Item 3")
 
 helpWin.addLabel("", 2, 2, "'TWS' (short for 'Terminal Windowing System') is a Terminal/Operating environment program with a few other programs (written in Python).")
 helpWin.addLabel("", 3, 2, "You can think of it sort of like a terminal-desktop environment - but it's really just a collection of programs you can run inside a terminal.")
