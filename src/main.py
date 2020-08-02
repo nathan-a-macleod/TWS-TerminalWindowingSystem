@@ -23,6 +23,8 @@ def main(stdscr):
     stdscr.timeout(500)
     
     # The core of the program
+    scr = Screen(stdscr)
+
     def appLauncherFunction(window, key, clickedButton):
         if clickedButton != 0:
             if clickedButton["widgetID"] == "endSession":
@@ -33,10 +35,8 @@ def main(stdscr):
                     exec(open("Programs/" + clickedButton["widgetID"]).read())
 
                 except:
-                    pass
-                    # window.addAlert("There was an error running the program.")
-                
-    scr = Screen(stdscr)
+                    scr.alert("Error Running Program", "There was an error while trying to run the program.")
+
     appLauncher = Window(curses.LINES//9, curses.COLS//9, int(curses.LINES/1.2)-10, int(curses.COLS/1.3), "TWS-App_Launcher", appLauncherFunction)
     appLauncher.addLabel("str", 1, 2, "Use arrow keys to highlight an option and <ENTER> to 'click' an option.")
 

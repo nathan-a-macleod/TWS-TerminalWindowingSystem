@@ -80,6 +80,37 @@ class Screen:
         else:
             self.stdscrRoot.addstr(window.y, window.x, window.windowTitle, curses.color_pair(1) + curses.A_DIM)
 
+    # Function to add an alert:
+    def alert(self, title, text):
+        winWidth = len(text)+3
+        alertWin = curses.newwin(6, winWidth, 10, 10)
+        alertWin.bkgd(" ", curses.color_pair(2))
+        alertWin.border()
+
+        # The window border and corners:
+        for xBorder in range(winWidth-1):
+            alertWin.addstr(5, xBorder, "\u2550",  curses.color_pair(2))
+            
+        for yBorder in range(4):
+            alertWin.addstr(yBorder+1, 0, "\u2551",  curses.color_pair(2))
+            alertWin.addstr(yBorder+1, winWidth-1, "\u2551",  curses.color_pair(2))
+
+        alertWin.addstr(5, 0, "+",  curses.color_pair(2))
+        alertWin.insch(5, winWidth-1, "+",  curses.color_pair(2))
+
+        # The title background:
+        for idx in range(winWidth):
+            alertWin.addstr(0, idx, " ", curses.color_pair(4))
+            
+        # The title text
+        alertWin.addstr(0, 0, "! " + str(title), curses.color_pair(4) + curses.A_BOLD)
+
+        alertWin.addstr(2, 2, str(text))
+        alertWin.addstr(4, 2, "Press any key to continue...")
+        alertWin.refresh()
+        alertWin.getch()
+
+
     # The main function in the class
     def mainloop(self):
         while True:

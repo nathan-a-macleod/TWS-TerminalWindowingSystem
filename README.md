@@ -8,7 +8,7 @@ Prerequisites:
 * Python 3
 * Python `psutil` package - `pip3 install psutil`
 
-Just run `python3 main.py` to run the program. When the program starts, you will see an app launcher screen with some apps you can use.
+Just run `python3 main.py` inside the `src/` folder to run the program. When the program starts, you will see an app launcher screen with all the installed apps.
 
 ## Basic Controls:
 * Up & down Arrow Keys: Highlight a selection.
