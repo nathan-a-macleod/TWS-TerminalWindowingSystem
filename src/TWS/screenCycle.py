@@ -138,19 +138,19 @@ class Screen:
                     pass
 
             # Movement of the windows:
-            if char == ord("a"):
+            if char == ord("A"):
                 if window.x-1 > 0:
                     window.x -= 2
 
-            elif char == ord("d"):
+            elif char == ord("D"):
                 if window.x+window.width+1 < curses.COLS:
                     window.x += 2
 
-            elif char == ord("w"):
+            elif char == ord("W"):
                 if window.y-1 > 0:
                     window.y -= 1
 
-            elif char == ord("s"):
+            elif char == ord("S"):
                 if window.y + window.height+1 < curses.LINES:
                     window.y += 1
 
