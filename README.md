@@ -11,10 +11,11 @@ Prerequisites:
 Just run `python3 main.py` inside the `src/` folder to run the program. When the program starts, you will see an app launcher screen with all the installed apps.
 
 ## Basic Controls:
-* Up & down Arrow Keys: Highlight a selection.
-* Left & right Arrow Keys: Focuses a different window.                       
+* Up & down Arrows: Scrolling.
+* Left & right Arrow Keys: Highlight a button.                    
 * ENTER: 'Click' a selection.
-* WASD: Moves the selected window.
+* WASD (UpperCase): Moves the selected window.
+* Q, E (UpperCase): Selects a different window.
 
 # Contributing
 I am looking for contributers to help with this project, especially with things like the applications (or anything else you would like to help with), because there are quite a few of them to do.
