@@ -15,6 +15,7 @@ def mainWinFunction(window, key, clickedButton):
         elif clickedButton["widgetID"] == "btn_001":
             window.getWidgetByID("str_001")["text"] = "You clicked the button!"
 
+        # If you have clicked entered stuff in the input field, and the text entered is "123"
         elif clickedButton["widgetID"] == "input_001" and clickedButton["value"] == "123":
             window.getWidgetByID("str_001")["text"] = "I like the number '123' as well!"
 
@@ -23,7 +24,9 @@ def mainWinFunction(window, key, clickedButton):
  
 mainWin = Window(curses.LINES//8+2, curses.COLS//8, int(curses.LINES/1.3)-10, int(curses.COLS/1.4), "TWS-Example", mainWinFunction) # Create a window
 mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
+
 mainWin.addLabel("str_001", 1, 2, "Click a button, enter some input in the widget, or press the 'j' key") # Add a label with an id of "str_001"
 mainWin.addLabel("timeStr", 2, 2, "Time: " + str(datetime.datetime.now().strftime("%I:%M:%S"))) # Add a label with an id of "timeStr"
+
 mainWin.addButton("btn_001", 3, 2, "Click Me!") # Add a button with an id of "btn_001"
 mainWin.addInput("input_001", 4, 2, "Enter a number - try '123':") # Add an input line with an id of "input_001"
