@@ -49,26 +49,42 @@ I am looking for contributers to help with this project, especially with things 
 Recently, the process of creating and installing another app has become much easier. Here is how.
 1. Add a new file in `src/Programs` with whatever name you want.
 2. For the first line, type `from TWS.windowClass import *`
-3. Next you will want to create a window. Type `newWindow = Window(y, x, height, width, windowTitle, functionName)`. The parameters are as follows:
+3. Next, import the rest of the libraries needed for your projects. However, before each import you must first make it global. For example:
+* `global myLibrary`
+* `import myLibrary`
+4. Next you will want to create a window. Type `newWindow = Window(y, x, height, width, windowTitle, functionName)`. The parameters are as follows:
 * `y` and `x` define the position of the window.
 * `height` and `width` is the size of the window.
 * `windowTitle` is the title of the window that appears at the bar at the top of the window.
 * `functionName` is the name of the function that you need to create in step `4`:
-4. Create a function with the same name as `functionName` with the following parameters: `window`, `key`, `selectedButtonID`.
-5. In this function, you can import the rest of the libraries you need for your program. For example `import psutil`, etc.
-6. Inside the function, you can do the logic of the program. There are a few functions you can use:
-* `window.addString(4, 2, "Hello, World!")` will add a string inside the window at (y:4, x:2) with the text `Hello, World!`
-* `window.closeWindow()` will close the window. (Usually used with a button [for example, `newWindow.addMenuButton("closeButton", 0, "Close Window")`] explained later.)
+5. Next, you can add the following widgets to your window:
+* Regular Buttons
+* Menu Buttons
+* Labels
+To add them, do the following in a new line (depending on the desired widget):
+* `newWindow.addLabel(widgetID, y, x, text)`
+* `newWindow.addButton(widgetID, y, x, text)`
+* `newWindow.addMenuButton(widgetID, x, text)`
+The parameters are:
+* `widgetID` is a unique string you must give yo each of the widgets you want to interactive with (if you don't want to interact with that particular widget, you can call it an empty string. e.g `""`).
+* `y` and `x` define the position of the window.
+* `text` is the text to be displayed to the user.
+
+6. Create a function with the same name as `functionName` with the following parameters: `window`, `key`, `clickedButton`.
+7. Inside the function, you can do the logic of the program. There are a few functions you can use:
+* `window.getWidgetById("label_001")["text"] = "Hello, World!"` will replace the text inside a widget with an ID of `label_001` with the text `Hello, World!`
+* `window.closeWindow()` will close the window. (Usually used with a button - explained later.)
 
 You can also detect key presses. For example:
 `if key == ord("f"):`
-`    window.addString(5, 2, "You pressed the 'f' key")`
-Will add text saying `You pressed the 'f' key` at (y:5, x:2) if the 'f' key is pressed.
+`    window.getWidgetById("label_001")["text"] = "Hello, World!"`
+Will do the same thing as above, except only if you press the `f` key.
 
 You can also do something if a button is pressed. For example:
-`if selectedButtonID == "myFirstButton":`
-`    window.addString(6, 2, "Thanks for pressing the button!")`
-Will add the string `Thanks for pressing the button!` at (y:6, x:2).
+`if clickedButton != 0:`
+`    if clickedButton["widgetID"] == "myFirstButton":`
+`        window.getWidgetById("label_001")["text"] = "Hello, World!"`
+Will do the same thing as above, but onlt if you click the button with an ID of "myFirstButton.
 But wait! Buttons won't work unless you do the following:
 
 Outside the function, after the line creating the window, add the following line:
