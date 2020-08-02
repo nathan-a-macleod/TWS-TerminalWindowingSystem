@@ -126,7 +126,7 @@ class Screen:
             char = self.stdscrRoot.getch()
 
             # Changing the selected button:
-            if char == curses.KEY_RIGHT:
+            if char == curses.KEY_DOWN:
                 while True:
                     if window.selectedWidget < len(window.widgets)-1:
                         window.selectedWidget += 1
@@ -137,7 +137,7 @@ class Screen:
                     if window.widgets[window.selectedWidget]["type"] != "label":
                         break
 
-            elif char == curses.KEY_LEFT:
+            elif char == curses.KEY_UP:
                 while True:
                     if window.selectedWidget > 0:
                         window.selectedWidget -= 1
@@ -152,7 +152,7 @@ class Screen:
                 window.functionName(window, char, window.widgets[window.selectedWidget])
 
             # Changing the focused window:
-            elif char == ord("E"):
+            elif char == curses.KEY_RIGHT:
                 try:
                     lastWindow = openWindows[0]
                     openWindows.remove(lastWindow)
@@ -161,7 +161,7 @@ class Screen:
                 except:
                     pass
 
-            elif char == ord("Q"):
+            elif char == curses.KEY_LEFT:
                 try:
                     lastWindow = openWindows[len(openWindows)-1]
                     openWindows.remove(lastWindow)
@@ -188,12 +188,12 @@ class Screen:
                     window.y += 1
 
             # Scrolling windows:
-            elif char == curses.KEY_UP: # Scrolling up:
+            elif char == ord("E"): # Scrolling up:
                 for widget in window.widgets:
                     if widget["type"] != "menuButton":
                         widget["y"] += 1
                     
-            elif char == curses.KEY_DOWN: # Scrolling down:
+            elif char == ord("Q"): # Scrolling down:
                 for widget in window.widgets:
                     if widget["type"] != "menuButton":
                         widget["y"] -= 1
