@@ -13,7 +13,7 @@ Just run `python3 main.py` to run the program. When the program starts, you will
 ## Basic Controls:
 * Up & down Arrow Keys: Highlight a selection.
 * Left & right Arrow Keys: Focuses a different window.                       
-* <ENTER>: 'Click' a selection.
+* ENTER: 'Click' a selection.
 * WASD: Moves the selected window.
 
 # Contributing
@@ -24,6 +24,7 @@ I am looking for contributers to help with this project, especially with things 
 * This Wikipedia page is very helpful (Unicode Characters): https://en.wikipedia.org/wiki/Box-drawing_character
 
 ## A list of apps & how close they are to being completed:
+* A way to develop custom apps (Ongoing).
 * Clock (Completed)
 * CPU Monitor (Completed)
 * Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
@@ -36,7 +37,6 @@ I am looking for contributers to help with this project, especially with things 
 * Calendar
 * Web Browser
 * Email Client
-* Development Library (Not sure how to do it yet, but maybe a python library (canvas.py or something to link up to automatically) where you can create graphical programs with the program.)
 
 # Images:
 ![image1](/images/screenShot1.png)
@@ -48,49 +48,25 @@ I am looking for contributers to help with this project, especially with things 
 # How to create an app
 Recently, the process of creating and installing another app has become much easier. Here is how.
 1. Add a new file in `src/Programs` with whatever name you want.
-2. For the first line, type `from TWS.windowClass import *`
-3. Next, import the rest of the libraries needed for your projects. However, before each import you must first make it global. For example:
-* `global myLibrary`
-* `import myLibrary`
-4. Next you will want to create a window. Type `newWindow = Window(y, x, height, width, windowTitle, functionName)`. The parameters are as follows:
-* `y` and `x` define the position of the window.
-* `height` and `width` is the size of the window.
-* `windowTitle` is the title of the window that appears at the bar at the top of the window.
-* `functionName` is the name of the function that you need to create in step `4`:
-5. Next, you can add the following widgets to your window:
-* Regular Buttons
-* Menu Buttons
-* Labels
-To add them, do the following in a new line (depending on the desired widget):
-* `newWindow.addLabel(widgetID, y, x, text)`
-* `newWindow.addButton(widgetID, y, x, text)`
-* `newWindow.addMenuButton(widgetID, x, text)`
-The parameters are:
-* `widgetID` is a unique string you must give yo each of the widgets you want to interactive with (if you don't want to interact with that particular widget, you can call it an empty string. e.g `""`).
-* `y` and `x` define the position of the window.
-* `text` is the text to be displayed to the user.
+2. Then, begin coding the app! Here is an example:
+```python
+from TWS.windowClass import * # Import the library like this
 
-6. Create a function with the same name as `functionName` with the following parameters: `window`, `key`, `clickedButton`.
-7. Inside the function, you can do the logic of the program. There are a few functions you can use:
-* `window.getWidgetById("label_001")["text"] = "Hello, World!"` will replace the text inside a widget with an ID of `label_001` with the text `Hello, World!`
-* `window.closeWindow()` will close the window. (Usually used with a button - explained later.)
+# Import other libraries like this:
+global datetime
+import datetime
 
-You can also detect key presses. For example:
-`if key == ord("f"):`
-`    window.getWidgetById("label_001")["text"] = "Hello, World!"`
-Will do the same thing as above, except only if you press the `f` key.
+# The main function
+def clockWinFunction(window, key, clickedButton):
+    window.getWidgetByID("timeStr")["text"] = str(datetime.datetime.now().strftime("%I:%M:%S")) # CHanges the text of a widget with an id of "timeStr" with str(datetime.datetime.now().strftime("%I:%M:%S"))
+  
+    if clickedButton != 0: # If you have clicked a button
+        if clickedButton["widgetID"] == "closeButton": # If the ID of the clicked button is "closeButton"
+            window.closeWindow() # Close the window
+ 
+clockWin = Window(1, 0, 3, 12, "TWS-Clock", clockWinFunction) # Create a window
+clockWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
+clockWin.addLabel("timeStr", 1, 2, str(datetime.datetime.now().strftime("%I:%M:%S"))) # Add a label with an id of "timeStr"
+```
 
-You can also do something if a button is pressed. For example:
-`if clickedButton != 0:`
-`    if clickedButton["widgetID"] == "myFirstButton":`
-`        window.getWidgetById("label_001")["text"] = "Hello, World!"`
-Will do the same thing as above, but onlt if you click the button with an ID of "myFirstButton.
-But wait! Buttons won't work unless you do the following:
-
-Outside the function, after the line creating the window, add the following line:
-`newWindow.addButton(buttonID, y, x, text)`
-OR
-`newWindow.addMenuButton(buttonID, y, x, text)`
-The parameters are:
-* `buttonID` the ID of the button. For example `myFirstButton`.
-* `y`, `x`, `text` are the y and x positions of the buttons, as well as the text.
+If you would like more explaination than this, feel free to create an issue in the github page.
