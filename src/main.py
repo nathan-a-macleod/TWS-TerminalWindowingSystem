@@ -38,7 +38,7 @@ def main(stdscr):
                     scr.alert("Error Running Program", "There was an error while trying to run the program.")
 
     appLauncher = Window(curses.LINES//9, curses.COLS//9, int(curses.LINES/1.2)-10, int(curses.COLS/1.3), "TWS-App_Launcher", appLauncherFunction)
-    appLauncher.addLabel("str", 1, 2, "Use arrow keys to highlight an option and <ENTER> to 'click' an option.")
+    appLauncher.addLabel("", 1, 2, "Use arrow keys to highlight an option and <ENTER> to 'click' an option.")
 
     # Create a button for each file in the 'Programs' directory
     idx = 0

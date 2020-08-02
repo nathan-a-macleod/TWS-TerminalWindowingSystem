@@ -30,11 +30,12 @@ class Screen:
         # Draw all the widgets:
         for idx, widget in enumerate(window.widgets):
             if widget["type"] == "regularButton":
-                if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
-                    self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
+                if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
+                    if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
+                        self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
 
-                else:
-                    self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(2))
+                    else:
+                        self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(2))
 
             # Only draw the menu bar on the selected window
             elif widget["type"] == "menuButton" and window == openWindows[len(openWindows)-1]:
@@ -45,7 +46,8 @@ class Screen:
                     self.stdscrRoot.addstr(widget["y"], widget["x"], str(widget["text"]), curses.color_pair(2))
 
             elif widget["type"] == "label":
-                self.stdscrRoot.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(2))
+                if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
+                    self.stdscrRoot.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(2))
 
         # Draw the shadow (if there is space on the screen, hence the try, except statement):
         try:
@@ -169,7 +171,7 @@ class Screen:
                     pass
 
             # Movement of the windows:
-            if char == ord("A"):
+            elif char == ord("A"):
                 if window.x-1 > 0:
                     window.x -= 2
 
@@ -184,6 +186,17 @@ class Screen:
             elif char == ord("S"):
                 if window.y + window.height+1 < curses.LINES:
                     window.y += 1
+
+            # Scrolling windows:
+            elif char == ord("E"): # Scrolling up:
+                for widget in window.widgets:
+                    if widget["type"] != "menuButton":
+                        widget["y"] += 1
+                    
+            elif char == ord("Q"): # Scrolling down:
+                for widget in window.widgets:
+                    if widget["type"] != "menuButton":
+                        widget["y"] -= 1
 
             else:
                 window.functionName(window, char, 0)
