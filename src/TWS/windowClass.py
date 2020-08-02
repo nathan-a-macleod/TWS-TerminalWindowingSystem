@@ -38,6 +38,9 @@ class Window:
     def addMenuButton(self, widgetID, x, text):
         self.widgets.append({"widgetID":widgetID, "y":0, "x":x, "text":text, "type":"menuButton"})
 
+    def addInput(self, widgetID, y, x, text):
+        self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "value":"", "type":"input"})
+
     def getWidgetByID(self, ID):
         for widget in self.widgets:
             if widget["widgetID"] == ID:

@@ -49,6 +49,15 @@ class Screen:
                 if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
                     self.stdscrRoot.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(2))
 
+            elif widget["type"] == "input":
+                if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
+                    if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
+                        self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
+
+                    else:
+                        self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(2))
+
+
         # Draw the shadow (if there is space on the screen, hence the try, except statement):
         try:
             for yShadow in range(window.y+2, window.y+window.height):
@@ -149,7 +158,21 @@ class Screen:
                         break
 
             elif char == curses.KEY_ENTER or char == 10 or char == 13:
-                window.functionName(window, char, window.widgets[window.selectedWidget])
+                clickedWidget = window.widgets[window.selectedWidget]
+                # Make the input work
+                if clickedWidget["type"] == "input":
+                    inputWindow = curses.newwin(1, 60, window.y+clickedWidget["y"], window.x+clickedWidget["x"]+len(clickedWidget["text"])+1)
+                    inputWindow.bkgd(" ", curses.color_pair(2))
+                    curses.curs_set(1)
+                    curses.echo()
+                    inputWindow.refresh()
+                    clickedWidget["value"] = str(inputWindow.getstr())
+                    clickedWidget["value"] = clickedWidget["value"][2:]
+                    clickedWidget["value"] = clickedWidget["value"][:-1]
+                    curses.curs_set(0)
+                    curses.noecho()
+
+                window.functionName(window, char, clickedWidget)
 
             # Changing the focused window:
             elif char == curses.KEY_RIGHT:
