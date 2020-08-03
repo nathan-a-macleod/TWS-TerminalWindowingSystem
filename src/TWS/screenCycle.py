@@ -1,95 +1,12 @@
 # Imports
 import curses
 from TWS.windowClass import *
+from TWS.drawWindow import *
 
 # The main screen class where everything happens:
 class Screen:
     def __init__(self, stdscrRoot):
         self.stdscrRoot = stdscrRoot
-
-    # Draw the given window:
-    def drawWindow(self, window):
-        self.stdscrRoot.hline(0, 0, " ", curses.COLS, curses.color_pair(2)) # Draw a horizontal line at the top of the screen
-
-        # SeDrawtup the character array for the window
-        for yBg in range(window.height):
-            for xBg in range(window.width):
-                self.stdscrRoot.addstr(window.y+yBg, window.x+xBg, " ",  curses.color_pair(2))
-
-        # The window border and corners:
-        for xBorder in range(window.width):
-            self.stdscrRoot.addstr(window.y+window.height-1, window.x+xBorder, "\u2550",  curses.color_pair(2))
-
-        for yBorder in range(window.height-2):
-            self.stdscrRoot.addstr(window.y+yBorder+1, window.x, "\u2551",  curses.color_pair(2))
-            self.stdscrRoot.addstr(window.y+yBorder+1, window.x+window.width-1, "\u2551",  curses.color_pair(2))
-
-        self.stdscrRoot.addstr(window.y+window.height-1, window.x, "\u255a",  curses.color_pair(2))
-        self.stdscrRoot.addstr(window.y+window.height-1, window.x+window.width-1, "\u255d",  curses.color_pair(2))
-
-        # Draw all the widgets:
-        for idx, widget in enumerate(window.widgets):
-            if widget["type"] == "regularButton":
-                if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
-                    if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
-                        self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
-
-                    else:
-                        self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(2))
-
-            # Only draw the menu bar on the selected window
-            elif widget["type"] == "menuButton" and window == openWindows[len(openWindows)-1]:
-                if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
-                    self.stdscrRoot.addstr(widget["y"], widget["x"], str(widget["text"]), curses.color_pair(1))
-
-                else:
-                    self.stdscrRoot.addstr(widget["y"], widget["x"], str(widget["text"]), curses.color_pair(2))
-
-            elif widget["type"] == "label":
-                if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
-                    self.stdscrRoot.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(2))
-
-            elif widget["type"] == "input":
-                if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
-                    if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
-                        self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
-
-                    else:
-                        self.stdscrRoot.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(2))
-
-
-        # Draw the shadow (if there is space on the screen, hence the try, except statement):
-        try:
-            for yShadow in range(window.y+2, window.y+window.height):
-                self.stdscrRoot.addstr(yShadow, window.x+window.width, " ", curses.color_pair(1))
-                self.stdscrRoot.addstr(yShadow, window.x+window.width+1, " ", curses.color_pair(1))
-
-        except:
-            pass
-
-        try:
-            for xShadow in range(window.x+2, window.x+window.width+2):
-                self.stdscrRoot.addstr(window.y+window.height, xShadow, " ", curses.color_pair(1))
-
-        except:
-            pass
-        
-        # The title background
-        if window != openWindows[len(openWindows)-1]: # For the selected window, don't draw '\u2592
-            for idx in range(window.width):
-                self.stdscrRoot.addstr(window.y, window.x+idx, "\u2592", curses.color_pair(4))
-
-        else:
-            for idx in range(window.width):
-                self.stdscrRoot.addstr(window.y, window.x+idx, " ", curses.color_pair(4))
-
-        # The title text itself
-        # if it's the selected window, make the title bold. Otherwise, make it italic:
-        if window == openWindows[len(openWindows)-1]:
-            self.stdscrRoot.addstr(window.y, window.x, window.windowTitle, curses.color_pair(1) + curses.A_BOLD)
-
-        else:
-            self.stdscrRoot.addstr(window.y, window.x, window.windowTitle, curses.color_pair(1) + curses.A_DIM)
 
     # Function to add an alert:
     def alert(self, title, text):
@@ -130,7 +47,7 @@ class Screen:
             # Draw all the windows, but don't give the key that's been clicked (only do that for the last window)
             for window in openWindows:
                 window.functionName(window, -1, 0)
-                self.drawWindow(window)
+                drawWindow(self.stdscrRoot, window)
 
             char = self.stdscrRoot.getch()
 
@@ -224,6 +141,6 @@ class Screen:
             else:
                 window.functionName(window, char, 0)
 
-            self.drawWindow(window)
+            drawWindow(self.stdscrRoot, window)
 
             self.stdscrRoot.refresh()
