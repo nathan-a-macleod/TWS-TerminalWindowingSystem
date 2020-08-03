@@ -45,7 +45,7 @@ class Window:
 
     def addImage(self, widgetID, y, x, imgWidth, imagePath):
         img = Image.open(os.getcwd() + "/" + imagePath)
-        
+
         # Resize the image:
         width, height = img.size
         aspect_ratio = height/width
@@ -62,7 +62,7 @@ class Window:
         # Convert each pixel to a character from an array
         chars = []
         #for char in "`.!#~+=@qwer#tyui":
-        for char in "i`u'~t#rewq@=+~#!.":
+        for char in ",`=+:o~@pi9":
             chars.append(char)
 
         # Get the new pixels:
