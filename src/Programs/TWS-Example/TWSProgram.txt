@@ -1,0 +1,2 @@
+displayname="TWS-Example"
+displaysymbol="="

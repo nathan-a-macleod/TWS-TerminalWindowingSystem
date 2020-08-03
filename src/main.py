@@ -6,8 +6,6 @@ import random
 from TWS.windowClass import *
 from TWS.screenCycle import *
 
-icons = ["*", "^", "@", "#", "~", "\u2591", "\u039E"]
-
 # The main function
 def main(stdscr):
     # Color combinations
@@ -32,7 +30,7 @@ def main(stdscr):
 
             else:
                 try:
-                    exec(open("Programs/" + clickedButton["widgetID"]).read())
+                    exec(open("Programs/" + clickedButton["widgetID"] + "/main.py").read())
 
                 except Exception as ex:
                     scr.alert("Error Running Program", "There was an error while trying to run the program. Error: " + str(ex))
@@ -45,11 +43,17 @@ def main(stdscr):
     for program in os.listdir("./Programs"):
         idx += 1
 
-        # If the file has "." as the first letter it's a hidden file. If it's a folder, it can't be run directly
-        if program[0] != "." and os.path.isfile(os.getcwd() + "/Programs/" + program):
-            icon = random.choice(icons)
-            appLauncher.addButton(str(program), idx+2, 2, "[" + icon + "] " + str(program)[:-3])
-            icons.remove(icon)
+        # If the file has "." as the first letter it's a hidden file.
+        if program[0] != "." and os.path.isfile(os.getcwd() + "/Programs/" + program) == False:
+            # Get the programs metadata from the 'TWSProgram.txt' file
+            settingsData = str(open("./Programs/" + program + "/TWSProgram.txt").read())
+            displayname = settingsData.split("\n")[0][13:]
+            displayname = displayname[:-1]
+
+            displaysymbol = settingsData.split("\n")[1][15:]
+            displaysymbol = displaysymbol[:-1]
+
+            appLauncher.addButton(str(program), idx+2, 2, "[" + displaysymbol + "] " + displayname)
 
         else:
             idx -= 1

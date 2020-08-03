@@ -48,6 +48,13 @@ I am looking for contributers to help with this project, especially with things 
 
 # How to create an app
 Recently, the process of creating and installing another app has become much easier. Here is how.
-1. Add a new file in `src/Programs` with whatever name you want.
-2. Then, begin coding the app! An example is in `src/Programs/TWS-Example.py`:
+1. Add a new folder in `src/Programs` with any name.
+2. Inside that folder, create a file called `main.py`, and another called `TWSProgram.txt`
+3. Inside `TWSProgram.txt`, put the following lines of code:
+```
+displayname="name_of_your_program"
+displaysymbol="symbol_to_be_displayed"
+```
+* You must format it exactly like it is shown because of how the file is detected. Remember, `displaysymbol` is a single character to be displayed in the app launcher screen.
+2. Then, begin coding the app in `main.py`! An example is in `src/Programs/TWS-Example/main.py`:
 If you would like more explaination than this, feel free to create an issue in the github page.
