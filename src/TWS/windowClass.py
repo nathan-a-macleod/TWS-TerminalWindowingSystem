@@ -1,5 +1,7 @@
 # Imports
 import curses
+import os
+from PIL import Image # For the image widget
 
 openWindows = [] # An array to store all the open windows
 
@@ -40,6 +42,41 @@ class Window:
 
     def addInput(self, widgetID, y, x, text):
         self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "value":"", "type":"input"})
+
+    def addImage(self, widgetID, y, x, imgWidth, imagePath):
+        img = Image.open(os.getcwd() + "/" + imagePath)
+        
+        # Resize the image:
+        width, height = img.size
+        aspect_ratio = height/width
+        new_width = imgWidth
+        new_height = aspect_ratio * new_width * 0.55
+        img = img.resize((new_width, int(new_height)))
+
+        # Convert image to greyscale:
+        img.convert("L")
+
+        # Get pixels:
+        pixels = img.getdata()
+
+        # Convert each pixel to a character from an array
+        chars = []
+        #for char in "`.!#~+=@qwer#tyui":
+        for char in "i`u'~t#rewq@=+~#!.":
+            chars.append(char)
+
+        # Get the new pixels:
+        new_pixels = [chars[pixel[0]//25] for pixel in pixels]
+        new_pixels = ''.join(new_pixels)
+
+        # split string of chars into multiple strings of length equal to new width and create a list
+        new_pixels_count = len(new_pixels)
+        ascii_image = [new_pixels[index:index + new_width] for index in range(0, new_pixels_count, new_width)]
+        ascii_image = "\n".join(ascii_image)
+        
+        
+        for idx, line in enumerate(ascii_image.split("\n")):
+            self.addLabel("", y+idx, x, str(line))
 
     def getWidgetByID(self, ID):
         for widget in self.widgets:

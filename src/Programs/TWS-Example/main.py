@@ -31,3 +31,5 @@ mainWin.addLabel("timeStr", 2, 2, "Time: " + str(datetime.datetime.now().strftim
 
 mainWin.addButton("btn_001", 3, 2, "Click Me!") # Add a button with an id of "btn_001"
 mainWin.addInput("input_001", 4, 2, "Enter a number - try '123':") # Add an input line with an id of "input_001"
+
+mainWin.addImage("", 6, 2, 80, "Programs/TWS-Example/amsterdamImage.jpg") # Add an Image. Highly reccommended to do this in the programs directory (e.g "TWS-Example") to make the program more portable
