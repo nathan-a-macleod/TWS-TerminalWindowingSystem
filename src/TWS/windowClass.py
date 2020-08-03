@@ -61,8 +61,7 @@ class Window:
 
         # Convert each pixel to a character from an array
         chars = []
-        #for char in "`.!#~+=@qwer#tyui":
-        for char in ",`=+:o~@pi9":
+        for char in "7QN>:!?-~+C":
             chars.append(char)
 
         # Get the new pixels:
