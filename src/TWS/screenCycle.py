@@ -29,7 +29,7 @@ class Screen:
                     else:
                         window.selectedWidget = 0
 
-                    if window.widgets[window.selectedWidget]["type"] != "label":
+                    if window.widgets[window.selectedWidget]["type"] != "label" and window.widgets[window.selectedWidget]["type"] != "title":
                         break
 
             elif char == curses.KEY_UP:
@@ -40,7 +40,7 @@ class Screen:
                     else:
                         window.selectedWidget = len(window.widgets)-1
 
-                    if window.widgets[window.selectedWidget]["type"] != "label":
+                    if window.widgets[window.selectedWidget]["type"] != "label" and window.widgets[window.selectedWidget]["type"] != "title":
                         break
 
             elif char == curses.KEY_ENTER or char == 10 or char == 13:
