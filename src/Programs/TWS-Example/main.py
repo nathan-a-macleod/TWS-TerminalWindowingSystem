@@ -22,6 +22,7 @@ def mainWinFunction(window, key, clickedButton):
 
     elif key == ord("j"):
         window.getWidgetByID("str_001")["text"] = "You pressed 'j'!"
+        window.alert("You Pressed A Key", "You Pressed the 'j' Key!") # Function to alert the user that they pressed the 'j' key!
  
 mainWin = Window(curses.LINES//8, curses.COLS//8-3, int(curses.LINES/1.2)-10, int(curses.COLS/1.3), "TWS-Example", mainWinFunction) # Create a window
 mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
