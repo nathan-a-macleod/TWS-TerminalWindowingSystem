@@ -43,6 +43,10 @@ def drawWindow(stdscr, window):
             if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
                 stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(2))
 
+        elif widget["type"] == "title":
+            if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
+                stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]).upper(), curses.color_pair(2) + curses.A_UNDERLINE)
+
         elif widget["type"] == "input":
             if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
                 if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair

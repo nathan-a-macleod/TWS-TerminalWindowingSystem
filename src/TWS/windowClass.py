@@ -33,6 +33,19 @@ class Window:
         except:
             pass
 
+    # Add individual letters from 'string' to the character array
+    def addTitle(self, widgetID, y, x, text):
+        self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "type":"title"})
+
+        # Make sure you don't start by "selecting" a title:
+        try:
+            while self.widgets[self.selectedWidget]["type"] == "title":
+                self.selectedWidget += 1
+
+        # If it doesn't work it probably means there aren't any button widgets yet
+        except:
+            pass
+
     def addButton(self, widgetID, y, x, text):
         self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "type":"regularButton"})
 
