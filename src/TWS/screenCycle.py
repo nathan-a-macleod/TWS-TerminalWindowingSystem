@@ -45,7 +45,7 @@ class Screen:
 
             elif char == curses.KEY_ENTER or char == 10 or char == 13:
                 clickedWidget = window.widgets[window.selectedWidget]
-                # Make the input work
+                # Make the input work (Create a new curses.newwin for the input, and save the getstr to the value of clickedWidget)
                 if clickedWidget["type"] == "input":
                     inputWindow = curses.newwin(1, 60, window.y+clickedWidget["y"], window.x+clickedWidget["x"]+len(clickedWidget["text"])+1)
                     inputWindow.bkgd(" ", curses.color_pair(2))
