@@ -10,6 +10,6 @@ def clockWinFunction(window, key, clickedButton):
         if clickedButton["widgetID"] == "closeButton":
             window.closeWindow()
 
-clockWin = Window(1, 0, 3, 12, "TWS-Clock", clockWinFunction)
+clockWin = Window(1, 0, 4, 16, "TWS-Clock", clockWinFunction)
 clockWin.addMenuButton("closeButton", 0, "Close Window")
-clockWin.addLabel("timeStr", 1, 2, str(datetime.datetime.now().strftime("%I:%M:%S")))
+clockWin.addLabel("timeStr", 1, 4, str(datetime.datetime.now().strftime("%I:%M:%S")))
