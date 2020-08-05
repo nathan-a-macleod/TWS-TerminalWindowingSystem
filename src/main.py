@@ -58,7 +58,7 @@ def main(stdscr):
         else:
             idx -= 1
 
-    appLauncher.addButton("endSession", curses.LINES-12, 2, "[x] End Session")
+    appLauncher.addButton("endSession", curses.LINES-13, 2, "[x] End Session")
 
     scr.mainloop()
 
