@@ -20,5 +20,5 @@ helpWin.addLabel("", 10, 2, "Left & right Arrow Keys: Focuses a different window
 helpWin.addLabel("", 11, 2, "ENTER: 'Click' a selection.")
 helpWin.addLabel("", 12, 2, "WASD (UpperCase): Moves the selected window.")
 helpWin.addLabel("", 13, 2, "Q, E (UpperCase): Scrolling.")
-helpWin.addLabel("", 15, 2, "Most programs will have at least a few buttons to select. Some of those buttons may be in the toolbar (look at the top of the screen).")
+helpWin.addLabel("", 15, 2, "Most programs will have at least a few buttons to select. Some of those buttons may be in the toolbar (look at the top of the window).")
 helpWin.addLabel("", 16, 2, "This window has a few buttons at the top - one of them is to close the window, the rest don't do anything.")

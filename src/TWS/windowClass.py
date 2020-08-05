@@ -24,7 +24,7 @@ class Window:
 
     # Add individual letters from 'string' to the character array
     def addLabel(self, widgetID, y, x, text):
-        self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "type":"label"})
+        self.widgets.append({"widgetID":widgetID, "y":y+1, "x":x, "text":text, "type":"label"})
 
         # Make sure you don't start by "selecting" a label:
         try:
@@ -37,7 +37,7 @@ class Window:
 
     # Add individual letters from 'string' to the character array
     def addTitle(self, widgetID, y, x, text):
-        self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "type":"title"})
+        self.widgets.append({"widgetID":widgetID, "y":y+1, "x":x, "text":text, "type":"title"})
 
         # Make sure you don't start by "selecting" a title:
         try:
@@ -49,14 +49,14 @@ class Window:
             pass
 
     def addButton(self, widgetID, y, x, text):
-        self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "type":"regularButton"})
+        self.widgets.append({"widgetID":widgetID, "y":y+1, "x":x, "text":text, "type":"regularButton"})
 
     # a Menu button is just a regular button, but it's drawn at the very top of the screen
     def addMenuButton(self, widgetID, x, text):
-        self.widgets.append({"widgetID":widgetID, "y":1, "x":x, "text":text, "type":"menuButton"})
+        self.widgets.append({"widgetID":widgetID, "y":1, "x":x+2, "text":text, "type":"menuButton"})
 
     def addInput(self, widgetID, y, x, text):
-        self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "value":"", "type":"input"})
+        self.widgets.append({"widgetID":widgetID, "y":y+1, "x":x, "text":text, "value":"", "type":"input"})
 
     def getWidgetByID(self, ID):
         for widget in self.widgets:

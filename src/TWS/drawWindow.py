@@ -3,12 +3,16 @@ from TWS.windowClass import *
 
 # Draw the given window:
 def drawWindow(stdscr, window):
-    stdscr.hline(1, 0, " ", curses.COLS, curses.color_pair(2)) # Draw a horizontal line at the top of the screen
-
-    # SeDrawtup the character array for the window
+    # Draw the character array for the window
     for yBg in range(window.height):
         for xBg in range(window.width):
             stdscr.addstr(window.y+yBg, window.x+xBg, " ",  curses.color_pair(2))
+
+    focusedWindow = openWindows[len(openWindows)-1] # focusedWindow is the last element in the 'openWindows' array
+
+    # Draw a horizontal line at the top of the window
+    for charIdx in range(focusedWindow.x, focusedWindow.x+focusedWindow.width):
+        stdscr.addstr(focusedWindow.y+1, charIdx, " ", curses.color_pair(2) + curses.A_UNDERLINE)
 
     # The window border and corners:
     for xBorder in range(window.width):
@@ -24,7 +28,7 @@ def drawWindow(stdscr, window):
     # Draw all the widgets:
     for idx, widget in enumerate(window.widgets):
         if widget["type"] == "regularButton":
-            if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
+            if widget["y"] > 1 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
                 if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
                     stdscr.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
 
@@ -34,21 +38,21 @@ def drawWindow(stdscr, window):
         # Only draw the menu bar on the selected window
         elif widget["type"] == "menuButton" and window == openWindows[len(openWindows)-1]:
             if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
-                stdscr.addstr(widget["y"], widget["x"], str(widget["text"]), curses.color_pair(1))
+                stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(1) + curses.A_UNDERLINE)
 
             else:
-                stdscr.addstr(widget["y"], widget["x"], str(widget["text"]), curses.color_pair(2))
+                stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(2) + curses.A_UNDERLINE)
 
         elif widget["type"] == "label":
-            if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
+            if widget["y"] > 1 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
                 stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(2))
 
         elif widget["type"] == "title":
-            if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
+            if widget["y"] > 1 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
                 stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]).upper(), curses.color_pair(2) + curses.A_UNDERLINE)
 
         elif widget["type"] == "input":
-            if widget["y"] > 0 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
+            if widget["y"] > 1 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
                 if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
                     stdscr.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
 
