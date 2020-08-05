@@ -1,7 +1,6 @@
 # Imports
 import curses
 import os
-from PIL import Image # For the image widget
 
 openWindows = [] # An array to store all the open windows
 
@@ -13,10 +12,13 @@ class Window:
         self.x = x
         self.height = height
         self.width = width
-        self.windowTitle = windowTitle
+        self.windowTitle = "(" + str(len(openWindows)) + ") " + windowTitle
         self.functionName = functionName
         self.widgets = [] # An array of all the widgets
         self.selectedWidget = 0
+
+        if self.y < 3:
+            self.y = 3
 
         openWindows.append(self) # Adds the window to the array containing all the open windows
 
@@ -51,7 +53,7 @@ class Window:
 
     # a Menu button is just a regular button, but it's drawn at the very top of the screen
     def addMenuButton(self, widgetID, x, text):
-        self.widgets.append({"widgetID":widgetID, "y":0, "x":x, "text":text, "type":"menuButton"})
+        self.widgets.append({"widgetID":widgetID, "y":1, "x":x, "text":text, "type":"menuButton"})
 
     def addInput(self, widgetID, y, x, text):
         self.widgets.append({"widgetID":widgetID, "y":y, "x":x, "text":text, "value":"", "type":"input"})

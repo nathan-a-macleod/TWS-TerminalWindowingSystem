@@ -3,7 +3,7 @@ from TWS.windowClass import *
 
 # Draw the given window:
 def drawWindow(stdscr, window):
-    stdscr.hline(0, 0, " ", curses.COLS, curses.color_pair(2)) # Draw a horizontal line at the top of the screen
+    stdscr.hline(1, 0, " ", curses.COLS, curses.color_pair(2)) # Draw a horizontal line at the top of the screen
 
     # SeDrawtup the character array for the window
     for yBg in range(window.height):
