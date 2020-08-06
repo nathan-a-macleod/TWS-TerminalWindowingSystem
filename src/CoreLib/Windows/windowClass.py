@@ -17,8 +17,8 @@ class Window:
         self.widgets = [] # An array of all the widgets
         self.selectedWidget = 0
 
-        if self.y < 3:
-            self.y = 3
+        if self.y < 1:
+            self.y = 1
 
         openWindows.append(self) # Adds the window to the array containing all the open windows
 
