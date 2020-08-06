@@ -66,7 +66,9 @@ class Window:
     # Function to add an alert:
     def alert(self, title, text):
         winWidth = len(text)+3
-        alertWin = curses.newwin(6, winWidth, 10, 10)
+        if winWidth < len("Press any key to continue..."):
+            winWidth = len("Press any key to continue...")+4
+        alertWin = curses.newwin(6, winWidth, curses.LINES//2-3, curses.COLS//2-winWidth//2)
         alertWin.bkgd(" ", curses.color_pair(2))
         alertWin.border()
 
