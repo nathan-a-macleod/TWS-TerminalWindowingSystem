@@ -1,4 +1,4 @@
-from TWS.windowClass import *
+from CoreLib.Windows.windowClass import *
 
 global datetime
 import datetime

@@ -1,4 +1,4 @@
-from TWS.windowClass import *
+from CoreLib.Windows.windowClass import *
 
 def helpWinFunction(window, key, clickedButton):
     if clickedButton != 0:

@@ -1,5 +1,5 @@
 # Imports:
-from TWS.windowClass import *
+from CoreLib.Windows.windowClass import *
 
 # Draw the given window:
 def drawWindow(stdscr, window):

@@ -3,8 +3,8 @@ import curses
 import os
 import random
 # ...and some other files
-from TWS.windowClass import *
-from TWS.screenCycle import *
+from CoreLib.Windows.windowClass import *
+from CoreLib.screenCycle import *
 
 # The main function
 def main(stdscr):

@@ -3,8 +3,8 @@ import curses
 import datetime
 import psutil
 import os
-from TWS.windowClass import *
-from TWS.drawWindow import *
+from CoreLib.Windows.windowClass import *
+from CoreLib.drawWindow import *
 
 # The main screen class where everything happens:
 class Screen:
