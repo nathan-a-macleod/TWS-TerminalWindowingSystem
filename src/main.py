@@ -23,6 +23,7 @@ def main(stdscr):
     # The core of the program
     scr = Screen(stdscr)
 
+    '''
     def appLauncherFunction(window, key, clickedButton):
         if clickedButton != 0:
             if clickedButton["widgetID"] == "endSession":
@@ -59,6 +60,9 @@ def main(stdscr):
             idx -= 1
 
     appLauncher.addButton("endSession", curses.LINES-13, 2, "[x] End Session")
+    '''
+
+    alert("Help", "To access help at any time, press '?' on your keyboard.")
 
     scr.mainloop()
 
