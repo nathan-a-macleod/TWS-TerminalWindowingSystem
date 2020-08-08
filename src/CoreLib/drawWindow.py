@@ -28,10 +28,14 @@ def drawWindow(stdscr, window):
         if widget["type"] == "regularButton":
             if widget["y"] > 1 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
                 if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
-                    stdscr.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
+                    for charIdx, char in enumerate(widget["text"]):
+                        if widget["x"]+charIdx > 1 and widget["x"]+charIdx < window.width-2:
+                            stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x+charIdx, str(char), curses.color_pair(1))
 
                 else:
-                    stdscr.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(2))
+                    for charIdx, char in enumerate(widget["text"]):
+                        if widget["x"]+charIdx > 1 and widget["x"]+charIdx < window.width-2:
+                            stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x+charIdx, str(char), curses.color_pair(2))
 
         # Only draw the menu bar on the selected window
         elif widget["type"] == "menuButton":
@@ -49,15 +53,21 @@ def drawWindow(stdscr, window):
 
         elif widget["type"] == "title":
             if widget["y"] > 1 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
-                stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]).upper(), curses.color_pair(2) + curses.A_UNDERLINE)
+                for charIdx, char in enumerate(widget["text"]):
+                    if widget["x"]+charIdx > 1 and widget["x"]+charIdx < window.width-2:
+                        stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x+charIdx, str(char).upper(), curses.color_pair(2) + curses.A_UNDERLINE)
 
         elif widget["type"] == "input":
             if widget["y"] > 1 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
                 if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
-                    stdscr.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(1))
+                    for charIdx, char in enumerate(widget["text"]):
+                        if widget["x"]+charIdx > 1 and widget["x"]+charIdx < window.width-2:
+                            stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x+charIdx, str(char), curses.color_pair(1))
 
                 else:
-                    stdscr.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(2))
+                    for charIdx, char in enumerate(widget["text"]):
+                        if widget["x"]+charIdx > 1 and widget["x"]+charIdx < window.width-2:
+                            stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x+charIdx, str(char), curses.color_pair(2))
 
 
     # Draw the shadow (if there is space on the screen, hence the try, except statement):
