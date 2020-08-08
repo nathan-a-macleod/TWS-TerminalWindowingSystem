@@ -8,14 +8,16 @@ Prerequisites:
 * Python 3
 * Python `psutil` package - `pip3 install psutil`
 
-Just run `python3 main.py` inside the `src/` folder to run the program. When the program starts, you will see an app launcher screen with all the installed apps.
+Just run `python3 main.py` from inside the `src/` folder to run the program. When the program starts, you will see an app launcher screen with all the installed apps.
 
-## Basic Controls:
+## Controls:
 * Up & down Arrow Keys: Highlight a selection.
-* Left & right Arrow Keys: Focuses a different window.                    
+* Left & right Arrow Keys: Focuses a different window. 
 * ENTER: 'Click' a selection.
 * WASD (UpperCase): Moves the selected window.
-* Q, E (UpperCase): Scrolling.
+* WASD (LowerCase): Resizes the selected window.
+* Q, E (UpperCase): Scrolling vertically.
+* Q, E (LowerCase): Scrolling horizontally.
 
 # Contributing
 I am looking for contributers to help with this project, especially with things like the applications (or anything else you would like to help with), because there are quite a few of them to do.
