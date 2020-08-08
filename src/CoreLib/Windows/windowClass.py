@@ -7,7 +7,7 @@ def alert(title, text):
     winWidth = len(text)+3
     if winWidth < len("Press any key to continue..."):
         winWidth = len("Press any key to continue...")+4
-    alertWin = curses.newwin(6, winWidth, curses.LINES//2-3, curses.COLS//2-winWidth//2)
+    alertWin = curses.newwin(6, winWidth, curses.LINES//2-5, curses.COLS//2-winWidth//2)
     alertWin.bkgd(" ", curses.color_pair(2))
     alertWin.border()
 

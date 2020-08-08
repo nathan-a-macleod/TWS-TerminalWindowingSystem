@@ -34,7 +34,7 @@ def main(stdscr):
                     exec(open("Programs/" + clickedButton["widgetID"] + "/main.py").read())
 
                 except Exception as ex:
-                    window.alert("Error Running Program", "There was an error while trying to run the program. Error: " + str(ex))
+                    alert("Error Running Program", "There was an error while trying to run the program. Error: " + str(ex))
 
     appLauncher = Window(5, 5, curses.LINES-10, curses.COLS-10, "TWS-App_Launcher", appLauncherFunction)
     appLauncher.addLabel("", 1, 2, "Use arrow keys to highlight an option and <ENTER> to 'click' an option.")

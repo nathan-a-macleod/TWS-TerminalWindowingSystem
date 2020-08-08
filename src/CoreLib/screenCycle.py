@@ -8,6 +8,21 @@ from CoreLib.Windows.windowManager import *
 from CoreLib.drawWindow import *
 from CoreLib.drawDesktop import *
 
+def appLauncherFunction(window, key, clickedButton):
+    if clickedButton != 0:
+        if clickedButton["widgetID"] == "endSession":
+            exit()
+        
+        elif clickedButton["widgetID"] == "closeWindow":
+            window.closeWindow()
+
+        else:
+            try:
+                exec(open("Programs/" + clickedButton["widgetID"] + "/main.py").read())
+
+            except Exception as ex:
+                alert("Error Running Program", "There was an error while trying to run the program. Error: " + str(ex))
+
 # The main screen class where everything happens:
 class Screen:
     def __init__(self, stdscrRoot):
@@ -16,9 +31,9 @@ class Screen:
         # The desktop:
         self.desktop = Window(1, 0, curses.LINES-2, curses.COLS, "Desktop", self.desktopFunction)
         self.desktop.addMenuButton("appLauncher", 0, "App Launcher")
-        self.desktop.addButton("123", 2, 2, "Button 1")
-        self.desktop.addButton("", 3, 2, "Button 2")
-        self.desktop.addButton("", 4, 2, "Button 3")
+        self.desktop.addButton("", 1, 2, "Button 2")
+        self.desktop.addButton("", 2, 2, "Button 3")
+        self.desktop.addButton("endSession", 3, 2, "[x] End Session")
 
     def taskbar(self):
         taskBarString = str(datetime.datetime.now().strftime("%I:%M")) + " | " + str(psutil.cpu_percent()) + " % | " + str(os.popen("whoami").read()).split("\n")[0] + "@" + str(os.popen("uname -n").read()).split("\n")[0] + " | " + str(openWindows[len(openWindows)-1].windowTitle)
@@ -27,8 +42,33 @@ class Screen:
 
     def desktopFunction(self, window, key, clickedButton):
         if clickedButton != 0:
-            if clickedButton["widgetID"] == "123":
+            if clickedButton["widgetID"] == "endSession":
                 exit()
+
+            elif clickedButton["widgetID"] == "appLauncher":
+                # Open a menu with all the installed apps:
+                appLauncherWin = Window(2, 2, curses.LINES//2, curses.COLS//5, "App Launcher", appLauncherFunction)
+                appLauncherWin.addMenuButton("closeWindow", 0, "Close Window")
+
+                # Create a button for each file in the 'Programs' directory
+                idx = 0
+                for program in os.listdir("./Programs"):
+                    idx += 1
+
+                    # If the file has "." as the first letter it's a hidden file.
+                    if program[0] != "." and os.path.isfile(os.getcwd() + "/Programs/" + program) == False:
+                        # Get the programs metadata from the 'TWSProgram.txt' file
+                        settingsData = str(open("./Programs/" + program + "/TWSProgram.txt").read())
+                        displayname = settingsData.split("\n")[0][13:]
+                        displayname = displayname[:-1]
+
+                        displaysymbol = settingsData.split("\n")[1][15:]
+                        displaysymbol = displaysymbol[:-1]
+
+                        appLauncherWin.addButton(str(program), idx+1, 2, "[" + displaysymbol + "] " + displayname)
+
+                    else:
+                        idx -= 1
 
     # The main function in the class
     def mainloop(self):
