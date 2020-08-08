@@ -45,7 +45,9 @@ def drawWindow(stdscr, window):
 
         elif widget["type"] == "label":
             if widget["y"] > 1 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
-                stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(2))
+                for charIdx, char in enumerate(widget["text"]):
+                    if widget["x"]+charIdx > 1 and widget["x"]+charIdx < window.width-2:
+                        stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x+charIdx, str(char), curses.color_pair(2))
 
         elif widget["type"] == "title":
             if widget["y"] > 1 and widget["y"] < window.height-1: # If it hasn't been scrolled out of view
