@@ -110,7 +110,7 @@ class Screen:
                 except:
                     pass
 
-            elif char == curses.KEY_LEFT:
+            elif char == curses.KEY_LEFT or char == curses.KEY_RIGHT:
                 try:
                     lastWindow = openWindows[len(openWindows)-1]
                     openWindows.remove(lastWindow)
