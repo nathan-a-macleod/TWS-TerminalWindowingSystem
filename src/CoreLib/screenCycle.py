@@ -15,7 +15,7 @@ def appLauncherFunction(window, key, clickedButton):
         
         elif clickedButton["widgetID"] == "closeWindow":
             window.closeWindow()
-
+        
         else:
             try:
                 exec(open("Programs/" + clickedButton["widgetID"] + "/main.py").read())
@@ -32,7 +32,7 @@ class Screen:
         self.desktop = Window(1, 0, curses.LINES-2, curses.COLS, "Desktop", self.desktopFunction)
         self.desktop.addMenuButton("appLauncher", 0, "App Launcher")
         self.desktop.addButton("", 1, 2, "Button 2")
-        self.desktop.addButton("", 2, 2, "Button 3")
+        self.desktop.addButton("terminal", 2, 2, "[#] TWS-Terminal")
         self.desktop.addButton("endSession", 3, 2, "[x] End Session")
 
     def taskbar(self):
@@ -44,6 +44,10 @@ class Screen:
         if clickedButton != 0:
             if clickedButton["widgetID"] == "endSession":
                 exit()
+
+            elif clickedButton["widgetID"] == "terminal":
+                exec(open("Programs/" + "TWS-Terminal" + "/main.py").read())
+
 
             elif clickedButton["widgetID"] == "appLauncher":
                 # Open a menu with all the installed apps:

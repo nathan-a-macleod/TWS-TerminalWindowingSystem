@@ -34,7 +34,7 @@ def drawWindow(stdscr, window):
                     stdscr.addstr(window.y+widget["y"], window.x+widget["x"], str(widget["text"]), curses.color_pair(2))
 
         # Only draw the menu bar on the selected window
-        elif widget["type"] == "menuButton" and window == openWindows[len(openWindows)-1]:
+        elif widget["type"] == "menuButton":
             if idx == window.selectedWidget: # If it's the selected widget, then draw it with a different color pair
                 stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x, str(widget["text"]), curses.color_pair(1) + curses.A_UNDERLINE)
 
