@@ -18,52 +18,19 @@ def main(stdscr):
     curses.curs_set(0)
     stdscr.bkgd(" ", curses.color_pair(3))
     stdscr.refresh()
-    stdscr.timeout(500)
     
+    # The bootup screen:
+    line1 = "Welcome to TWS-TerminalWindowingSystem!"
+    line2 = "To access help at any time, press '?' on your keyboard."
+    line3 = "Press any key to continue..."
+    stdscr.addstr(curses.LINES//2-3, curses.COLS//2-len(line1)//2, line1)
+    stdscr.addstr(curses.LINES//2-2, curses.COLS//2-len(line2)//2, line2)
+    stdscr.addstr(curses.LINES//2, curses.COLS//2-len(line3)//2, line3)
+    stdscr.getch()
+    stdscr.timeout(500) # Set the timeout from now on
+
     # The core of the program
     scr = Screen(stdscr)
-
-    '''
-    def appLauncherFunction(window, key, clickedButton):
-        if clickedButton != 0:
-            if clickedButton["widgetID"] == "endSession":
-                exit()
-
-            else:
-                try:
-                    exec(open("Programs/" + clickedButton["widgetID"] + "/main.py").read())
-
-                except Exception as ex:
-                    alert("Error Running Program", "There was an error while trying to run the program. Error: " + str(ex))
-
-    appLauncher = Window(5, 5, curses.LINES-10, curses.COLS-10, "TWS-App_Launcher", appLauncherFunction)
-    appLauncher.addLabel("", 1, 2, "Use arrow keys to highlight an option and <ENTER> to 'click' an option.")
-
-    # Create a button for each file in the 'Programs' directory
-    idx = 0
-    for program in os.listdir("./Programs"):
-        idx += 1
-
-        # If the file has "." as the first letter it's a hidden file.
-        if program[0] != "." and os.path.isfile(os.getcwd() + "/Programs/" + program) == False:
-            # Get the programs metadata from the 'TWSProgram.txt' file
-            settingsData = str(open("./Programs/" + program + "/TWSProgram.txt").read())
-            displayname = settingsData.split("\n")[0][13:]
-            displayname = displayname[:-1]
-
-            displaysymbol = settingsData.split("\n")[1][15:]
-            displaysymbol = displaysymbol[:-1]
-
-            appLauncher.addButton(str(program), idx+2, 2, "[" + displaysymbol + "] " + displayname)
-
-        else:
-            idx -= 1
-
-    appLauncher.addButton("endSession", curses.LINES-13, 2, "[x] End Session")
-    '''
-
-    alert("Help", "To access help at any time, press '?' on your keyboard.")
-
     scr.mainloop()
 
     # Update the screen and wait for 1 second (curses.napms())

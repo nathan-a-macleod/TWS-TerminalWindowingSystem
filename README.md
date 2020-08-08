@@ -18,6 +18,7 @@ Just run `python3 main.py` from inside the `src/` folder to run the program. Whe
 * WASD (LowerCase): Resizes the selected window.
 * Q, E (UpperCase): Scrolling vertically.
 * Q, E (LowerCase): Scrolling horizontally.
+* ".": Toggle between showing & hiding the desktop.
 
 # Contributing
 I am looking for contributers to help with this project, especially with things like the applications (or anything else you would like to help with), because there are quite a few of them to do.

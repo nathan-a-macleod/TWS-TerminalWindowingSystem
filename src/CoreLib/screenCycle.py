@@ -50,7 +50,7 @@ class Screen:
 
             elif clickedButton["widgetID"] == "appLauncher":
                 # Open a menu with all the installed apps:
-                appLauncherWin = Window(2, 2, curses.LINES//2, curses.COLS//5, "App Launcher", appLauncherFunction)
+                appLauncherWin = Window(3, 2, curses.LINES//2, curses.COLS//5, "App Launcher", appLauncherFunction)
                 appLauncherWin.addMenuButton("closeWindow", 0, "Close Window")
 
                 # Create a button for each file in the 'Programs' directory
