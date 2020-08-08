@@ -8,11 +8,9 @@ def drawWindow(stdscr, window):
         for xBg in range(window.width):
             stdscr.addstr(window.y+yBg, window.x+xBg, " ",  curses.color_pair(2))
 
-    focusedWindow = openWindows[len(openWindows)-1] # focusedWindow is the last element in the 'openWindows' array
-
     # Draw a horizontal line at the top of the window
-    for charIdx in range(focusedWindow.x, focusedWindow.x+focusedWindow.width):
-        stdscr.addstr(focusedWindow.y+1, charIdx, " ", curses.color_pair(2) + curses.A_UNDERLINE)
+    for charIdx in range(window.x, window.x+window.width):
+        stdscr.addstr(window.y+1, charIdx, " ", curses.color_pair(2) + curses.A_UNDERLINE)
 
     # The window border and corners:
     for xBorder in range(window.width):
