@@ -96,11 +96,16 @@ class Screen:
             windowManager(char, window)
 
             # Changing the focused window:
-            if char == curses.KEY_RIGHT:
+            if char == ord("."):
                 try:
                     lastWindow = openWindows[0]
                     openWindows.remove(lastWindow)
                     openWindows.append(lastWindow)
+
+                    # Put the desktop at the bottom:
+                    if openWindows[len(openWindows)-1] != self.desktop:
+                        openWindows.remove(self.desktop)
+                        openWindows.insert(0, self.desktop)
 
                 except:
                     pass
@@ -110,6 +115,11 @@ class Screen:
                     lastWindow = openWindows[len(openWindows)-1]
                     openWindows.remove(lastWindow)
                     openWindows.insert(0, lastWindow)
+
+                    # Put the desktop at the bottom:
+                    if openWindows[len(openWindows)-1] != self.desktop:
+                        openWindows.remove(self.desktop)
+                        openWindows.insert(0, self.desktop)
 
                 except:
                     pass
