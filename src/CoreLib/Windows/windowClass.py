@@ -96,8 +96,12 @@ class Window:
             if widget["widgetID"] == ID:
                 return widget
 
-    def addIcon(self, widgetID, y, x, iconPixels):
-        addIcon(self, widgetID, y, x, iconPixels) # CoreLib/Graphics/icon.py file
+    def addIcon(self, y, x, iconPixels):
+        addIcon(self, y, x, iconPixels) # CoreLib/Graphics/icon.py file
+
+    def add3DLabel(self, y, x, label3DString):
+        for lineIdx, line in enumerate(label3DString):
+            self.addLabel("", y+lineIdx, x, str(line))
 
     def closeWindow(self):
         # Remove the window from the array of windows

@@ -24,7 +24,7 @@ def drawDesktop(stdscr, window):
                 else:
                     for charIdx, char in enumerate(widget["text"]):
                         if widget["x"]+charIdx > 1 and widget["x"]+charIdx < window.width-2:
-                            stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x+charIdx, str(char), curses.color_pair(3))
+                            stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x+charIdx, str(char), curses.color_pair(2))
 
         # The menu bar
         elif widget["type"] == "menuButton":

@@ -31,8 +31,10 @@ class Screen:
         # The desktop:
         self.desktop = Window(1, 0, curses.LINES-2, curses.COLS, "Desktop", self.desktopFunction)
         self.desktop.addMenuButton("appLauncher", 0, "App Launcher")
-        self.desktop.addButton("terminal", 1, 2, "[#] TWS-Terminal")
-        self.desktop.addButton("endSession", 2, 2, "[x] End Session")
+        self.desktop.add3DLabel(1, 2, ["==", "  ==", "    ==", "  ==", "==   ___________"])
+        self.desktop.addButton("terminal", 7, 2, "[#] TWS-Terminal")
+        self.desktop.add3DLabel(11, 2, ["XX          XX", "   XX   XX", "      XX", "   XX    XX", "XX          XX"])
+        self.desktop.addButton("endSession", 17, 2, "[x] End Session")
 
     def taskbar(self):
         taskBarString = str(datetime.datetime.now().strftime("%I:%M")) + " | " + str(psutil.cpu_percent()) + " % | " + str(os.popen("whoami").read()).split("\n")[0] + "@" + str(os.popen("uname -n").read()).split("\n")[0] + " | " + str(openWindows[len(openWindows)-1].windowTitle)

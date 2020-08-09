@@ -35,4 +35,4 @@ mainWin.addLabel("timeStr", 5, 2, "Time: " + str(datetime.datetime.now().strftim
 mainWin.addButton("btn_001", 6, 2, "Click Me!") # Add a button with an id of "btn_001"
 mainWin.addInput("input_001", 7, 2, "Enter a number - try '123':") # Add an input line with an id of "input_001"
 
-mainWin.addIcon("myIcon", 9, 2, [[1, 0, 1, 0], [0, 1, 0, 1], [1, 0, 1, 0], [0, 1, 0, 1]]) # Add a icon with id of myIcon. last argument is an array for each line of the icon
+mainWin.addIcon(9, 2, [[1, 0, 1, 0], [0, 1, 0, 1], [1, 0, 1, 0], [0, 1, 0, 1]]) # Add a icon. last argument is an array for each line of the icon
