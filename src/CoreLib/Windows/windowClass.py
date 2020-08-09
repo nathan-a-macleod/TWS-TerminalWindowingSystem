@@ -1,6 +1,7 @@
 # Imports
 import curses
 import os
+from CoreLib.Graphics.icon import *
 
 # Alert function:
 def alert(title, text):
@@ -94,6 +95,9 @@ class Window:
         for widget in self.widgets:
             if widget["widgetID"] == ID:
                 return widget
+
+    def addIcon(self, widgetID, y, x, iconPixels):
+        addIcon(self, widgetID, y, x, iconPixels) # CoreLib/Graphics/icon.py file
 
     def closeWindow(self):
         # Remove the window from the array of windows
