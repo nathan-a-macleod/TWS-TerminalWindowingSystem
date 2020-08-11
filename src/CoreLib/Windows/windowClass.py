@@ -39,12 +39,12 @@ openWindows = [] # An array to store all the open windows
 
 # The main window class:
 class Window:
-    def __init__(self, y, x, height, width, windowTitle, functionName):
+    def __init__(self, windowTitle, functionName):
         # Some variable initialisations
-        self.y = y
-        self.x = x
-        self.height = height
-        self.width = width
+        self.y = 1
+        self.x = 0
+        self.height = curses.LINES-1
+        self.width = curses.COLS
         self.windowTitle = "(" + str(len(openWindows)) + ") " + windowTitle
         self.functionName = functionName
         self.widgets = [] # An array of all the widgets

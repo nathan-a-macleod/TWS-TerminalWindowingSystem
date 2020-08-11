@@ -6,11 +6,15 @@ def drawDesktop(stdscr, window):
     # Draw the character array for the window
     for yBg in range(window.height):
         for xBg in range(window.width):
-            if yBg == 0:
-                stdscr.addstr(window.y+yBg, window.x+xBg, " ",  curses.color_pair(2))
+            try:
+                if yBg == 0:
+                    stdscr.addstr(window.y+yBg, window.x+xBg, " ",  curses.color_pair(2))
 
-            else:
-                stdscr.addstr(window.y+yBg, window.x+xBg, " ",  curses.color_pair(3))
+                else:
+                    stdscr.addstr(window.y+yBg, window.x+xBg, " ",  curses.color_pair(3))
+
+            except:
+                pass
 
     # Draw all the widgets:
     for idx, widget in enumerate(window.widgets):

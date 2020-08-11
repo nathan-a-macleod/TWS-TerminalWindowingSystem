@@ -29,7 +29,7 @@ class Screen:
         self.stdscrRoot = stdscrRoot
 
         # The desktop:
-        self.desktop = Window(1, 0, curses.LINES-2, curses.COLS, "Desktop", self.desktopFunction)
+        self.desktop = Window("Desktop", self.desktopFunction)
         self.desktop.addMenuButton("appLauncher", 0, "App Launcher")
         self.desktop.add3DLabel(1, 2, ["==", "  ==", "    ==", "  ==", "==   ___________"])
         self.desktop.addButton("terminal", 7, 2, "[#] TWS-Terminal")
@@ -52,7 +52,7 @@ class Screen:
 
             elif clickedButton["widgetID"] == "appLauncher":
                 # Open a menu with all the installed apps:
-                appLauncherWin = Window(3, 2, curses.LINES//2, curses.COLS//5, "App Launcher", appLauncherFunction)
+                appLauncherWin = Window("App Launcher", appLauncherFunction)
                 appLauncherWin.addMenuButton("closeWindow", 0, "Close Window")
 
                 # Create a button for each file in the 'Programs' directory
@@ -86,18 +86,21 @@ class Screen:
             # Draw all the windows, but don't give the key that's been clicked (only do that for the last window)
             for window in openWindows:
                 window.functionName(window, -1, 0)
-                if window.functionName != self.desktopFunction:
-                    drawWindow(self.stdscrRoot, window)
 
-                else:
-                    drawDesktop(self.stdscrRoot, window)
+            focusedWindow = openWindows[len(openWindows)-1]
+            focusedWindow.functionName(window, -1, 0)
+            if focusedWindow.functionName != self.desktopFunction:
+                drawWindow(self.stdscrRoot, focusedWindow)
+                
+            else:
+                drawDesktop(self.stdscrRoot, window)
 
             char = self.stdscrRoot.getch()
 
             windowManager(char, window)
 
             # Changing the focused window:
-            if char == ord("."):
+            if char == ord("."): # Desktop
                 try:
                     lastWindow = openWindows[0]
                     openWindows.remove(lastWindow)
@@ -111,16 +114,28 @@ class Screen:
                 except:
                     pass
 
-            elif char == curses.KEY_LEFT or char == curses.KEY_RIGHT:
+            elif char == curses.KEY_LEFT:
                 try:
                     lastWindow = openWindows[len(openWindows)-1]
                     openWindows.remove(lastWindow)
                     openWindows.insert(0, lastWindow)
 
                     # Put the desktop at the first index of openWindows
-                    if openWindows[len(openWindows)-1] != self.desktop: # But only if you aren't currently using it
-                        openWindows.remove(self.desktop)
-                        openWindows.insert(0, self.desktop)
+                    openWindows.remove(self.desktop)
+                    openWindows.insert(0, self.desktop)
+
+                except:
+                    pass
+
+            elif char == curses.KEY_RIGHT:
+                try:
+                    lastWindow = openWindows[len(openWindows)-1]
+                    openWindows.remove(lastWindow)
+                    openWindows.insert(1, lastWindow)
+
+                    # Put the desktop at the first index of openWindows
+                    openWindows.remove(self.desktop)
+                    openWindows.insert(0, self.desktop)
 
                 except:
                     pass

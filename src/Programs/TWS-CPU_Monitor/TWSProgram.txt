@@ -1,2 +1,0 @@
-displayname="TWS-CPU_Monitor"
-displaysymbol="/"

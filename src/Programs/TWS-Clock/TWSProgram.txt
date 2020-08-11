@@ -1,2 +1,0 @@
-displayname="TWS-Clock"
-displaysymbol="@"
