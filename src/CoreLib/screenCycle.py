@@ -31,15 +31,30 @@ class Screen:
         # The desktop:
         self.desktop = Window("Desktop", self.desktopFunction)
         self.desktop.addMenuButton("appLauncher", 0, "App Launcher")
-        self.desktop.add3DLabel(1, 2, ["==", "  ==", "    ==", "  ==", "==   ___________"])
+        self.desktop.add3DLabel(
+        1,
+        2,[
+        "███",
+        "  ███",
+        "    ███",
+        "  ███",
+        "███   ___________"]
+        )
         self.desktop.addButton("terminal", 7, 2, "[#] TWS-Terminal")
-        self.desktop.add3DLabel(11, 2, ["XX          XX", "   XX   XX", "      XX", "   XX    XX", "XX          XX"])
+        self.desktop.add3DLabel(
+        11,
+        2, [
+        "███      ███", 
+        "  ███  ███",
+        "    ████",
+        "  ███  ███", 
+        "███      ███"]
+        )
         self.desktop.addButton("endSession", 17, 2, "[x] End Session")
-
     def taskbar(self):
         taskBarString = str(datetime.datetime.now().strftime("%I:%M")) + " | " + str(psutil.cpu_percent()) + " % | " + str(os.popen("whoami").read()).split("\n")[0] + "@" + str(os.popen("uname -n").read()).split("\n")[0] + " | " + str(openWindows[len(openWindows)-1].windowTitle)
-        self.stdscrRoot.hline(0, 0, " ", curses.COLS, curses.color_pair(1)) # Draw a horizontal line at the top of the screen
-        self.stdscrRoot.addstr(0, curses.COLS//2-len(taskBarString)//2, taskBarString, curses.color_pair(1))
+        self.stdscrRoot.hline(0, 0, " ", curses.COLS, curses.color_pair(4)) # Draw a horizontal line at the top of the screen
+        self.stdscrRoot.addstr(0, curses.COLS//2-len(taskBarString)//2, taskBarString, curses.color_pair(4))
 
     def desktopFunction(self, window, key, clickedButton):
         if clickedButton != 0:
