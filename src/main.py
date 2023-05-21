@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Import the curses library...
 import curses
 import os
@@ -6,26 +7,37 @@ import random
 from CoreLib.Windows.windowClass import *
 from CoreLib.screenCycle import *
 
+blue = curses.COLOR_BLUE
+black = curses.COLOR_BLACK
+cyan = curses.COLOR_CYAN
+green = curses.COLOR_GREEN
+magenta = curses.COLOR_MAGENTA
+red = curses.COLOR_RED
+white = curses.COLOR_WHITE
+yellow = curses.COLOR_YELLOW
+
 # The main function
 def main(stdscr):
     # Color combinations
-    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK) # For the shadows
-    curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE) # Same, but inverted
-    curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLUE) # The background color
-    curses.init_pair(4, curses.COLOR_WHITE, curses.COLOR_BLACK) # For the titles
-
+    curses.init_pair(1, black, yellow) # For the shadows
+    curses.init_pair(2, black, white) # Same, but inverted
+    curses.init_pair(3, white, blue) # The background color
+    curses.init_pair(4, white, black) # For the titles
     # Stdscr settings
     curses.curs_set(0)
     stdscr.bkgd(" ", curses.color_pair(3))
     stdscr.refresh()
-    
     # The bootup screen:
-    line1 = "Welcome to TWS-TerminalWindowingSystem!"
-    line2 = "To access help at any time, press '?' on your keyboard."
-    line3 = "Press any key to continue..."
+    line0 = "╔═══════════════════════════════════════════════════════╗"
+    line1 = "║       Welcome to TWS-TerminalWindowingSystem!         ║"
+    line2 = "║To access help at any time, press '?' on your keyboard.║"
+    line3 = "║           Press any key to continue...                ║"
+    line4 = "╚═══════════════════════════════════════════════════════╝"
+    stdscr.addstr(curses.LINES//2-4, curses.COLS//2-len(line0)//2, line0)
     stdscr.addstr(curses.LINES//2-3, curses.COLS//2-len(line1)//2, line1)
     stdscr.addstr(curses.LINES//2-2, curses.COLS//2-len(line2)//2, line2)
-    stdscr.addstr(curses.LINES//2, curses.COLS//2-len(line3)//2, line3)
+    stdscr.addstr(curses.LINES//2-1, curses.COLS//2-len(line3)//2, line3)
+    stdscr.addstr(curses.LINES//2, curses.COLS//2-len(line4)//2, line4)    
     stdscr.getch()
     stdscr.timeout(500) # Set the timeout from now on
 
