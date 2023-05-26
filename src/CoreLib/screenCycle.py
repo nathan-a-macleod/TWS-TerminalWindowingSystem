@@ -27,16 +27,6 @@ def appLauncherFunction(window, key, clickedButton):
 class Screen:
     def __init__(self, stdscrRoot):
         self.stdscrRoot = stdscrRoot
-       # self.desktop.add3DLabel(
-       # 11,
-       # 2, [
-       # "███████████", 
-       # "███████████",
-       # "███████████",
-       # "███████████", 
-       # "███████████"]
-       # )
-       # self.desktop.addButton("fileBrowser", 17, 2, "[?] TWS-File Browser")
        
         # The desktop:
         self.desktop = Window("Desktop", self.desktopFunction)
@@ -54,13 +44,23 @@ class Screen:
         self.desktop.add3DLabel(
         11,
         2, [
+        "███████████", 
+        "███████████",
+        "███████████",
+        "███████████", 
+        "███████████"]
+        )
+        self.desktop.addButton("bgndchgr", 17, 2, "[?] TWS-BackgroundChanger")       
+        self.desktop.add3DLabel(
+        21,
+        2, [
         "███      ███", 
         "  ███  ███",
         "    ████",
         "  ███  ███", 
         "███      ███"]
         )
-        self.desktop.addButton("endSession", 17, 2, "[x] End Session")
+        self.desktop.addButton("endSession", 27, 2, "[x] End Session")
     def taskbar(self):
         taskBarString = str(datetime.datetime.now().strftime("%I:%M")) + " | " + str(psutil.cpu_percent()) + " % | " + str(os.popen("whoami").read()).split("\n")[0] + "@" + str(os.popen("uname -n").read()).split("\n")[0] + " | " + str(openWindows[len(openWindows)-1].windowTitle)
         self.stdscrRoot.hline(0, 0, " ", curses.COLS, curses.color_pair(4)) # Draw a horizontal line at the top of the screen
@@ -73,6 +73,9 @@ class Screen:
 
             elif clickedButton["widgetID"] == "terminal":
                 exec(open("Programs/" + "TWS-Terminal" + "/main.py").read())
+                
+            elif clickedButton["widgetID"] == "bgndchgr":
+                exec(open("Programs/" + "TWS-BackgroundChanger" + "/main.py").read())
 
 
             elif clickedButton["widgetID"] == "appLauncher":
