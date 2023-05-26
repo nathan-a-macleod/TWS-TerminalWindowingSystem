@@ -27,7 +27,17 @@ def appLauncherFunction(window, key, clickedButton):
 class Screen:
     def __init__(self, stdscrRoot):
         self.stdscrRoot = stdscrRoot
-
+       # self.desktop.add3DLabel(
+       # 11,
+       # 2, [
+       # "███████████", 
+       # "███████████",
+       # "███████████",
+       # "███████████", 
+       # "███████████"]
+       # )
+       # self.desktop.addButton("fileBrowser", 17, 2, "[?] TWS-File Browser")
+       
         # The desktop:
         self.desktop = Window("Desktop", self.desktopFunction)
         self.desktop.addMenuButton("appLauncher", 0, "App Launcher")
