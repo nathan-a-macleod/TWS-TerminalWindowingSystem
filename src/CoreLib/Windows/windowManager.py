@@ -3,7 +3,7 @@ import curses
 
 def windowManager(char, window):
     # Changing the selected button:
-    if char == curses.KEY_DOWN:
+    if char == curses.KEY_DOWN or char == ord("j") or char == ord("J"):
         while True:
             if window.selectedWidget < len(window.widgets)-1:
                 window.selectedWidget += 1
@@ -14,7 +14,7 @@ def windowManager(char, window):
             if window.widgets[window.selectedWidget]["type"] != "label" and window.widgets[window.selectedWidget]["type"] != "title":
                 break
 
-    elif char == curses.KEY_UP:
+    elif char == curses.KEY_UP or char == ord("k") or char == ord("K"):
         while True:
             if window.selectedWidget > 0:
                 window.selectedWidget -= 1
@@ -43,12 +43,12 @@ def windowManager(char, window):
         window.functionName(window, char, clickedWidget)
         
     # Scrolling windows:
-    elif char == ord("E"): # Scrolling up:
+    elif char == ord("E") or char == curses.KEY_PPAGE: # Scrolling up:
         for widget in window.widgets:
             if widget["type"] != "menuButton":
                 widget["y"] += 1
             
-    elif char == ord("Q"): # Scrolling down:
+    elif char == ord("Q") or char == curses.KEY_NPAGE: # Scrolling down:
         for widget in window.widgets:
             if widget["type"] != "menuButton":
                 widget["y"] -= 1
