@@ -53,6 +53,7 @@ def main(stdscr):
         curses.init_pair(3, white, blue) # The background color       
          
     curses.init_pair(4, white, black) # For the titles
+    
     # Stdscr settings
     curses.curs_set(0)
     stdscr.bkgd(" ", curses.color_pair(3))
