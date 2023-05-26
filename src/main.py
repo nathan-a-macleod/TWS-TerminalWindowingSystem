@@ -45,7 +45,10 @@ else:
 # The main function
 def main(stdscr):
     # Color combinations
-    curses.init_pair(1, black, yellow) # For the shadows
+    if bgnd == "yellow":
+        curses.init_pair(1, black, red) # For the shadows
+    else:
+        curses.init_pair(1, black, yellow) # For the shadows
     curses.init_pair(2, black, white) # Same, but inverted
     try:
         curses.init_pair(3, colors[fg], colors[bgnd]) # The background color
