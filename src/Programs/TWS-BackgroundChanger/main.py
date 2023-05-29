@@ -50,42 +50,42 @@ def mainWinFunction(window, key, clickedButton):
             curses.init_pair(4, white, black) # For the titles
             
         elif clickedButton["widgetID"] == "btn_001":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
+            window.getWidgetByID("str_001")["text"] = "Exit To Set Color"
             f = open("bgclr.txt", "w")
             f.write("blue")
             f.close()
         elif clickedButton["widgetID"] == "btn_002":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
+            window.getWidgetByID("str_001")["text"] = "Exit To Set Color"
             f = open("bgclr.txt", "w")
             f.write("black")
             f.close()
         elif clickedButton["widgetID"] == "btn_003":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
+            window.getWidgetByID("str_001")["text"] = "Exit To Set Color"
             f = open("bgclr.txt", "w")
             f.write("cyan")
             f.close()
         elif clickedButton["widgetID"] == "btn_004":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
+            window.getWidgetByID("str_001")["text"] = "Exit To Set Color"
             f = open("bgclr.txt", "w")
             f.write("green")
             f.close()
         elif clickedButton["widgetID"] == "btn_005":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
+            window.getWidgetByID("str_001")["text"] = "Exit To Set Color"
             f = open("bgclr.txt", "w")
             f.write("magenta")
             f.close()
         elif clickedButton["widgetID"] == "btn_006":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
+            window.getWidgetByID("str_001")["text"] = "Exit To Set Color"
             f = open("bgclr.txt", "w")
             f.write("red")
             f.close()
         elif clickedButton["widgetID"] == "btn_007":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
+            window.getWidgetByID("str_001")["text"] = "Exit To Set Color"
             f = open("bgclr.txt", "w")
             f.write("white")
             f.close()
         elif clickedButton["widgetID"] == "btn_008":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
+            window.getWidgetByID("str_001")["text"] = "Exit To Set Color"
             f = open("bgclr.txt", "w")
             f.write("yellow")
             f.close()
