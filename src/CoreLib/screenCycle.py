@@ -44,11 +44,11 @@ class Screen:
         self.desktop.add3DLabel(
         11,
         2, [
-        "███████████", 
-        "███████████",
-        "███████████",
-        "███████████", 
-        "███████████"]
+        "    ███    ", 
+        " ████ ████ ",
+        "███     ███",
+        " ████ ████ ", 
+        "    ███    "]
         )
         self.desktop.addButton("bgndchgr", 17, 2, "[?] TWS-BackgroundChanger")       
         self.desktop.add3DLabel(
