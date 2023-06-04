@@ -38,7 +38,15 @@ magenta = colors["magenta"] #Can't have white text (readability)
 red = colors["red"] #Can have white text
 white = colors["white"] #Can't have white text (readability)
 yellow = colors["yellow"] #Can't have white text (readability)
-if bgnd == "white" or bgnd == "yellow" or bgnd == "cyan" or bgnd == "magenta":
+
+BlackFGColors = [
+"white",
+"yellow",
+"cyan",
+"magenta"
+]
+
+if bgnd in BlackFGColors:
     fg = "black"
 else:
     fg = "white"
