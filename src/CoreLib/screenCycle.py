@@ -42,7 +42,7 @@ class Screen:
         self.desktop.addButton("terminal", 7, 2, "[#] TWS-Terminal")
  
         self.desktop.add3DLabel(
-        21,
+        11,
         2, [
         "███      ███", 
         "  ███  ███",
@@ -50,7 +50,7 @@ class Screen:
         "  ███  ███", 
         "███      ███"]
         )
-        self.desktop.addButton("endSession", 27, 2, "[x] End Session")
+        self.desktop.addButton("endSession", 17, 2, "[x] End Session")
     def taskbar(self):
         taskBarString = str(datetime.datetime.now().strftime("%I:%M")) + " | " + str(psutil.cpu_percent()) + " % | " + str(os.popen("whoami").read()).split("\n")[0] + "@" + str(os.popen("uname -n").read()).split("\n")[0] + " | " + str(openWindows[len(openWindows)-1].windowTitle)
         self.stdscrRoot.hline(0, 0, " ", curses.COLS, curses.color_pair(4)) # Draw a horizontal line at the top of the screen
