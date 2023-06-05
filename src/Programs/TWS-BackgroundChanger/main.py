@@ -1,62 +1,113 @@
 from CoreLib.Windows.windowClass import * # Import the library like this
-
 # Import other libraries like this:
 global datetime
 import datetime
-
+global re
+import re
+from pathlib import Path
+global Path
+global msg
+msg = "Set Color"
 # The main function
 def mainWinFunction(window, key, clickedButton):
-  
+    bgclr = Path("bgclr.txt") #Note, the color has to be one of the 7 default colors
+    if bgclr.exists():
+        f = open("bgclr.txt", "r")
+    else:
+        os.system("touch bgclr.txt")
+        f = open("bgclr.txt", "w")
+        f.write("blue")
+        f.close()
+    f = open("bgclr.txt", "r")  
+    x = f.read()
+    bgnd = re.sub("\n", '', x).lower()
+    colors = {
+"blue" : curses.COLOR_BLUE,
+"black" : curses.COLOR_BLACK,
+"cyan" : curses.COLOR_CYAN,
+"green" : curses.COLOR_GREEN,
+"magenta" : curses.COLOR_MAGENTA,
+"red" : curses.COLOR_RED,
+"white" : curses.COLOR_WHITE,
+"yellow" : curses.COLOR_YELLOW
+}
+
+    blue = colors["blue"] #Can have white text
+    black = colors["black"] #Can have white text
+    cyan = colors["cyan"] #Can't have white text (readability)
+    green = colors["green"] #Can have white text
+    magenta = colors["magenta"] #Can't have white text (readability)
+    red = colors["red"] #Can have white text
+    white = colors["white"] #Can't have white text (readability)
+    yellow = colors["yellow"] #Can't have white text (readability)
+
+    BlackFGColors = [
+"white",
+"yellow",
+"cyan",
+"magenta"
+]
+
+    if bgnd in BlackFGColors:
+        fg = "black"
+    else:
+        fg = "white"
+    
+    if bgnd == "yellow":
+        curses.init_pair(1, black, red) # For the shadows
+    else:
+        curses.init_pair(1, black, yellow) # For the shadows
+    curses.init_pair(2, black, white) # Same, but inverted
+    try:
+        curses.init_pair(3, colors[fg], colors[bgnd]) # The background color
+    except:
+        curses.init_pair(3, white, blue) # The background color       
+         
+    curses.init_pair(4, white, black) # For the titles
+    
     if clickedButton != 0: # If you have clicked a button
         # If the ID of the button being clicked is "closeButton", close the window. (It's highly recommended to include a button the close the window in each program)
         if clickedButton["widgetID"] == "closeButton":
             window.closeWindow() # Close the window
-
+            
+            
         elif clickedButton["widgetID"] == "btn_001":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
-            alert("Important", "Color will be changed on restart") # Function to alert the user that they pressed the 'j' key!
+            window.getWidgetByID("str_001")["text"] = msg
             f = open("bgclr.txt", "w")
             f.write("blue")
             f.close()
         elif clickedButton["widgetID"] == "btn_002":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
-            alert("Important", "Color will be changed on restart") # Function to alert the user that they pressed the 'j' key!
+            window.getWidgetByID("str_001")["text"] = msg
             f = open("bgclr.txt", "w")
             f.write("black")
             f.close()
         elif clickedButton["widgetID"] == "btn_003":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
-            alert("Important", "Color will be changed on restart") # Function to alert the user that they pressed the 'j' key!
+            window.getWidgetByID("str_001")["text"] = msg
             f = open("bgclr.txt", "w")
             f.write("cyan")
             f.close()
         elif clickedButton["widgetID"] == "btn_004":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
-            alert("Important", "Color will be changed on restart") # Function to alert the user that they pressed the 'j' key!
+            window.getWidgetByID("str_001")["text"] = msg
             f = open("bgclr.txt", "w")
             f.write("green")
             f.close()
         elif clickedButton["widgetID"] == "btn_005":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
-            alert("Important", "Color will be changed on restart") # Function to alert the user that they pressed the 'j' key!
+            window.getWidgetByID("str_001")["text"] = msg
             f = open("bgclr.txt", "w")
             f.write("magenta")
             f.close()
         elif clickedButton["widgetID"] == "btn_006":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
-            alert("Important", "Color will be changed on restart") # Function to alert the user that they pressed the 'j' key!
+            window.getWidgetByID("str_001")["text"] = msg
             f = open("bgclr.txt", "w")
             f.write("red")
             f.close()
         elif clickedButton["widgetID"] == "btn_007":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
-            alert("Important", "Color will be changed on restart") # Function to alert the user that they pressed the 'j' key!
+            window.getWidgetByID("str_001")["text"] = msg
             f = open("bgclr.txt", "w")
             f.write("white")
             f.close()
         elif clickedButton["widgetID"] == "btn_008":
-            window.getWidgetByID("str_001")["text"] = "Set Color"
-            alert("Important", "Color will be changed on restart") # Function to alert the user that they pressed the 'j' key!
+            window.getWidgetByID("str_001")["text"] = msg
             f = open("bgclr.txt", "w")
             f.write("yellow")
             f.close()

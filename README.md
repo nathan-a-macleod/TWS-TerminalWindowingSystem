@@ -29,7 +29,7 @@ I am looking for contributers to help with this project, especially with things 
 * A way to develop custom apps (Ongoing).
 * Clock (Completed)
 * CPU Monitor (Completed)
-* Terminal Shell (Mostly Completed - [things like autocomplete, etc aren't implemented yet])
+* Terminal Shell (Completed)
 * Help Page (Mostly completed)
 * Default System Text Editor (Not started)
 * File Manager (Not started)
