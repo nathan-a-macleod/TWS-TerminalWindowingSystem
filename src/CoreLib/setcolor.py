@@ -7,17 +7,17 @@ from CoreLib.Windows.windowClass import *
 from CoreLib.screenCycle import *
 from pathlib import Path
 def SetThemeColors():
-    bgclr = Path("bgclr.txt") #Note, the color has to be one of the 7 default colors
+    bgclr = Path("config.cfg") #Note, the color has to be one of the 7 default colors
     if bgclr.exists():
-        f = open("bgclr.txt", "r")
+        f = open("config.cfg", "r")
     else:
-        os.system("touch bgclr.txt")
-        f = open("bgclr.txt", "w")
-        f.write("blue")
+        os.system("touch config.cfg")
+        f = open("config.cfg", "w")
+        f.write("COLOR:blue\nTHEME:light")
         f.close()
-    f = open("bgclr.txt", "r")  
-    x = f.read()
-    bgnd = re.sub("\n", '', x).lower()
+    f = open("config.cfg", "r").readline().rstrip() 
+    bgnd1 = re.sub("COLOR:", '', f).lower()
+    bgnd = re.sub("\n", '', bgnd1).lower()
     colors = {
 "blue" : curses.COLOR_BLUE,
 "black" : curses.COLOR_BLACK,
@@ -44,21 +44,34 @@ def SetThemeColors():
 "cyan",
 "magenta"
 ]
-
+    f2 = open("config.cfg", "r")
+    thm3 = f2.readlines()
+    thm2 = thm3[1]
+    thm1 = re.sub("THEME:", '', thm2).lower()
+    mode = re.sub("\n", '', thm1).lower()
+    
     if bgnd in BlackFGColors:
         fg = "black"
     else:
         fg = "white"
     
     if bgnd == "yellow":
-        curses.init_pair(1, black, red) # For the shadows
+        curses.init_pair(1, black, red) # For the shadows       
     else:
         curses.init_pair(1, black, yellow) # For the shadows
-    curses.init_pair(2, black, white) # Same, but inverted
+             
+    if mode == "dark":    
+        curses.init_pair(2, white, black) # Same, but inverted, Apps Background and Foreground Colors
+    else:
+        curses.init_pair(2, black, white) # Same, but inverted, Apps Background and Foreground Colors
+        
     try:
         curses.init_pair(3, colors[fg], colors[bgnd]) # The background color
     except:
-        curses.init_pair(3, white, blue) # The background color       
-         
-    curses.init_pair(4, white, black) # For the titles
+        curses.init_pair(3, white, blue) # The background color  
+             
+    if mode == "dark":         
+        curses.init_pair(4, black, white) # Same, but inverted, Apps Background and Foreground Colors
+    else:    
+        curses.init_pair(4, white, black) # Same, but inverted, Apps Background and Foreground Colors
 
