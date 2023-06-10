@@ -15,8 +15,10 @@ def SetThemeColors():
         f = open("config.cfg", "w")
         f.write("COLOR:blue\nTHEME:light")
         f.close()
-    f = open("config.cfg", "r").readline().rstrip() 
-    bgnd1 = re.sub("COLOR:", '', f).lower()
+    f = open("config.cfg", "r")
+    bgnd3 = f.readlines()
+    bgnd2 = bgnd3[1]
+    bgnd1 = re.sub("COLOR:", '', bgnd2).lower()
     bgnd = re.sub("\n", '', bgnd1).lower()
     colors = {
 "blue" : curses.COLOR_BLUE,
@@ -46,7 +48,7 @@ def SetThemeColors():
 ]
     f2 = open("config.cfg", "r")
     thm3 = f2.readlines()
-    thm2 = thm3[1]
+    thm2 = thm3[2]
     thm1 = re.sub("THEME:", '', thm2).lower()
     mode = re.sub("\n", '', thm1).lower()
     
