@@ -20,8 +20,8 @@ def mainWinFunction(window, key, clickedButton):
     global change
     f3 = open("config.cfg", "r")
     temp = f3.readlines()
-    theme = temp[1]
-    color = temp[0]
+    theme = temp[2]
+    color = temp[1]
     if clickedButton != 0: # If you have clicked a button
         # If the ID of the button being clicked is "closeButton", close the window. (It's highly recommended to include a button the close the window in each program)
         if clickedButton["widgetID"] == "closeButton":
