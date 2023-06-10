@@ -1,2 +1,2 @@
-displayname="TWS-BackgroundChanger"
+displayname="TWS-Settings"
 displaysymbol="$"
