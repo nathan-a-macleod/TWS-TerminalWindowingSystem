@@ -15,11 +15,7 @@ def mainWinFunction(window, key, clickedButton):
 
         elif clickedButton["widgetID"] == "btn_001":
             curses.endwin()
-            try:
-                os.system("elinks google.com")
-            except:
-                os.system("sudo apt install elinks")
-                os.system("elinks google.com")               
+            os.system("elinks google.com")          
                 
 mainWin = Window("Elinks", mainWinFunction) # Create a window
 mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
