@@ -41,7 +41,39 @@ def windowManager(char, window):
             curses.noecho()
 
         window.functionName(window, char, clickedWidget)
-        
+    # Movement of the windows:
+    elif char == ord("A"):
+        if window.x > 0:
+            window.x -= 1
+
+    elif char == ord("D"):
+        if window.x+window.width+2 < curses.COLS:
+            window.x += 1
+
+    elif char == ord("W"):
+        if window.y-1 > 0:
+            window.y -= 1
+
+    elif char == ord("S"):
+        if window.y + window.height+1 < curses.LINES:
+            window.y += 1
+    
+    # Resizing of the windows:
+    elif char == ord("a"):
+        if window.width > 10:
+            window.width -= 1
+
+    elif char == ord("d"):
+        if window.x+window.width+1 < curses.COLS-1:
+            window.width += 1
+
+    elif char == ord("w"):
+        if window.height > 3:
+            window.height -= 1
+
+    elif char == ord("s"):
+        if window.y + window.height+1 < curses.LINES:
+            window.height += 1        
     # Scrolling windows:
     elif char == ord("E") or char == curses.KEY_PPAGE: # Scrolling up:
         for widget in window.widgets:
