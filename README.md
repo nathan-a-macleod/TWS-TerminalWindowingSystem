@@ -14,7 +14,7 @@ Just run `python3 main.py` from inside the `src/` folder to run the program. Whe
 * Up & down Arrow Keys: Highlight a selection.
 * Left & right Arrow Keys: Focuses a different window. 
 * ENTER: 'Click' a selection.
-* Q, E (UpperCase): Scrolling vertically.
+* Q, E (UpperCase), PgUp, PgDn, j, k: Scrolling vertically.
 * Q, E (LowerCase): Scrolling horizontally.
 * ".": Toggle between showing & hiding the desktop.
 
