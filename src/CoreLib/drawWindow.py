@@ -86,10 +86,20 @@ def drawWindow(stdscr, window):
                         if widget["x"]+charIdx > 1 and widget["x"]+charIdx < window.width-2:
                             stdscr.addstr(widget["y"]+window.y, widget["x"]+window.x+charIdx, str(char), curses.color_pair(2))
 
+    
     # The title background
-    for idx in range(window.width):
-        stdscr.addstr(window.y, window.x+idx, " ", curses.color_pair(4))
+    if window != openWindows[len(openWindows)-1]: # For the selected window, don't draw '\u2592
+        for idx in range(window.width):
+            stdscr.addstr(window.y, window.x+idx, "\u2592", curses.color_pair(4))
+
+    else:
+        for idx in range(window.width):
+            stdscr.addstr(window.y, window.x+idx, " ", curses.color_pair(4))
 
     # The title text itself
     # if it's the selected window, make the title bold. Otherwise, make it italic:
-    stdscr.addstr(window.y, window.x, window.windowTitle, curses.color_pair(1) + curses.A_BOLD)
+    if window == openWindows[len(openWindows)-1]:
+        stdscr.addstr(window.y, window.x, window.windowTitle, curses.color_pair(1) + curses.A_BOLD)
+
+    else:
+        stdscr.addstr(window.y, window.x, window.windowTitle, curses.color_pair(1) + curses.A_DIM)

@@ -11,6 +11,7 @@ from CoreLib.drawDesktop import *
 def appLauncherFunction(window, key, clickedButton):
     if clickedButton != 0:
         if clickedButton["widgetID"] == "endSession":
+            os.system('clear')
             exit()
         
         elif clickedButton["widgetID"] == "closeWindow":
@@ -59,6 +60,7 @@ class Screen:
     def desktopFunction(self, window, key, clickedButton):
         if clickedButton != 0:
             if clickedButton["widgetID"] == "endSession":
+                os.system('clear')
                 exit()
 
             elif clickedButton["widgetID"] == "terminal":
@@ -94,21 +96,17 @@ class Screen:
     def mainloop(self):
         while True:
             self.stdscrRoot.erase() # Clear the screen
-
             # Draw the taskbar
             self.taskbar()
 
             # Draw all the windows, but don't give the key that's been clicked (only do that for the last window)
             for window in openWindows:
                 window.functionName(window, -1, 0)
+                if window.functionName != self.desktopFunction:
+                    drawWindow(self.stdscrRoot, window)
 
-            focusedWindow = openWindows[len(openWindows)-1]
-            focusedWindow.functionName(window, -1, 0)
-            if focusedWindow.functionName != self.desktopFunction:
-                drawWindow(self.stdscrRoot, focusedWindow)
-                
-            else:
-                drawDesktop(self.stdscrRoot, window)
+                else:
+                    drawDesktop(self.stdscrRoot, window)
 
             char = self.stdscrRoot.getch()
 
