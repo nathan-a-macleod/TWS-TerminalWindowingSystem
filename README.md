@@ -37,7 +37,7 @@ I am looking for contributers to help with this project, especially with things 
 
 ## A list of potential ideas for the future:
 * Calendar
-* Web Browser
+* Web Browser [somewhat ready, currently just runs ELinks]
 * Email Client
 
 # Images:
