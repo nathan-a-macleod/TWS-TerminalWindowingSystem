@@ -16,6 +16,8 @@ Just run `python3 main.py` from inside the `src/` folder to run the program. Whe
 * ENTER: 'Click' a selection.
 * Q, E (UpperCase), PgUp, PgDn, j, k: Scrolling vertically.
 * Q, E (LowerCase): Scrolling horizontally.
+* W, A, S, D (UpperCase): Move Current Window
+* W, A, S, D (LowerCase): Resize Current Window
 * ".": Toggle between showing & hiding the desktop.
 
 # Contributing
