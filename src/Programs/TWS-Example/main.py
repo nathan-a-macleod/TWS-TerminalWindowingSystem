@@ -20,16 +20,16 @@ def mainWinFunction(window, key, clickedButton):
         elif clickedButton["widgetID"] == "input_001" and clickedButton["value"] == "123":
             window.getWidgetByID("str_001")["text"] = "I like the number '123' as well!"
 
-    elif key == ord("j"):
-        window.getWidgetByID("str_001")["text"] = "You pressed 'j'!"
-        alert("You Pressed A Key", "You Pressed the 'j' Key!") # Function to alert the user that they pressed the 'j' key!
+    elif key == ord("p"):
+        window.getWidgetByID("str_001")["text"] = "You pressed 'p'!"
+        alert("You Pressed A Key", "You Pressed the 'p' Key!") # Function to alert the user that they pressed the 'j' key!
  
 mainWin = Window("TWS-Example", mainWinFunction) # Create a window
 mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
 
 mainWin.addTitle("", 2, 2, "This is a title.") # Add a title with an id of "str_001"
 
-mainWin.addLabel("str_001", 4, 2, "Click a button, enter some input in the widget, or press the 'j' key") # Add a label with an id of "str_001"
+mainWin.addLabel("str_001", 4, 2, "Click a button, enter some input in the widget, or press the 'p' key") # Add a label with an id of "str_001"
 mainWin.addLabel("timeStr", 5, 2, "Time: " + str(datetime.datetime.now().strftime("%I:%M:%S"))) # Add a label with an id of "timeStr"
 
 mainWin.addButton("btn_001", 6, 2, "Click Me!") # Add a button with an id of "btn_001"

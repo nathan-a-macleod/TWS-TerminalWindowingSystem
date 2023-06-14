@@ -11,7 +11,6 @@ def alert(title, text):
     alertWin = curses.newwin(6, winWidth, curses.LINES//2-5, curses.COLS//2-winWidth//2)
     alertWin.bkgd(" ", curses.color_pair(2))
     alertWin.border()
-
     # The window border and corners:
     for xBorder in range(winWidth-1):
         alertWin.addstr(5, xBorder, "\u2550",  curses.color_pair(2))
@@ -45,6 +44,7 @@ class Window:
         self.x = 0
         self.height = curses.LINES-1
         self.width = curses.COLS
+
         self.windowTitle = "(" + str(len(openWindows)) + ") " + windowTitle
         self.functionName = functionName
         self.widgets = [] # An array of all the widgets

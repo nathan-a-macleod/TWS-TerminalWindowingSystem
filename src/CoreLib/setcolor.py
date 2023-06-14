@@ -61,6 +61,7 @@ def SetThemeColors():
         fg = "black"
     else:
         fg = "white"
+
     Foreground = colors[fg]
     Background = colors[bgnd]        
 #	For the shadows on the text
@@ -82,7 +83,13 @@ def SetThemeColors():
         curses.init_pair(3, white, blue)
 
 #	Taskbar Alternate Color             
-    if mode == "dark":         
-        curses.init_pair(4, black, white)
-    else:    
-        curses.init_pair(4, white, black)
+    if mode == "dark":
+        if bgnd != "blue": #is the background black
+            curses.init_pair(4, white, blue) #otherwise use the lightmode one
+        else:
+            curses.init_pair(4, black, white) #if not, do the normal dark mode taskbar
+    else:  
+        if bgnd != "blue": #is the background white
+            curses.init_pair(4, white, blue) #otherwise use the darkmode one
+        else:
+            curses.init_pair(4, white, black) #if not, do the normal dark mode taskbar
