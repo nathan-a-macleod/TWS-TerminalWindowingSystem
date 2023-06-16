@@ -2,7 +2,7 @@
 import curses
 
 def windowManager(char, window):
-    # Changing the selected button:
+#	Changing the selected button:
     if char == curses.KEY_DOWN or char == ord("j") or char == ord("J"):
         while True:
             if window.selectedWidget < len(window.widgets)-1:
@@ -11,23 +11,29 @@ def windowManager(char, window):
             else:
                 window.selectedWidget = 0
 
-            if window.widgets[window.selectedWidget]["type"] != "label" and window.widgets[window.selectedWidget]["type"] != "title":
-                break
+            try:
+                if window.widgets[window.selectedWidget]["type"] != "label" and window.widgets[window.selectedWidget]["type"] != "title":
+                    break
+            except:
+                window.selectedWidget = 1
 
     elif char == curses.KEY_UP or char == ord("k") or char == ord("K"):
         while True:
             if window.selectedWidget > 0:
                 window.selectedWidget -= 1
-
             else:
-                window.selectedWidget = len(window.widgets)-1
-
-            if window.widgets[window.selectedWidget]["type"] != "label" and window.widgets[window.selectedWidget]["type"] != "title":
-                break
-
+                try:
+                    window.selectedWidget = len(window.widgets)-1
+                except:
+                    window.selectedWidget = 0                
+            try:
+                if window.widgets[window.selectedWidget]["type"] != "label" and window.widgets[window.selectedWidget]["type"] != "title":
+                    break
+            except:
+                window.selectedWidget = 1
     elif char == curses.KEY_ENTER or char == 10 or char == 13:
         clickedWidget = window.widgets[window.selectedWidget]
-        # Make the input work (Create a new curses.newwin for the input, and save the getstr to the value of clickedWidget)
+#	Make the input work (Create a new curses.newwin for the input, and save the getstr to the value of clickedWidget)
         if clickedWidget["type"] == "input":
             inputWindow = curses.newwin(1, 60, window.y+clickedWidget["y"], window.x+clickedWidget["x"]+len(clickedWidget["text"])+1)
             inputWindow.bkgd(" ", curses.color_pair(2))
@@ -41,7 +47,7 @@ def windowManager(char, window):
             curses.noecho()
 
         window.functionName(window, char, clickedWidget)
-    # Movement of the windows:
+#	Movement of the windows:
     elif char == ord("A"):
         if window.x > 0:
             window.x -= 1
@@ -58,7 +64,7 @@ def windowManager(char, window):
         if window.y + window.height+1 < curses.LINES:
             window.y += 1
     
-    # Resizing of the windows:
+#	Resizing of the windows:
     elif char == ord("a"):
         if window.width > 10:
             window.width -= 1
@@ -73,8 +79,9 @@ def windowManager(char, window):
 
     elif char == ord("s"):
         if window.y + window.height+1 < curses.LINES:
-            window.height += 1        
-    # Scrolling windows:
+            window.height += 1  
+      
+#	Scrolling windows:
     elif char == ord("E") or char == curses.KEY_PPAGE: # Scrolling up:
         for widget in window.widgets:
             if widget["type"] != "menuButton":

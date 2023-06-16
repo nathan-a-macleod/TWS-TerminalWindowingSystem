@@ -34,7 +34,7 @@ I am looking for contributers to help with this project, especially with things 
 * Terminal Shell (Completed)
 * Help Page (Mostly completed)
 * Default System Text Editor (Not started)
-* File Manager (Not started)
+* File Manager (In Progress)
 * Settings (In Progress - [For changing things like default system colors(Done), etc])
 
 ## A list of potential ideas for the future:

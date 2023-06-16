@@ -1,44 +1,47 @@
 #!/usr/bin/python3
-# Import the curses library...
+#	Import the curses library for text based windows...
 import curses
-# Import some other libraries
+#	Import some other libraries
 import os
 import random
 import re
 from pathlib import Path
-# ...and some other files to deal with managing windows
+#	...and some other files to deal with managing the screen and windows
 from CoreLib.Windows.windowClass import *
 from CoreLib.screenCycle import *
 from CoreLib.setcolor import SetThemeColors
 def main(stdscr):
     SetThemeColors()
 
-# Stdscr settings
+#	Stdscr settings
 
     curses.curs_set(0)
     stdscr.bkgd(" ", curses.color_pair(3))
     stdscr.refresh()
 
-# The bootup screen:
-
+#	The bootup screen:
+#	This dictionary contains the lines of the bootup screen, this is so we can simplify the script
     LineDict = {
     0 : "╔═══════════════════════════════════════════════════════╗",
     1 : "║       Welcome to TWS-TerminalWindowingSystem!         ║",
     2 : "║To access help at any time, press '?' on your keyboard.║",
     3 : "║           Press any key to continue...                ║",
-    4 : "╚═══════════════════════════════════════════════════════╝"
+    4 : "║                                                       ║",
+    5 : "║As a note, if you don't have mc and elinks, you'll want║",
+    6 : "║   to have them since they are used for some programs  ║",
+    7 : "╚═══════════════════════════════════════════════════════╝"
     }
 
-# A bunch of math to figure out where to start the line at so the text is centered, no matter what, unless it is above the top or bottom of the screen
+#	A bunch of math to figure out where to start the line at so the text is centered, no matter what, unless it is above the top or bottom of the screen
  
     scrline = int(round((((len(LineDict)/2)-1)*-1), 0))
     txtline = 0
 
-#The Welcome Message Drawing Code
-
-    for lines in range(len(LineDict)): #Run for as many lines there are in the welcome screen
-        #(Y,X,Text)
-        #Add the text of LineDict[txtline] to the screen     
+#	The Welcome Message Drawing Code
+#	Run for as many lines there are in the welcome screen, this is a simplification of the old code
+    for lines in range(len(LineDict)): 
+#	(Y, X, Text)
+#	Add the text of LineDict[txtline] to the screen     
         try:
             stdscr.addstr(
         curses.LINES//2+scrline, #Y
@@ -50,18 +53,19 @@ def main(stdscr):
 
         scrline += 1 # make the screen go down a line for printing the next line
         txtline += 1 # tell us to read from a different index of LineDict
-#Screen refresh and set timeout
+        
+#	Screen refresh and set timeout
     stdscr.getch() #refresh the screen and wait for the user to hit a key
     stdscr.timeout(500) # Set the timeout from now on
 
-# The core of the program
+#	The core of the program
 
     scr = Screen(stdscr)
     scr.mainloop()
 
-# Update the screen and wait for 1 second (curses.napms())
+#	Update the screen and wait for 1 second (curses.nap())
 
     stdscr.refresh()
-    curses.napms(1000) # 1 second = 1000 milliseconds
+    curses.nap(1) # 1 second
 
 curses.wrapper(main) #Start Curses from the Main function

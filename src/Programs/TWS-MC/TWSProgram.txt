@@ -1,0 +1,2 @@
+displayname="Midnight_Commander"
+displaysymbol="!"
