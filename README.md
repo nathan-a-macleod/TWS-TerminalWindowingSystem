@@ -43,9 +43,11 @@ I am looking for contributers to help with this project, especially with things 
 * Email Client
 
 # Images:
-![image1](/images/screenShot1.png)
 
-![image2](/images/screenShot2.png)
+![screenShot1](https://github.com/RobiTheGit/TWS-TerminalWindowingSystem/assets/94720060/eb27d1e9-b1a1-4f74-8173-cff0b0b5227c)
+
+![screenShot2](https://github.com/RobiTheGit/TWS-TerminalWindowingSystem/assets/94720060/2a0f4bf3-e8e8-41ab-b120-8e4f70500e6f)
+
 
 ![image3](/images/screenShot3.png)
 
