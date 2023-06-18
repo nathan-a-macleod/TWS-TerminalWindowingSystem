@@ -8,8 +8,14 @@ global os
 import os
 global home
 global mainWin
+global row
+global lineinc
+row = 6
 home = os.getcwd()
-# The main function
+lineinc = 1
+
+#	The main function
+
 
 def mainWinFunction(window, key, clickedButton):  
     if clickedButton != 0: # If you have clicked a button
@@ -20,22 +26,7 @@ def mainWinFunction(window, key, clickedButton):
 
 
         elif clickedButton["widgetID"] == "Back":
-            mainWin.widgets = [] # An array of all the widgets
             os.chdir("../")
-            idx2 = 4
-            for program in os.listdir(os.getcwd()):
-                idx2 += 1
-                if not os.path.isdir(program):
-                    mainWin.addButton(str(program), idx2+1, 2, program)
-                else:
-                    mainWin.addButton(str(program), idx2+1, 2, program+"/")
-
-            mainWin.addButton("Back", idx2+2, 2, "../")   
-            mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-            mainWin.addInput("Make", 3, 2, "Make a new file:") # Add an input line with an id of "input_001"
-            mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Add an input line with an id of "input_001"
-            mainWin.addTitle("", 1, 2, "File Browser") # Add a title with an id of "str_001"    
-            curses.setsyx(1, 1)
 
 
         elif clickedButton["widgetID"] == "Make":
@@ -52,64 +43,47 @@ def mainWinFunction(window, key, clickedButton):
                     os.system(f'mkdir {dirs} && touch {clickedButton["value"]}')
                 except:
                     os.system(f'touch {clickedButton["value"]}')
-
-            mainWin.widgets = [] # An array of all the widgets
-            idx2 = 4
-            for program in os.listdir(os.getcwd()):
-                idx2 += 1
-                if not os.path.isdir(program):
-                    mainWin.addButton(str(program), idx2+1, 2, program)
-                else:
-                    mainWin.addButton(str(program), idx2+1, 2, program+"/")
-
-            mainWin.addButton("Back", idx2+2, 2, "../")   
-            mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-            mainWin.addInput("Make", 3, 2, "Make a new file:") # Add an input line with an id of "input_001"
-            mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Add an input line with an id of "input_001"
-            mainWin.addTitle("", 1, 2, "File Browser") # Add a title with an id of "str_001"    
-            curses.setsyx(1, 1)
-                        
+            
+        elif clickedButton["widgetID"] == "Remove":
+            try:
+                os.system(f'rm {clickedButton["value"]}')
+            except:
+                pass
+                                   
         elif clickedButton["widgetID"] == "MKDIR":
             dirs = clickedButton["value"]
-            os.mkdir(dirs)
-            mainWin.widgets = [] # An array of all the widgets
-            idx2 = 4
-            for program in os.listdir(os.getcwd()):
-                idx2 += 1
-                if not os.path.isdir(program):
-                    mainWin.addButton(str(program), idx2+1, 2, program)
-                else:
-                    mainWin.addButton(str(program), idx2+1, 2, program+"/")
-
-            mainWin.addButton("Back", idx2+2, 2, "../")   
-            mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-            mainWin.addInput("Make", 3, 2, "Make a new file:") # Add an input line with an id of "input_001"
-            mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Add an input line with an id of "input_001"
-            mainWin.addTitle("", 1, 2, "File Browser") # Add a title with an id of "str_001"    
-            curses.setsyx(1, 1) 
+            try:
+                os.mkdir(dirs)
+            except:
+                pass
 
         else:
             if not os.path.isdir(str(clickedButton["widgetID"])):
                 curses.endwin()
                 os.system(f'nano {str(clickedButton["widgetID"])}')
             else:
-                mainWin.widgets = [] # An array of all the widgets
                 os.chdir(str(clickedButton["widgetID"]))
-                idx2 = 4
-                for program in os.listdir(os.getcwd()):
-                    idx2 += 1
-                    if not os.path.isdir(program):
-                        mainWin.addButton(str(program), idx2+1, 2, program)
-                    else:
-                        mainWin.addButton(str(program), idx2+1, 2, program+"/")
 
-                mainWin.addButton("Back", idx2+2, 2, "../")   
-                mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-                mainWin.addInput("Make", 3, 2, "Make a new file:") # Add an input line with an id of "input_001"
-                mainWin.addTitle("", 1, 2, "File Browser") # Add a title with an id of "str_001"    
-                mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Add an input line with an id of "input_001"
-                curses.setsyx(1, 1)
-            
+#	Redraw the screen to update for new files
+        mainWin.widgets = [] # An array of all the widgets
+        idx2 = row
+        for program in os.listdir(os.getcwd()):
+            idx2 += lineinc
+            if not os.path.isdir(program):
+                mainWin.addButton(str(program), idx2+1, 2, program)
+            else:
+                mainWin.addButton(str(program), idx2+1, 2, program+"/")
+        mainWin.addButton("Back", idx2+2, 2, "../")   
+        mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
+        mainWin.addInput("Make", 3, 2, "Make a new file:") # Add an input line with an id of "input_001"
+        mainWin.addTitle("", 1, 2, "File Browser") # Add a title with an id of "str_001"    
+        mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Add an input line with an id of "input_001"
+        mainWin.addInput("Remove", 5, 2, "Delete a file:") # Add an input line with an id of "input_001"
+        curses.setsyx(1, 1)
+
+"""
+	Draw the things in the file manager on initilization
+"""
 mainWin = Window("TWS-FileBrowser", mainWinFunction) # Create a window
 mainWin.widgets = [] # An array of all the widgets
 mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
@@ -118,10 +92,12 @@ mainWin.addTitle("", 1, 2, "File Browser") # Add a title with an id of "str_001"
 
 mainWin.addInput("Make", 3, 2, "Make a new file:") # Add an input line with an id of "input_001"
 mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Add an input line with an id of "input_001"
+mainWin.addInput("Remove", 5, 2, "Delete a file:") # Add an input line with an id of "input_001"
+
 #	Create a button for each file in the 'Programs' directory
-idx2 = 4
+idx2 = row
 for program in os.listdir(os.getcwd()):
-    idx2 += 1
+    idx2 += lineinc
     if not os.path.isdir(program):
         mainWin.addButton(str(program), idx2+1, 2, program)
     else:
