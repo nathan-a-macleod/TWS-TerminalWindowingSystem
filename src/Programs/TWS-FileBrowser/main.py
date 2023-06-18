@@ -16,7 +16,6 @@ lineinc = 1
 
 #	The main function
 
-
 def mainWinFunction(window, key, clickedButton):  
     if clickedButton != 0: # If you have clicked a button
         # If the ID of the button being clicked is "closeButton", close the window. (It's highly recommended to include a button the close the window in each program)
@@ -57,6 +56,12 @@ def mainWinFunction(window, key, clickedButton):
             except:
                 pass
 
+        elif clickedButton["widgetID"] == "RMDIR":
+            dirs = clickedButton["value"]
+            try:
+                os.rmdir(dirs)
+            except:
+                pass
         else:
             if not os.path.isdir(str(clickedButton["widgetID"])):
                 curses.endwin()
@@ -64,8 +69,16 @@ def mainWinFunction(window, key, clickedButton):
             else:
                 os.chdir(str(clickedButton["widgetID"]))
 
-#	Redraw the screen to update for new files
-        mainWin.widgets = [] # An array of all the widgets
+#	Redraw the screen to update for new/removed files and/or directories
+#	This is as optimized as I was able to do the code, so I can't really do anything to make it better in terms of not repeating code
+
+        mainWin.widgets = [] # An array of all the widgets, currently empty for redrawing the screen
+        mainWin.addMenuButton("closeButton", 0, "Close Window") # Close Button
+        mainWin.addTitle("", 1, 2, "File Browser") # Title
+        mainWin.addInput("Make", 3, 2, "Make a new file:") # Touch Input
+        mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Mkdir Input
+        mainWin.addInput("Remove", 5, 2, "Delete a file:") # Rm Input
+        mainWin.addInput("RMDIR", 6, 2, "Delete a directory:") # Rmdir Input
         idx2 = row
         for program in os.listdir(os.getcwd()):
             idx2 += lineinc
@@ -73,33 +86,28 @@ def mainWinFunction(window, key, clickedButton):
                 mainWin.addButton(str(program), idx2+1, 2, program)
             else:
                 mainWin.addButton(str(program), idx2+1, 2, program+"/")
-        mainWin.addButton("Back", idx2+2, 2, "../")   
-        mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-        mainWin.addInput("Make", 3, 2, "Make a new file:") # Add an input line with an id of "input_001"
-        mainWin.addTitle("", 1, 2, "File Browser") # Add a title with an id of "str_001"    
-        mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Add an input line with an id of "input_001"
-        mainWin.addInput("Remove", 5, 2, "Delete a file:") # Add an input line with an id of "input_001"
+        mainWin.addButton("Back", idx2+2, 2, "../")
         curses.setsyx(1, 1)
 
 """
 	Draw the things in the file manager on initilization
+	What this does is make a bunch of widgets for some functions
+	then when we get to the for loop, we are putting each file and directory as buttons
 """
 mainWin = Window("TWS-FileBrowser", mainWinFunction) # Create a window
 mainWin.widgets = [] # An array of all the widgets
-mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-
-mainWin.addTitle("", 1, 2, "File Browser") # Add a title with an id of "str_001"
-
-mainWin.addInput("Make", 3, 2, "Make a new file:") # Add an input line with an id of "input_001"
-mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Add an input line with an id of "input_001"
-mainWin.addInput("Remove", 5, 2, "Delete a file:") # Add an input line with an id of "input_001"
-
-#	Create a button for each file in the 'Programs' directory
+mainWin.addMenuButton("closeButton", 0, "Close Window")
+mainWin.addTitle("", 1, 2, "File Browser") 
+mainWin.addInput("Make", 3, 2, "Make a new file:")
+mainWin.addInput("MKDIR", 4, 2, "Make a new directory:")
+mainWin.addInput("Remove", 5, 2, "Delete a file:")
+mainWin.addInput("RMDIR", 6, 2, "Delete a directory:")
 idx2 = row
 for program in os.listdir(os.getcwd()):
     idx2 += lineinc
     if not os.path.isdir(program):
         mainWin.addButton(str(program), idx2+1, 2, program)
     else:
-         mainWin.addButton(str(program), idx2+1, 2, program+"/")   
+         mainWin.addButton(str(program), idx2+1, 2, program+"/")  
 mainWin.addButton("Back", idx2+2, 2, "../")
+curses.setsyx(1, 1) 
