@@ -11,7 +11,7 @@ helpWin.addMenuButton("", 16, "Menu Item 2")
 helpWin.addMenuButton("", 31, "Menu Item 3")
 
 helpWin.addLabel("", 2, 2, "'TWS' (short for 'Terminal Windowing System') is a Terminal/Operating environment program with a few other programs (written in Python).")
-helpWin.addLabel("", 3, 2, "You can think of it sort of like a terminal-desktop environment - but it's really just a collection of programs you can run inside a terminal.")
+helpWin.addLabel("", 3, 2, "You can think of it sort of like a terminal-desktop environment - but it's really just a collection of programs you can run inside a terminal that use some custom windowing modules.")
 helpWin.addLabel("", 5, 2, "The Github page is at https://github.com/nathan-a-macleod/TWS-TerminalWindowingSystem")
 helpWin.addLabel("", 7, 2, "Controls: ")
 helpWin.addLabel("", 8, 2, "----------")
