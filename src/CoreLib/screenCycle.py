@@ -41,7 +41,7 @@ class Screen:
         "  ███	",
         "    ███",
         "  ███	",
-        "███    ▃▃▃▃▃▃▃"
+        "███    _______"
         ]
         )
         self.desktop.addButton("terminal", 7, 2, "[>] TWS-Terminal")
