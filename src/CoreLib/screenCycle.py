@@ -7,7 +7,6 @@ from CoreLib.Windows.windowClass import *
 from CoreLib.Windows.windowManager import *
 from CoreLib.drawWindow import *
 from CoreLib.drawDesktop import *
-
 def appLauncherFunction(window, key, clickedButton):
     if clickedButton != 0:
         if clickedButton["widgetID"] == "endSession":
@@ -22,6 +21,7 @@ def appLauncherFunction(window, key, clickedButton):
                 exec(open("Programs/" + clickedButton["widgetID"] + "/main.py").read())
 
             except Exception as ex:
+                curses.flash()
                 curses.beep()
                 alert("Error Running Program", "There was an error while trying to run the program. Error: " + str(ex))
 
@@ -31,7 +31,7 @@ class Screen:
         self.stdscrRoot = stdscrRoot  
 #	The desktop:
         self.desktop = Window("Desktop", self.desktopFunction)
-
+#	Terminal Icon
         self.desktop.addMenuButton("appLauncher", 0, "[❖] App Launcher")
         self.desktop.add3DLabel(
         1,
@@ -41,11 +41,11 @@ class Screen:
         "  ███	",
         "    ███",
         "  ███	",
-        "███    ▃▃▃▃▃▃▃"
+        "███    _______"
         ]
         )
         self.desktop.addButton("terminal", 7, 2, "[>] TWS-Terminal")
-
+#	End Session Icon
         self.desktop.add3DLabel(
         11,
         2,
@@ -57,11 +57,22 @@ class Screen:
         "███      ███"
         ]
         )
-        self.desktop.addButton("endSession", 17, 2, "[x] End Session")
+        self.desktop.addButton("endSession", 17, 2, "[X] End Session")
 
     def taskbar(self):
-        taskBarString = str(datetime.datetime.now().strftime("%I:%M")) + " | " + str(psutil.cpu_percent()) + " % | " + str(os.popen("whoami").read()).split("\n")[0] + "@" + str(os.popen("uname -n").read()).split("\n")[0] + " | " + str(openWindows[len(openWindows)-1].windowTitle)
-        self.stdscrRoot.hline(0, 0, " ", curses.COLS, curses.color_pair(4)) # Draw a horizontal line at the top of the screen
+
+#	Define variables for parts of the taskbar to shorten the taskbar string
+        user = str(os.popen("whoami").read()).split("\n")[0]
+        system = str(os.popen("uname -n").read()).split("\n")[0]
+        cpu = str(psutil.cpu_percent())
+        time = str(datetime.datetime.now().strftime("%I:%M"))
+        windows = str(openWindows[len(openWindows)-1].windowTitle)
+
+#	Actual Taskbar String
+        taskBarString = str(f"{time} | {cpu}% | {user}@{system} | {windows}")
+        self.stdscrRoot.hline(0, 0, " ", curses.COLS, curses.color_pair(4))
+
+#	Draw a horizontal line at the top of the screen
         self.stdscrRoot.addstr(0, curses.COLS//2-len(taskBarString)//2, taskBarString, curses.color_pair(4))
 
     def desktopFunction(self, window, key, clickedButton):
@@ -73,8 +84,8 @@ class Screen:
             elif clickedButton["widgetID"] == "terminal":
                 exec(open("Programs/" + "TWS-Terminal" + "/main.py").read())
 
-
             elif clickedButton["widgetID"] == "appLauncher":
+
 #	Open a menu with all the installed apps:
                 appLauncherWin = Window("App Launcher", appLauncherFunction)
                 appLauncherWin.addMenuButton("closeWindow", 0, "Close Window")
@@ -86,7 +97,8 @@ class Screen:
 
 #	If the file has "." as the first letter it's a hidden file.
                     if program[0] != "." and os.path.isfile(os.getcwd() + "/Programs/" + program) == False:
-                        # Get the programs metadata from the 'TWSProgram.txt' file
+
+#	Get the programs metadata from the 'TWSProgram.txt' file
                         settingsData = str(open("./Programs/" + program + "/TWSProgram.txt").read())
                         displayname = settingsData.split("\n")[0][13:]
                         displayname = displayname[:-1]
@@ -97,10 +109,13 @@ class Screen:
                     else:
                         idx -= 1
 
+                appLauncherWin.addButton("endSession", idx+3, 2, "[X] End Session")
 #	The main function in the class
     def mainloop(self):
         while True:
-            self.stdscrRoot.erase() # Clear the screen
+#	Clear the screen
+            self.stdscrRoot.erase()
+
 #	Draw the taskbar
             self.taskbar()
 
@@ -114,7 +129,6 @@ class Screen:
                     drawDesktop(self.stdscrRoot, window)
 
             char = self.stdscrRoot.getch()
-
             windowManager(char, window)
 
 #	Changing the focused window:
@@ -132,7 +146,9 @@ class Screen:
 
                 except:
                     pass
+
 #	Test for the left arrow key to change what window you are focused on
+ 
             elif char == curses.KEY_LEFT:
                 try:
                     lastWindow = openWindows[len(openWindows)-1]
@@ -145,6 +161,7 @@ class Screen:
 
                 except:
                     pass
+
 #	Test for the right arrow key to change what window you are focused on
             elif char == curses.KEY_RIGHT:
                 try:
@@ -171,5 +188,4 @@ class Screen:
 
             else:
                 drawDesktop(self.stdscrRoot, window)
-
             self.stdscrRoot.refresh()

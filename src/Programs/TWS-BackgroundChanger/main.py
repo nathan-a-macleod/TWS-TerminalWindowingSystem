@@ -26,7 +26,8 @@ def mainWinFunction(window, key, clickedButton):
         # If the ID of the button being clicked is "closeButton", close the window. (It's highly recommended to include a button the close the window in each program)
         if clickedButton["widgetID"] == "closeButton":
             window.closeWindow() # Close the window
-        else:
+        else: #If we aren't closing the window
+#	Set Colors
             if clickedButton["widgetID"] == "btn_001":
                 color = "COLOR:blue" 
                 change = "colors"
@@ -51,7 +52,7 @@ def mainWinFunction(window, key, clickedButton):
             elif clickedButton["widgetID"] == "btn_008":
                 color = "COLOR:yellow"
                 change = "colors"
-                
+#	Set Themes
             elif clickedButton["widgetID"] == "btn_009":
                 theme = "THEME:light"
                 change = "theme"
@@ -60,7 +61,7 @@ def mainWinFunction(window, key, clickedButton):
                 change = "theme"
                 
             window.getWidgetByID("str_001")["text"] = msg
-            
+#	Write to file
             with open("config.cfg", "r") as f:
                 lines = f.readlines()
             if change == "colors":
@@ -73,11 +74,13 @@ def mainWinFunction(window, key, clickedButton):
             with open("config.cfg", "w") as f:
                 f.writelines(lines)   
                 f.close()
-mainWin = Window("TWS-BackgroundChanger", mainWinFunction) # Create a window
-mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-mainWin.addTitle("", 2, 2, "Change System Color Options") # Add a title with an id of "str_001"
 
+mainWin = Window("TWS-Settings", mainWinFunction) # Create a window
+mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
+mainWin.addTitle("", 2, 2, "Change System Settings") # Add a title with an id of "str_001"
 mainWin.addLabel("str_001", 4, 2, "") # Add a label with an id of "str_001"
+#	Color Labels
+mainWin.addLabel("str_003", 5, 2, "*Colors*") # Add a label with an id of "str_003"
 mainWin.addButton("btn_001", 6, 2, "Blue") # Add a button with an id of "btn_001"
 mainWin.addButton("btn_002", 7, 2, "Black") # Add a button with an id of "btn_002"
 mainWin.addButton("btn_003", 8, 2, "Cyan") # Add a button with an id of "btn_003"
@@ -86,6 +89,13 @@ mainWin.addButton("btn_005", 10, 2, "Magenta") # Add a button with an id of "btn
 mainWin.addButton("btn_006", 11, 2, "Red") # Add a button with an id of "btn_006"
 mainWin.addButton("btn_007", 12, 2, "White") # Add a button with an id of "btn_007"
 mainWin.addButton("btn_008", 13, 2, "Yellow") # Add a button with an id of "btn_008"
-mainWin.addLabel("str_002", 15, 2, "Themes") # Add a label with an id of "str_002"
+#	Theme Labels
+mainWin.addLabel("str_002", 15, 2, "*Themes*") # Add a label with an id of "str_002"
 mainWin.addButton("btn_009", 16, 2, "Light") # Add a button with an id of "btn_009"
 mainWin.addButton("btn_00A", 17, 2, "Dark") # Add a button with an id of "btn_00A"
+#	The Totally Secret Credits
+mainWin.addLabel("str_004", 100, 2, "Why did you scroll this far.") # Add a label with an id of "str_004"
+mainWin.addLabel("str_005", 105, 2, "CREDITS:") # Add a label with an id of "str_005"
+mainWin.addLabel("str_006", 107, 2, "Nathan Macleod: Writing most of the entire windowing system, and most of the apps") # Add a label with an id of "str_006"
+mainWin.addLabel("str_007", 109, 2, "RobiTheGit: Writing this app, a file manager, fixing some bugs, and some other things") # Add a label with an id of "str_007"
+mainWin.addLabel("str_008", 111, 2, "Jacob Macleod: Doing something?") # Add a label with an id of "str_008"
