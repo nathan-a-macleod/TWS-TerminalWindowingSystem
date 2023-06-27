@@ -1,113 +1,154 @@
 from CoreLib.Windows.windowClass import * # Import the library like this
-from CoreLib.Windows.windowManager import * # Import the library like this
-global curses
-import curses# Import other libraries like this:
+
+global SetThemeColors
+from CoreLib.setcolor import SetThemeColors
+
+#	Import other libraries like this:
+
 global datetime
 import datetime
-global os
-import os
-global home
-global mainWin
-global row
-global lineinc
-row = 6
-home = os.getcwd()
-lineinc = 1
 
+global re
+import re
+
+from pathlib import Path
+global Path
+
+global msg
+msg = "Changed Config"
+
+global theme_buttons
+global color_buttons
+global taskbarColor_buttons
+
+color_buttons = [
+"blue_button",
+"black_button",
+"cyan_button",
+"green_button",
+"magenta_button",
+"red_button",
+"white_button",
+"yellow_button"
+]
+
+theme_buttons = [
+"light_button",
+"dark_button"
+]
+
+taskbarColor_buttons = [
+"blue_button2",
+"black_button2",
+"cyan_button2",
+"green_button2",
+"magenta_button2",
+"red_button2",
+"white_button2",
+"yellow_button2"
+]
 #	The main function
-
-def mainWinFunction(window, key, clickedButton):  
+def mainWinFunction(window, key, clickedButton):
+    SetThemeColors()
+    global color
+    global lines
+    global theme
+    global change
+    f3 = open("config.cfg", "r")
+    config = f3.readlines()
+    color = config[1]
+    theme = config[2]
+    taskbar = config[3]
     if clickedButton != 0: # If you have clicked a button
-        # If the ID of the button being clicked is "closeButton", close the window. (It's highly recommended to include a button the close the window in each program)
+#	If the ID of the button being clicked is "closeButton", close the window. (It's highly recommended to include a button the close the window in each program)
         if clickedButton["widgetID"] == "closeButton":
-            os.chdir(home)
             window.closeWindow() # Close the window
+        else: #If we aren't closing the window
 
+#	Set Background Colors
+            if clickedButton["widgetID"] in color_buttons:
+                color = "COLOR:"+ (clickedButton["widgetID"].split("_"))[0]
+                change = "colors"
 
-        elif clickedButton["widgetID"] == "Back":
-            os.chdir("../")
+#	Set Window Themes
+            elif clickedButton["widgetID"] in theme_buttons:
+                theme = "THEME:"+(clickedButton["widgetID"].split("_"))[0]
+                change = "theme"
+                
+            elif clickedButton["widgetID"] in taskbarColor_buttons:
+                taskbar = "TSKBRCLR:"+(clickedButton["widgetID"].split("_"))[0]
+                change = "taskbar"
 
+#	Write to file
+            with open("config.cfg", "r") as f:
+                lines = f.readlines()
 
-        elif clickedButton["widgetID"] == "Make":
+#	Test if we are changing the background on the desktop
+            if change == "colors\n":
+                lines[1] = f"{color}"
 
-            try:
-                files = clickedButton["value"].split("/")[1]
-                dirs = clickedButton["value"].split("/")[0]
-                os.system(f'touch {files} || mkdir {dirs}')
-                os.system(f'mv {files} {clickedButton["value"]}')
-            except:
-                try:
-                    files = clickedButton["value"].split("/")[1]
-                    dirs = clickedButton["value"].split("/")[0]  
-                    os.system(f'mkdir {dirs} && touch {clickedButton["value"]}')
-                except:
-                    os.system(f'touch {clickedButton["value"]}')
-            
-        elif clickedButton["widgetID"] == "Remove":
-            try:
-                os.system(f'rm {clickedButton["value"]}')
-            except:
-                pass
-                                   
-        elif clickedButton["widgetID"] == "MKDIR":
-            dirs = clickedButton["value"]
-            try:
-                os.mkdir(dirs)
-            except:
-                pass
+#	Test if we are changing the window theme
+            elif change == "theme":
+                lines[2] = f"{theme}\n"
 
-        elif clickedButton["widgetID"] == "RMDIR":
-            dirs = clickedButton["value"]
-            try:
-                os.rmdir(dirs)
-            except:
-                pass
-        else:
-            if not os.path.isdir(str(clickedButton["widgetID"])):
-                curses.endwin()
-                os.system(f'nano {str(clickedButton["widgetID"])}')
+#	Test if we are changing the taskbar colors
+            elif change == "taskbar":
+                lines[3] = f"{taskbar}"
+
+#	Run something if it is nothing, it'll probably crash, but this code shouldn't ever even be called
             else:
-                os.chdir(str(clickedButton["widgetID"]))
+                lines[1] = f"{color}\n"
 
-#	Redraw the screen to update for new/removed files and/or directories
-#	This is as optimized as I was able to do the code, so I can't really do anything to make it better in terms of not repeating code
+#	Add a message at the top of the config file
+            lines[0] = "This File Is Automatically Generated By TWS-Settings, Do Not Edit This File!\n"
 
-        mainWin.widgets = [] # An array of all the widgets, currently empty for redrawing the screen
-        mainWin.addMenuButton("closeButton", 0, "Close Window") # Close Button
-        mainWin.addTitle("", 1, 2, "File Browser") # Title
-        mainWin.addInput("Make", 3, 2, "Make a new file:") # Touch Input
-        mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Mkdir Input
-        mainWin.addInput("Remove", 5, 2, "Delete a file:") # Rm Input
-        mainWin.addInput("RMDIR", 6, 2, "Delete a directory:") # Rmdir Input
-        idx2 = row
-        for program in os.listdir(os.getcwd()):
-            idx2 += lineinc
-            if not os.path.isdir(program):
-                mainWin.addButton(str(program), idx2+1, 2, program)
-            else:
-                mainWin.addButton(str(program), idx2+1, 2, program+"/")
-        mainWin.addButton("Back", idx2+2, 2, "../")
-        curses.setsyx(1, 1)
+#	Write the changes to the file (only what is different)
+            with open("config.cfg", "w") as f:
+                f.writelines(lines)   
+                f.close()
 
-"""
-	Draw the things in the file manager on initilization
-	What this does is make a bunch of widgets for some functions
-	then when we get to the for loop, we are putting each file and directory as buttons
-"""
-mainWin = Window("TWS-FileBrowser", mainWinFunction) # Create a window
-mainWin.widgets = [] # An array of all the widgets
-mainWin.addMenuButton("closeButton", 0, "Close Window")
-mainWin.addTitle("", 1, 2, "File Browser") 
-mainWin.addInput("Make", 3, 2, "Make a new file:")
-mainWin.addInput("MKDIR", 4, 2, "Make a new directory:")
-mainWin.addInput("Remove", 5, 2, "Delete a file:")
-mainWin.addInput("RMDIR", 6, 2, "Delete a directory:")
-idx2 = row
-for program in os.listdir(os.getcwd()):
-    idx2 += lineinc
-    if not os.path.isdir(program):
-        mainWin.addButton(str(program), idx2+1, 2, program)
-    else:
-         mainWin.addButton(str(program), idx2+1, 2, program+"/")  
-mainWin.addButton("Back", idx2+2, 2, "../")
-curses.setsyx(1, 1) 
+#	Display the conformation message that we in fact did change the configuration
+            window.getWidgetByID("Config_Update")["text"] = msg
+
+'''
+Ran on initilization to set up the widgets
+'''           
+Widgy = 2
+
+mainWin = Window("TWS-Settings", mainWinFunction) # Create a window
+mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
+mainWin.addTitle("", 2, Widgy, " Change System Settings ") # Add a title with an id of "Config_Update"
+mainWin.addLabel("Config_Update", 4, Widgy, "") # Add a label with an id of "Config_Update"
+
+#	Color Labels
+mainWin.addLabel("Colors_Header", 5, Widgy, "*Colors*") # Add a label with an id of "Colors_Header"
+mainWin.addButton("blue_button", 6, Widgy, "Blue") # Add a button with an id of "blue_button"
+mainWin.addButton("black_button", 7, Widgy, "Black") # Add a button with an id of "black_button"
+mainWin.addButton("cyan_button", 8, Widgy, "Cyan") # Add a button with an id of "cyan_button"
+mainWin.addButton("green_button", 9, Widgy, "Green") # Add a button with an id of "green_button"
+mainWin.addButton("magenta_button", 10, Widgy, "Magenta") # Add a button with an id of "magenta_button"
+mainWin.addButton("red_button", 11, Widgy, "Red") # Add a button with an id of "red_button"
+mainWin.addButton("white_button", 12, 2, "White") # Add a button with an id of "white_button"
+mainWin.addButton("yellow_button", 13, Widgy, "Yellow") # Add a button with an id of "yellow_button"
+
+#	Theme Labels
+mainWin.addLabel("Themes_Header", 15, Widgy, "*Themes*") # Add a label with an id of "Themes_Header"
+mainWin.addButton("light_button", 16, Widgy, "Light") # Add a button with an id of "light_button"
+mainWin.addButton("dark_button", 17, Widgy, "Dark") # Add a button with an id of "dark_button"
+
+mainWin.addLabel("TaskBar_Colors_Header", 19, Widgy, "*Taskbar and Window Border Colors*") # Add a label with an id of "Colors_Header"
+mainWin.addButton("blue_button2", 20, Widgy, "Blue") # Add a button with an id of "blue_button"
+mainWin.addButton("black_button2", 21, Widgy, "Black") # Add a button with an id of "black_button"
+mainWin.addButton("cyan_button2", 22, Widgy, "Cyan") # Add a button with an id of "cyan_button"
+mainWin.addButton("green_button2", 23, Widgy, "Green") # Add a button with an id of "green_button"
+mainWin.addButton("magenta_button2", 24, Widgy, "Magenta") # Add a button with an id of "magenta_button"
+mainWin.addButton("red_button2", 25, Widgy, "Red") # Add a button with an id of "red_button"
+mainWin.addButton("white_button2", 26, Widgy, "White") # Add a button with an id of "white_button"
+mainWin.addButton("yellow_button2", 27, Widgy, "Yellow") # Add a button with an id of "yellow_button"
+
+#	The Totally Secret Credits
+mainWin.addLabel("credits_01", 100, Widgy, "Why did you scroll this far.") # Add a label with an id of "credits_01"
+mainWin.addLabel("credits_02", 105, Widgy, "CREDITS:") # Add a label with an id of "credits_02"
+mainWin.addLabel("credits_03", 107, Widgy, "Nathan Macleod: Writing most of the entire windowing system, and most of the apps") # Add a label with an id of "credits_03"
+mainWin.addLabel("credits_04", 109, Widgy, "RobiTheGit: Writing this app, a file manager, fixing some bugs, and some other things") # Add a label with an id of "credits_04"
+mainWin.addLabel("credits_05", 111, Widgy, "Jacob Macleod: Doing something?") # Add a label with an id of "credits_05"
