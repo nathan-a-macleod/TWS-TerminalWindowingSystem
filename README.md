@@ -18,6 +18,8 @@ Just run `python3 main.py` from inside the `src/` folder to run the program. Whe
 * Q, E (LowerCase): Scrolling horizontally.
 * W, A, S, D (UpperCase): Move Current Window
 * W, A, S, D (LowerCase): Resize Current Window
+* R (UpperCase): Roll Up The Current Window (But Keep It Focused)
+* R (LowerCase): Maximize Current Window
 * ".": Toggle between showing & hiding the desktop.
 
 # Contributing
