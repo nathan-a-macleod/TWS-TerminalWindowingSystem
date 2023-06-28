@@ -35,6 +35,7 @@ def windowManager(char, window):
         clickedWidget = window.widgets[window.selectedWidget]
 #	Make the input work (Create a new curses.newwin for the input, and save the getstr to the value of clickedWidget)
         if clickedWidget["type"] == "input":
+            global output
             inputWindow = curses.newwin(1, 60, window.y+clickedWidget["y"], window.x+clickedWidget["x"]+len(clickedWidget["text"])+1)
             inputWindow.bkgd(" ", curses.color_pair(2))
             curses.curs_set(1)
@@ -66,7 +67,7 @@ def windowManager(char, window):
     
 #	Resizing of the windows:
     elif char == ord("a"):
-        if window.width > 10:
+        if window.width > 15:
             window.width -= 1
 
     elif char == ord("d"):
@@ -79,8 +80,19 @@ def windowManager(char, window):
 
     elif char == ord("s"):
         if window.y + window.height+1 < curses.LINES:
-            window.height += 1  
-      
+            window.height += 1 
+
+#	Maximizing and rolling ip windows
+    elif char == ord("r"):
+        window.height =  curses.LINES-1
+        window.width =  curses.COLS
+        window.x = 0
+        window.y = 1
+
+    elif char == ord("R"):
+        window.height =  2
+        window.width =  curses.COLS//4
+
 #	Scrolling windows:
     elif char == ord("E") or char == curses.KEY_PPAGE: # Scrolling up:
         for widget in window.widgets:
