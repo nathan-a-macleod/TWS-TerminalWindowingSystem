@@ -1,6 +1,5 @@
 # Imports
 import curses
-
 def windowManager(char, window):
 #	Changing the selected button:
     if char == curses.KEY_DOWN or char == ord("j") or char == ord("J"):
@@ -48,6 +47,8 @@ def windowManager(char, window):
             curses.noecho()
 
         window.functionName(window, char, clickedWidget)
+
+
 #	Movement of the windows:
     elif char == ord("A"):
         if window.x > 0:
@@ -104,12 +105,12 @@ def windowManager(char, window):
             if widget["type"] != "menuButton":
                 widget["y"] -= 1
 
-    elif char == ord("e"): # Scrolling right:
+    elif char == ord("e") or char == curses.KEY_IC: # Scrolling right:
         for widget in window.widgets:
             if widget["type"] != "menuButton":
                 widget["x"] -= 1
             
-    elif char == ord("q"): # Scrolling left:
+    elif char == ord("q") or char == curses.KEY_DC: # Scrolling left:
         for widget in window.widgets:
             if widget["type"] != "menuButton":
                 widget["x"] += 1
