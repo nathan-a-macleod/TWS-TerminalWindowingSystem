@@ -21,8 +21,6 @@ def appLauncherFunction(window, key, clickedButton):
                 exec(open("Programs/" + clickedButton["widgetID"] + "/main.py").read())
 
             except Exception as ex:
-                curses.flash()
-                curses.beep()
                 alert("Error Running Program", "There was an error while trying to run the program. Error: " + str(ex))
 
 #	The main screen class where everything happens:
