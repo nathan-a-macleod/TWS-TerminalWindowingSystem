@@ -108,6 +108,11 @@ class Screen:
                         idx -= 1
 
                 appLauncherWin.addButton("endSession", idx+3, 2, "[X] End Session")
+                try:
+                   appLauncherWin.width = 30
+                   appLauncherWin.height = idx+10
+                except:
+                   pass
 #	The main function in the class
     def mainloop(self):
         while True:

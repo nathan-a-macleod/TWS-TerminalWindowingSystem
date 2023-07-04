@@ -11,5 +11,10 @@ def clockWinFunction(window, key, clickedButton):
             window.closeWindow()
 
 clockWin = Window("TWS-CPU_Monitor", clockWinFunction)
+try:
+    clockWin.width = 16
+    clockWin.height = 4
+except:
+    pass
 clockWin.addMenuButton("closeButton", 0, "Close Window")
 clockWin.addLabel("CPUStr", 1, 2, str(psutil.cpu_percent()) + " % ")

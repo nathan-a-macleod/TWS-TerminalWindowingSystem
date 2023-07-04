@@ -27,8 +27,8 @@ def main(stdscr):
     2 : "║To access help at any time, press '?' on your keyboard.║",
     3 : "║           Press any key to continue...                ║",
     4 : "║                                                       ║",
-    5 : "║As a note, if you don't have mc and elinks, you'll want║",
-    6 : "║   to have them since they are used for some programs  ║",
+    5 : "║ As a note, if you don't have elinks, you'll want to   ║",
+    6 : "║   have them since they are used for some programs     ║",
     7 : "╚═══════════════════════════════════════════════════════╝"
     }
 
@@ -49,7 +49,7 @@ def main(stdscr):
         LineDict[txtline] #Text
         )
         except:
-            break
+            pass
 
         scrline += 1 # make the screen go down a line for printing the next line
         txtline += 1 # tell us to read from a different index of LineDict
