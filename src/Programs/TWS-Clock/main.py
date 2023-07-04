@@ -11,5 +11,10 @@ def clockWinFunction(window, key, clickedButton):
             window.closeWindow()
 
 clockWin = Window("TWS-Clock", clockWinFunction)
+try:
+    clockWin.width = 16
+    clockWin.height = 4
+except:
+    pass
 clockWin.addMenuButton("closeButton", 0, "Close Window")
 clockWin.addLabel("timeStr", 1, 4, str(datetime.datetime.now().strftime("%I:%M:%S")))
