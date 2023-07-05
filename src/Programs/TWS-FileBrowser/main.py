@@ -98,6 +98,13 @@ def mainWinFunction(window, key, clickedButton):
 	I'd like to optimize this further, but I can't since it has been as optimized as I reasonably can
 """
 mainWin = Window("TWS-FileBrowser", mainWinFunction) # Create a window
+try:
+    mainWin.width = int(curses.COLS/1.3)
+    mainWin.height = int(curses.LINES/1.2)-10
+    mainWin.x = curses.COLS//9
+    mainWin.y = curses.LINES//9
+except:
+    pass
 mainWin.widgets = [] # An array of all the widgets
 mainWin.addMenuButton("closeButton", 0, "Close Window")
 mainWin.addTitle("", 1, 2, "File Browser") 
