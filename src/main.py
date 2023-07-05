@@ -28,7 +28,7 @@ def main(stdscr):
     3 : "║           Press any key to continue...                ║",
     4 : "║                                                       ║",
     5 : "║ As a note, if you don't have elinks, you'll want to   ║",
-    6 : "║   have them since they are used for some programs     ║",
+    6 : "║            have it  since it is a  program            ║",
     7 : "╚═══════════════════════════════════════════════════════╝"
     }
 
