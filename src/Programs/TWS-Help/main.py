@@ -9,7 +9,13 @@ helpWin = Window("TWS-Help", helpWinFunction)
 helpWin.addMenuButton("closeButton", 0, "Close Window")
 helpWin.addMenuButton("", 16, "Menu Item 2")
 helpWin.addMenuButton("", 31, "Menu Item 3")
-
+try:
+    helpWin.width = int(curses.COLS/1.3)
+    helpWin.height = int(curses.LINES/1.2)-10
+    helpWin.x = curses.COLS//9
+    helpWin.y = curses.LINES//9
+except:
+    pass
 helpWin.addLabel("", 2, 2, "'TWS' (short for 'Terminal Windowing System') is a Terminal/Operating environment program with a few other programs (written in Python).")
 helpWin.addLabel("", 3, 2, "You can think of it sort of like a terminal-desktop environment - but it's really just a collection of programs you can run inside a terminal that use some custom windowing modules.")
 helpWin.addLabel("", 5, 2, "The Github page is at https://github.com/nathan-a-macleod/TWS-TerminalWindowingSystem")
