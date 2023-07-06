@@ -91,6 +91,7 @@ def mainWinFunction(window, key, clickedButton):
         mainWin.addInput("Remove", 5, 2, "Delete a file:") # Rm Input
         mainWin.addInput("RMDIR", 6, 2, "Delete a directory:") # Rmdir Input
         mainWin.addInput("Goto", 7, 2, "Go to path (Absolute, Then Relative):")
+        mainWin.addButton("Back", 8, 2, "../")
         idx2 = row
         for program in os.listdir(os.getcwd()):
             idx2 += lineinc
@@ -98,7 +99,6 @@ def mainWinFunction(window, key, clickedButton):
                 mainWin.addButton(str(program), idx2+1, 2, program)
             else:
                 mainWin.addButton(str(program), idx2+1, 2, program+"/")
-        mainWin.addButton("Back", idx2+2, 2, "../")
         curses.setsyx(1, 1)
 
 """
@@ -123,6 +123,7 @@ mainWin.addInput("MKDIR", 4, 2, "Make a new directory:")
 mainWin.addInput("Remove", 5, 2, "Delete a file:")
 mainWin.addInput("RMDIR", 6, 2, "Delete a directory:")
 mainWin.addInput("Goto", 7, 2, "Go to path (Absolute, Then Relative):")
+mainWin.addButton("Back", 8, 2, "../")
 idx2 = row
 for program in os.listdir(os.getcwd()):
     idx2 += lineinc
@@ -130,5 +131,4 @@ for program in os.listdir(os.getcwd()):
         mainWin.addButton(str(program), idx2+1, 2, program)
     else:
          mainWin.addButton(str(program), idx2+1, 2, program+"/")  
-mainWin.addButton("Back", idx2+2, 2, "../")
 curses.setsyx(1, 1) 
