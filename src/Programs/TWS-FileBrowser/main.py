@@ -12,7 +12,7 @@ global home
 global mainWin
 global row
 global lineinc
-row = 6
+row = 7
 home = os.getcwd()
 lineinc = 1
 
@@ -64,6 +64,12 @@ def mainWinFunction(window, key, clickedButton):
                 os.rmdir(dirs)
             except:
                 pass
+        elif clickedButton["widgetID"] == "Goto":
+            dirs = clickedButton["value"]
+            try:
+                os.chdir(dirs)
+            except:
+                pass
         else:
             if not os.path.isdir(str(clickedButton["widgetID"])):
                 curses.endwin()
@@ -81,6 +87,7 @@ def mainWinFunction(window, key, clickedButton):
         mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Mkdir Input
         mainWin.addInput("Remove", 5, 2, "Delete a file:") # Rm Input
         mainWin.addInput("RMDIR", 6, 2, "Delete a directory:") # Rmdir Input
+        mainWin.addInput("Goto", 7, 2, "Go to path (Absolute):")
         idx2 = row
         for program in os.listdir(os.getcwd()):
             idx2 += lineinc
@@ -98,6 +105,13 @@ def mainWinFunction(window, key, clickedButton):
 	I'd like to optimize this further, but I can't since it has been as optimized as I reasonably can
 """
 mainWin = Window("TWS-FileBrowser", mainWinFunction) # Create a window
+try:
+    mainWin.width = int(curses.COLS/1.3)
+    mainWin.height = int(curses.LINES/1.2)-10
+    mainWin.x = curses.COLS//9
+    mainWin.y = curses.LINES//9
+except:
+    pass
 mainWin.widgets = [] # An array of all the widgets
 mainWin.addMenuButton("closeButton", 0, "Close Window")
 mainWin.addTitle("", 1, 2, "File Browser") 
@@ -105,6 +119,7 @@ mainWin.addInput("Make", 3, 2, "Make a new file:")
 mainWin.addInput("MKDIR", 4, 2, "Make a new directory:")
 mainWin.addInput("Remove", 5, 2, "Delete a file:")
 mainWin.addInput("RMDIR", 6, 2, "Delete a directory:")
+mainWin.addInput("Goto", 7, 2, "Go to path (Absolute):")
 idx2 = row
 for program in os.listdir(os.getcwd()):
     idx2 += lineinc

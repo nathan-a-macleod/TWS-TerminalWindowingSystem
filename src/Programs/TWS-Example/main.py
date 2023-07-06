@@ -26,7 +26,13 @@ def mainWinFunction(window, key, clickedButton):
  
 mainWin = Window("TWS-Example", mainWinFunction) # Create a window
 mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-
+try:
+    mainWin.width = int(curses.COLS/1.3)
+    mainWin.height = int(curses.LINES/1.2)-10
+    mainWin.x = curses.COLS//9
+    mainWin.y = curses.LINES//9
+except:
+    pass
 mainWin.addTitle("", 2, 2, "This is a title.") # Add a title with an id of "str_001"
 
 mainWin.addLabel("str_001", 4, 2, "Click a button, enter some input in the widget, or press the 'p' key") # Add a label with an id of "str_001"

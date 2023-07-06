@@ -28,7 +28,7 @@ def main(stdscr):
     3 : "║           Press any key to continue...                ║",
     4 : "║                                                       ║",
     5 : "║ As a note, if you don't have elinks, you'll want to   ║",
-    6 : "║   have them since they are used for some programs     ║",
+    6 : "║          have it  since it is a  program              ║",
     7 : "╚═══════════════════════════════════════════════════════╝"
     }
 
@@ -66,6 +66,6 @@ def main(stdscr):
 #	Update the screen and wait for 1 second (curses.nap())
 
     stdscr.refresh()
-    curses.nap(1) # 1 second
+    curses.nap(1) # 1 second, we aren't using napms since we just have regular nap
 
 curses.wrapper(main) #Start Curses from the Main function
