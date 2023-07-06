@@ -69,7 +69,10 @@ def mainWinFunction(window, key, clickedButton):
             try:
                 os.chdir(dirs)
             except:
-                pass
+                try:
+                    os.chdir(f"{os.getcwd()}/{dirs}")
+                except:
+                    pass
         else:
             if not os.path.isdir(str(clickedButton["widgetID"])):
                 curses.endwin()
@@ -87,7 +90,7 @@ def mainWinFunction(window, key, clickedButton):
         mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Mkdir Input
         mainWin.addInput("Remove", 5, 2, "Delete a file:") # Rm Input
         mainWin.addInput("RMDIR", 6, 2, "Delete a directory:") # Rmdir Input
-        mainWin.addInput("Goto", 7, 2, "Go to path (Absolute):")
+        mainWin.addInput("Goto", 7, 2, "Go to path (Absolute, Then Relative):")
         idx2 = row
         for program in os.listdir(os.getcwd()):
             idx2 += lineinc
@@ -119,7 +122,7 @@ mainWin.addInput("Make", 3, 2, "Make a new file:")
 mainWin.addInput("MKDIR", 4, 2, "Make a new directory:")
 mainWin.addInput("Remove", 5, 2, "Delete a file:")
 mainWin.addInput("RMDIR", 6, 2, "Delete a directory:")
-mainWin.addInput("Goto", 7, 2, "Go to path (Absolute):")
+mainWin.addInput("Goto", 7, 2, "Go to path (Absolute, Then Relative):")
 idx2 = row
 for program in os.listdir(os.getcwd()):
     idx2 += lineinc
