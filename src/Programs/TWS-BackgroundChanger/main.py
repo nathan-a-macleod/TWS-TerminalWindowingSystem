@@ -126,11 +126,13 @@ except:
     pass
 
 mainWin.addMenuButton("closeButton", 0, "Close Window") # Create a menu button with the ID of "closeButton"
-mainWin.addTitle("", 2, Widgy, " Change System Settings ") # Add a title with an id of "Config_Update"
+mainWin.addLabel("", 1, Widgy, "╔══════════════════════╗") # Add a title with an id of "Config_Update"
+mainWin.addLabel("", 2, Widgy, "║Change System Settings║") # Add a title with an id of "Config_Update"
+mainWin.addLabel("", 3, Widgy, "╚══════════════════════╝") # Add a title with an id of "Config_Update"
 mainWin.addLabel("Config_Update", 4, Widgy, "") # Add a label with an id of "Config_Update"
 
 #	Color Labels
-mainWin.addLabel("Colors_Header", 5, Widgy, "*Colors*") # Add a label with an id of "Colors_Header"
+mainWin.addTitle("Colors_Header", 5, Widgy, "*Colors*") # Add a label with an id of "Colors_Header"
 mainWin.addButton("blue_button", 6, Widgy, "Blue") # Add a button with an id of "blue_button"
 mainWin.addButton("black_button", 7, Widgy, "Black") # Add a button with an id of "black_button"
 mainWin.addButton("cyan_button", 8, Widgy, "Cyan") # Add a button with an id of "cyan_button"
@@ -141,11 +143,11 @@ mainWin.addButton("white_button", 12, 2, "White") # Add a button with an id of "
 mainWin.addButton("yellow_button", 13, Widgy, "Yellow") # Add a button with an id of "yellow_button"
 
 #	Theme Labels
-mainWin.addLabel("Themes_Header", 15, Widgy, "*Themes*") # Add a label with an id of "Themes_Header"
+mainWin.addTitle("Themes_Header", 15, Widgy, "*Themes*") # Add a label with an id of "Themes_Header"
 mainWin.addButton("light_button", 16, Widgy, "Light") # Add a button with an id of "light_button"
 mainWin.addButton("dark_button", 17, Widgy, "Dark") # Add a button with an id of "dark_button"
 
-mainWin.addLabel("TaskBar_Colors_Header", 19, Widgy, "*Taskbar and Window Border Colors*") # Add a label with an id of "Colors_Header"
+mainWin.addTitle("TaskBar_Colors_Header", 19, Widgy, "*Taskbar and Window Border Colors*") # Add a label with an id of "Colors_Header"
 mainWin.addButton("blue_button2", 20, Widgy, "Blue") # Add a button with an id of "blue_button"
 mainWin.addButton("black_button2", 21, Widgy, "Black") # Add a button with an id of "black_button"
 mainWin.addButton("cyan_button2", 22, Widgy, "Cyan") # Add a button with an id of "cyan_button"

@@ -19,7 +19,6 @@ def appLauncherFunction(window, key, clickedButton):
         else:
             try:
                 exec(open("Programs/" + clickedButton["widgetID"] + "/main.py").read())
-
             except Exception as ex:
                 alert("Error Running Program", "There was an error while trying to run the program. Error: " + str(ex))
 
@@ -180,7 +179,7 @@ class Screen:
                     pass
 
 #	A Help window that is opened when you press [?]:
-            elif char == ord("?"):
+            elif char == ord("?") or char == curses.KEY_F1:
                 exec(open(os.getcwd() + "/Programs/TWS-Help/main.py").read())
 
             else:

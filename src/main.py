@@ -24,7 +24,7 @@ def main(stdscr):
     LineDict = {
     0 : "╔═══════════════════════════════════════════════════════╗",
     1 : "║       Welcome to TWS-TerminalWindowingSystem!         ║",
-    2 : "║To access help at any time, press '?' on your keyboard.║",
+    2 : "║To access help at any time, press ? or F1 your keyboard║",
     3 : "║           Press any key to continue...                ║",
     4 : "║                                                       ║",
     5 : "║ As a note, if you don't have elinks, you'll want to   ║",
