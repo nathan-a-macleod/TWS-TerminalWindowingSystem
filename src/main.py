@@ -22,14 +22,14 @@ def main(stdscr):
 #	The bootup screen:
 #	This dictionary contains the lines of the bootup screen, this is so we can simplify the script
     LineDict = {
-    0 : "╔═══════════════════════════════════════════════════════╗",
-    1 : "║       Welcome to TWS-TerminalWindowingSystem!         ║",
-    2 : "║To access help at any time, press ? or F1 your keyboard║",
-    3 : "║           Press any key to continue...                ║",
-    4 : "║                                                       ║",
-    5 : "║ As a note, if you don't have elinks, you'll want to   ║",
-    6 : "║          have it  since it is a  program              ║",
-    7 : "╚═══════════════════════════════════════════════════════╝"
+    0 : "╔═══════════════════════════════════════════════════════════╗",
+    1 : "║         Welcome to TWS-TerminalWindowingSystem!           ║",
+    2 : "║To access help at any time, press '?' or 'F1' your keyboard║",
+    3 : "║               Press any key to continue...                ║",
+    4 : "║                                                           ║",
+    5 : "║   As a note, if you don't have elinks, you'll want to     ║",
+    6 : "║            have it  since it is a  program                ║",
+    7 : "╚═══════════════════════════════════════════════════════════╝"
     }
 
 #	A bunch of math to figure out where to start the line at so the text is centered, no matter what, unless it is above the top or bottom of the screen
