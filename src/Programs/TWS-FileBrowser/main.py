@@ -12,10 +12,38 @@ global home
 global mainWin
 global row
 global lineinc
-row = 7
+global winstrs
+global wigID
+global Inputs
+global row2
+
+Inputs = 2
+row2 = 3
+
+row = 8
 home = os.getcwd()
 lineinc = 1
+winstrs = [
+"Close Window",
+"File Browser",
+"Make a new file:",
+"Make a new directory:",
+"Delete a file:",
+"Delete a directory:",
+"Go to path (Tries Absolute, Then Relative):",
+"../"
+]
 
+wigID = [
+"closeButton",
+"",
+"Make",
+"MKDIR",
+"Remove",
+"RMDIR",
+"Goto",
+"Back"
+]
 #	The main function
 
 def mainWinFunction(window, key, clickedButton):  
@@ -84,14 +112,16 @@ def mainWinFunction(window, key, clickedButton):
 #	This is as optimized as I was able to do the code, so I can't really do anything to make it better in terms of not repeating code
 
         mainWin.widgets = [] # An array of all the widgets, currently empty for redrawing the screen
-        mainWin.addMenuButton("closeButton", 0, "Close Window") # Close Button
-        mainWin.addTitle("", 1, 2, "File Browser") # Title
-        mainWin.addInput("Make", 3, 2, "Make a new file:") # Touch Input
-        mainWin.addInput("MKDIR", 4, 2, "Make a new directory:") # Mkdir Input
-        mainWin.addInput("Remove", 5, 2, "Delete a file:") # Rm Input
-        mainWin.addInput("RMDIR", 6, 2, "Delete a directory:") # Rmdir Input
-        mainWin.addInput("Goto", 7, 2, "Go to path (Tries Absolute, Then Relative):")
-        mainWin.addButton("Back", 8, 2, "../")
+        mainWin.addMenuButton(wigID[0], 0, winstrs[0])
+        mainWin.addTitle(wigID[1], 1, 2, winstrs[1]) 
+        Inputs = 2
+        row2 = 3
+        while Inputs != 6:
+            mainWin.addInput(wigID[Inputs], row2, 2, winstrs[Inputs])
+            row2 += 1
+            Inputs += 1
+
+        mainWin.addButton(wigID[7], 9, 2, winstrs[7])
         idx2 = row
         for program in os.listdir(os.getcwd()):
             idx2 += lineinc
@@ -116,14 +146,17 @@ try:
 except:
     pass
 mainWin.widgets = [] # An array of all the widgets
-mainWin.addMenuButton("closeButton", 0, "Close Window")
-mainWin.addTitle("", 1, 2, "File Browser") 
-mainWin.addInput("Make", 3, 2, "Make a new file:")
-mainWin.addInput("MKDIR", 4, 2, "Make a new directory:")
-mainWin.addInput("Remove", 5, 2, "Delete a file:")
-mainWin.addInput("RMDIR", 6, 2, "Delete a directory:")
-mainWin.addInput("Goto", 7, 2, "Go to path (Tries Absolute, Then Relative):")
-mainWin.addButton("Back", 8, 2, "../")
+
+mainWin.addMenuButton(wigID[0], 0, winstrs[0])
+mainWin.addTitle(wigID[1], 1, 2, winstrs[1]) 
+
+while Inputs != 6:
+    mainWin.addInput(wigID[Inputs], row2, 2, winstrs[Inputs])
+    row2 += 1
+    Inputs += 1
+
+mainWin.addButton(wigID[7], 9, 2, winstrs[7])
+
 idx2 = row
 for program in os.listdir(os.getcwd()):
     idx2 += lineinc
