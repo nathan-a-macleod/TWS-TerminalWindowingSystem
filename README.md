@@ -10,7 +10,7 @@ Prerequisites:
 
 Just run `python3 main.py` from inside the `src/` folder to run the program. When the program starts, you will see an app launcher screen with all the installed apps.
 
-You can also do `chmod +x main.y` from inside the `src/` folder then, run `./main.py` instead
+You can also do `chmod +x main.py` from inside the `src/` folder then, run `./main.py` instead
 
 ## Controls:
 * Up & Down Arrow Keys or K(Up) and J(Down): Highlight a selection.
