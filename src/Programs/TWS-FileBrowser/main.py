@@ -30,7 +30,7 @@ winstrs = [
 "Make a new directory:",
 "Delete a file:",
 "Delete a directory:",
-"Go to path (Tries Absolute, Then Relative):",
+"Go to path",
 "../"
 ]
 
@@ -116,7 +116,7 @@ def mainWinFunction(window, key, clickedButton):
         mainWin.addTitle(wigID[1], 1, 2, winstrs[1]) 
         Inputs = 2
         row2 = 3
-        while Inputs != 6:
+        while Inputs != 7:
             mainWin.addInput(wigID[Inputs], row2, 2, winstrs[Inputs])
             row2 += 1
             Inputs += 1
@@ -150,7 +150,7 @@ mainWin.widgets = [] # An array of all the widgets
 mainWin.addMenuButton(wigID[0], 0, winstrs[0])
 mainWin.addTitle(wigID[1], 1, 2, winstrs[1]) 
 
-while Inputs != 6:
+while Inputs != 7:
     mainWin.addInput(wigID[Inputs], row2, 2, winstrs[Inputs])
     row2 += 1
     Inputs += 1
